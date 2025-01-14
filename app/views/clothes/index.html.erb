@@ -1,0 +1,19 @@
+<% @clothes.each do |cloth| %>
+    <div class="cloth_img">
+      <% if cloth.image.attached? %>
+        <%= image_tag cloth.image%>
+      <% else %>
+        <p>画像がありません</p>
+      <%end%>
+    </div>
+
+    <h3 class="cloth_name">
+      <%= cloth.name %>
+    </h3>
+    <p class="cloth_explanation">
+      <%= cloth.explanation%>
+    </p>
+    <%= form_with url: clothing_usage_logs_path(cloth_id: cloth.id), method: :post, local: true do %>
+      <button class="btn_primary">使用</button>
+    <% end %>
+<% end %>
