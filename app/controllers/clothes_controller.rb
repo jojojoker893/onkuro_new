@@ -1,6 +1,6 @@
 class ClothesController < ApplicationController
   def index
-    @clothes = Cloth.all
+    @clothes = current_user.clothes
   end
 
   def new
@@ -8,11 +8,12 @@ class ClothesController < ApplicationController
   end
 
   def create
-    @cloth = Cloth.new(cloth_params)
+    @cloth = current_user.clothes.new(cloth_params)
 
     if @cloth.save
       redirect_to clothes_path, notice: "登録しました"
     else
+      Rails.logger.debug(@cloth.errors.full_messages)
       render :new
     end
   end
@@ -20,6 +21,6 @@ class ClothesController < ApplicationController
   private
 
   def cloth_params
-    params.require(:cloth).permit(:name, :category_id, :brand_id, :color_id, :explanation, :user_id)
+    params.require(:cloth).permit(:name, :category_id, :brand_id, :color_id, :explanation, :image)
   end
 end
