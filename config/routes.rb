@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
+  get "/home", to: "home#index"
+
   resources :users, only: [ :new, :create ]
   resources :categories, only: [ :index, :new, :create ]
   resources :brands, only: [ :index, :new, :create ]
