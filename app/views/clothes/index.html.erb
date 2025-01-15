@@ -14,7 +14,11 @@
     <p class="cloth_explanation">
       <%= cloth.explanation%>
     </p>
-    <!-- %= form_with url: clothing_usage_logs_path(cloth_id: cloth.id), method: :post, local: true do %-->
-      <button class="btn_primary">使用</button>
-    <!--% end %-->
+
+    <p>
+      使用回数<%= cloth.clothing_usage_logs.count %> 回
+    </p>
+    
+    <%= button_to "使用", usage_log_clothe_path(cloth), method: :post  %>
+
 <% end %>

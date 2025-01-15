@@ -9,5 +9,10 @@ Rails.application.routes.draw do
   resources :categories, only: [ :index, :new, :create ]
   resources :brands, only: [ :index, :new, :create ]
   resources :colors, only: [ :index, :new, :create ]
-  resources :clothes
+
+  resources :clothes do
+    member do
+      post :usage_log
+    end
+  end
 end
