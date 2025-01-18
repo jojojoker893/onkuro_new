@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "maps/index"
   root to: "users#new"
 
   get "/login", to: "sessions#new"
@@ -6,6 +7,8 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   get "/home", to: "home#index"
+
+  get "/maps", to: "maps#index"
 
   resources :users, only: [ :new, :create ]
   resources :categories, only: [ :index, :new, :create ]
