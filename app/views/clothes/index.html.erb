@@ -1,4 +1,5 @@
 <% @clothes.each do |cloth| %>
+  <%= link_to edit_clothe_path(cloth) do %>
     <div class="cloth_img">
       <% if cloth.image.attached? %>
         <%= image_tag cloth.image.variant(resize_to_fill:[200, 300]) %>
@@ -6,6 +7,7 @@
         <p>画像がありません</p>
       <% end %>
     </div>
+  <% end %>
 
     <h3 class="cloth_name">
       <%= cloth.name %>
@@ -16,7 +18,7 @@
     </p>
 
     <p>
-      使用回数<%= cloth.clothing_usage_logs.count %> 回
+      使用回数: <%= cloth.clothing_usage_logs.count %> 回
     </p>
     
     <%= button_to "使用", usage_log_clothe_path(cloth), method: :post  %>

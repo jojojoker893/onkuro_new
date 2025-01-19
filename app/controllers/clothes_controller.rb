@@ -18,6 +18,29 @@ class ClothesController < ApplicationController
     end
   end
 
+  def edit
+    @cloth = Cloth.find(params[:id])
+  end
+
+  def update
+    @cloth = Cloth.find(params[:id])
+    if @cloth.update(cloth_params)
+      redirect_to clothes_path, notice: "更新しました"
+    else
+      render :edit
+    end
+  end
+
+  def show
+    @cloth = Cloth.find(cloth_params[:id])
+  end
+
+  def destroy
+    @cloth = Cloth.find(cloth_params[:id])
+    @cloth.destroy
+    redirect_to clothes_path, notice: "削除しました"
+  end
+
   def usage_log
     @cloth = current_user.clothes.find(params[:id])
     ClothingUsageLog.create!(cloth: @cloth, user: current_user, used_at: Time.current)

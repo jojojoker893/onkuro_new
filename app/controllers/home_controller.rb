@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
   def index
-    @clothes_data = current_user.clothes
+    @use_logs = current_user.clothes
+      .joins(:clothing_usage_logs)
+      .group("cloths.id")
+      .pluck("cloths.name, COUNT(clothing_usage_logs.id)")
+      .to_h
   end
 end

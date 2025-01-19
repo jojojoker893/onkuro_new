@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "maps/index"
   root to: "users#new"
 
   get "/login", to: "sessions#new"
@@ -14,6 +13,7 @@ Rails.application.routes.draw do
   resources :categories, only: [ :index, :new, :create ]
   resources :brands, only: [ :index, :new, :create ]
   resources :colors, only: [ :index, :new, :create ]
+  resources :maps, only: [ :index ]
 
   resources :clothes do
     member do

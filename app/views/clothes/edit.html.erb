@@ -1,4 +1,11 @@
-<%= form_with model: @cloth, html: { multipart: true } do |form| %>
+<%= form_with model: @cloth, url: clothe_path, local: true, method: "patch", html: { multipart: true } do |form| %>
+
+    <div>
+      <% if @cloth.image.attached? %>
+        <p>現在の画像</p>
+        <%= image_tag @cloth.image.variant(resize_to_fill:[200, 300])  %>
+      <% end %>
+    </div>
 
     <div>
       <%= form.file_field :image, accept: "image/*" %>
@@ -25,6 +32,7 @@
       <%= form.text_area :explanation, placeholder: "explanation", class: "form_input" %>
     </div>
 
-    <%= form.submit "登録", class: "form_submit" %>
+    <%= form.submit "更新", class: "form_submit" %>
+    削除
   
   <% end %>
