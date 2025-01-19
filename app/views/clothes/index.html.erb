@@ -21,6 +21,7 @@
       使用回数: <%= cloth.clothing_usage_logs.count %> 回
     </p>
     
-    <%= button_to "使用", usage_log_clothe_path(cloth), method: :post  %>
+    <%= button_to "使用", usage_log_clothe_path(cloth), method: :post %>
+    <%= link_to "削除", clothe_path(cloth.id), data: {turbo_method: :delete} %>
 
 <% end %>

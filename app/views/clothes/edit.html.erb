@@ -1,4 +1,4 @@
-<%= form_with model: @cloth, url: clothe_path, local: true, method: "patch", html: { multipart: true } do |form| %>
+<%= form_with model: @cloth, url: clothe_path, method: "patch", html: { multipart: true } do |form| %>
 
     <div>
       <% if @cloth.image.attached? %>

@@ -1,4 +1,4 @@
-<%= form_with model: @cloth, html: { multipart: true } do |form| %>
+<%= form_with model: @cloth, url: clothes_path, multipart: true do |form| %>
 
     <div>
       <%= form.file_field :image, accept: "image/*" %>
@@ -27,4 +27,4 @@
 
     <%= form.submit "登録", class: "form_submit" %>
   
-  <% end %>
+<% end %>
