@@ -31,12 +31,8 @@ class ClothesController < ApplicationController
     end
   end
 
-  def show
-    @cloth = Cloth.find(cloth_params[:id])
-  end
-
   def destroy
-    @cloth = Cloth.find(cloth_params[:id])
+    @cloth = Cloth.find(params[:id])
     @cloth.destroy
     redirect_to clothes_path, notice: "削除しました"
   end
