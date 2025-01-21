@@ -44,6 +44,13 @@ class ClothesController < ApplicationController
     redirect_to clothes_path, notice: "使用記録を追加しました"
   end
 
+  def usage_order
+    @usage_count_log = current_user.clothes
+    .includes(:clothing_usage_logs)
+    .joins(clothing_usage_logs)
+    .order("clothing_usage_logs.used_at: :DESC")
+  end
+
   private
 
   def cloth_params

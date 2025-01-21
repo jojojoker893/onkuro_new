@@ -1,8 +1,13 @@
+<%= render "layouts/header" %>
 
-<%= pie_chart @use_logs, donut: true, suffix: "回" %>
+<div class="container">
+  <%= pie_chart @use_logs, donut: true, suffix: "回", legend: false, class: "chart" %>
 
-<%= link_to "一覧",clothes_path %>
+  <div class="form_btns">
+    <%= link_to "一覧",clothes_path, class: "form_btn"%>
+    <%= link_to "服を登録する", new_clothe_path, class: "form_btn" %>
+  </div>
+  
 
-<%= link_to "服を登録する", new_clothe_path %>
-
-<%= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %>
+  <!-- %= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %-->
+</div>
