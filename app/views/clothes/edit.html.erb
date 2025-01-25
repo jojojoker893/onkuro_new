@@ -1,0 +1,38 @@
+
+<%= form_with model: @cloth, url: clothe_path, method: "patch", html: { multipart: true } do |form| %>
+
+    <div>
+      <% if @cloth.image.attached? %>
+        <p>現在の画像</p>
+        <%= image_tag @cloth.image.variant(resize_to_fill:[200, 300])  %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.file_field :image, accept: "image/*" %>
+    </div>
+  
+    <div>
+      <%= form.text_field :name, placeholder: "name", class: "form_input" %>
+    </div>
+    
+    <div>
+      <!-- %= form.text_field :category_id, placeholder: "カテゴリ", class: "form_input" % --> 
+      <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: "カテゴリを選択してください"%>
+    </div>
+
+    <div>
+      <%= form.collection_select :color_id, Color.all, :id, :name, include_blank: "色を選択してください"%>
+    </div>
+    
+    <div>
+      <%= form.collection_select :brand_id, Brand.all, :id, :name, include_blank: "ブランドを選択してください" %>
+    </div>
+
+    <div>
+      <%= form.text_area :explanation, placeholder: "explanation", class: "form_input" %>
+    </div>
+
+    <%= form.submit "更新", class: "form_submit" %>
+  
+  <% end %>

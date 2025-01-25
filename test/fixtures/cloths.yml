@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  category: one
+  brand: one
+  color: one
+  explanation: MyText
+
+two:
+  user: two
+  name: MyString
+  category: two
+  brand: two
+  color: two
+  explanation: MyText

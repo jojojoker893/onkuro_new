@@ -1,0 +1,22 @@
+<div class="container">
+  <%= form_with model:@user, local: true do |form| %>
+
+  <h1 class="users_title">ようこそ</h1>
+
+  <div>
+    <%= form.text_field :name, placeholder: "name", class: "input_field" %>
+  </div>
+
+  <div>
+    <%= form.text_field :email,placeholder: "email", class: "input_field" %>
+  </div>
+
+  <div>
+    <%= form.password_field :password, placeholder: "password", class: "input_field" %>
+  </div>
+
+  <%= form.submit "新規登録", class: "button" %>
+  <%= link_to "ログイン", login_path, class: "btn login_button" %>
+
+  <% end %>
+</div>
