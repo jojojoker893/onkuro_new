@@ -1,4 +1,25 @@
-<div id="map" style="height: 500px; width: 100%;">
-<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places&loading=async", defer:true %>
-</div>
+<!-- TODO: Add bootstrap script tag. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&libraries=maps,marker&v=beta" defer></script>
 
+<!-- TODO: Add a map with markers. -->
+
+<gmp-map
+  center="43.4142989,-124.2301242"
+  zoom="4"
+  map-id="DEMO_MAP_ID"
+  style="height: 400px"
+>
+  <gmp-advanced-marker
+    position="37.4220656,-122.0840897"
+    title="Mountain View, CA"
+  ></gmp-advanced-marker>
+  <gmp-advanced-marker
+    position="47.648994,-122.3503845"
+    title="Seattle, WA"
+  ></gmp-advanced-marker>
+</gmp-map>
+
+<button id="btn">現在地の取得</button>
+<p>緯度<span id="latitude">???</span>度</p>
+<p>経度<span id="longitude">???</span>度</p>
+<script src="geolocation.js"></script>
