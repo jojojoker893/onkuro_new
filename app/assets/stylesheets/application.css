@@ -216,3 +216,31 @@ z-index: 1000;
   max-width: 100%;
   justify-content: center;
 }
+
+/*  入力フォーム  */
+.form_input{
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  outline: none;
+  display: block;
+  margin: 10px auto;
+}
+
+.form_select{
+  width: 320px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  outline: none;
+  display: block;
+  margin: 10px auto;
+  color: #757575;
+}
