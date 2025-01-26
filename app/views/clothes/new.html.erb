@@ -4,7 +4,11 @@
   <%= form_with model: @cloth, url: clothes_path, multipart: true do |form| %>
     
       <div>
-        <%= form.file_field :image, accept: "image/*",class: "img_form"%>
+        <%= form.file_field :image, accept: "image/*",class: "img_form", id: "img_input_form" %>
+      </div>
+
+      <div>
+        <%= image_tag "", id: "img_preview", style: "display: none; max-width: 300px;" %>
       </div>
     
       <div>
