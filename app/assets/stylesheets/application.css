@@ -21,7 +21,7 @@ top: 0;
 left: 0;
 box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 box-sizing: border-box;
-z-index: 1000;
+z-index: 100;
 }
 
 .header_logo{
@@ -126,6 +126,7 @@ z-index: 1000;
   height: 100vh;
   margin: 0;
   background-color: #fff;
+  gap: 20px;
 }
 
 .login_form{
@@ -247,4 +248,26 @@ z-index: 1000;
   display: block;
   margin: 10px auto;
   color: #757575;
+}
+
+.flash {
+  display: flex;
+  justify-content: center;
+  top: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  position: absolute;
+  text-align: center;
+  z-index: 150;
+  width: 300px;
+  height: 30px;
+  font-size: 18px;
+}
+.flash.notice {
+  background-color: #d4edda;
+  color: #155724;
+}
+.flash.alert {
+  background-color: #f8d7da;
+  color: #721c24;
 }

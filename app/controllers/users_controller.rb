@@ -8,10 +8,11 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to login_path, notice: "登録しました"
+      flash[:notice] = "登録しました"
+      redirect_to login_path
     else
       flash.now[:alert] = "登録に失敗しました"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
