@@ -1,6 +1,7 @@
+<%= render "layouts/header" %>
 
-<%= form_with model: @cloth, url: clothe_path, method: "patch", html: { multipart: true } do |form| %>
-
+<div class="container">
+  <%= form_with model: @cloth, url: clothe_path, method: "patch", html: { multipart: true } do |form| %>
     <div>
       <% if @cloth.image.attached? %>
         <p>現在の画像</p>
@@ -18,22 +19,23 @@
     
     <div>
       <!-- %= form.text_field :category_id, placeholder: "カテゴリ", class: "form_input" % --> 
-      <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: "カテゴリを選択してください"%>
+      <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: "カテゴリを選択してください" }, { class: "form_select" }%>
     </div>
 
     <div>
-      <%= form.collection_select :color_id, Color.all, :id, :name, include_blank: "色を選択してください"%>
+      <%= form.collection_select :color_id, Color.all, :id, :name, { include_blank: "色を選択してください" }, { class: "form_select" }%>
     </div>
     
     <div>
-      <%= form.collection_select :brand_id, Brand.all, :id, :name, include_blank: "ブランドを選択してください" %>
+      <%= form.collection_select :brand_id, Brand.all, :id, :name, { include_blank: "ブランドを選択してください" }, { class: "form_select" }%>
     </div>
 
     <div>
       <%= form.text_area :explanation, placeholder: "explanation", class: "form_input" %>
     </div>
 
-    <%= form.submit "更新", class: "form_submit" %>
-    <%= link_to "戻る", clothes_path%>
+    <%= form.submit "更新", class: "button" %>
+    <%= link_to "戻る", clothes_path, class: "form_btn" %>
   
   <% end %>
+</div>
