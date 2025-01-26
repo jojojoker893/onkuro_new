@@ -23,7 +23,7 @@
 
       <div class="cloth_btn">
         <%= button_to "使用", usage_log_clothe_path(cloth), method: :post, class: "cloth_btn cloth_usage_btn" %>
-        <%= link_to "削除", clothe_path(cloth.id), data: {turbo_method: :delete}, class: "cloth_btn cloth_delete_btn" %>
+        <%= link_to "削除", clothe_path(cloth.id), data: {turbo_method: :delete, turbo_confirm: "#{cloth.name}を削除します。よろしいですか？"},class: "cloth_btn cloth_delete_btn" %>
       </div>
     </div>
   <% end %>
