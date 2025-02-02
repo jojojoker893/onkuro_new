@@ -1,7 +1,15 @@
 <%= render "layouts/header" %>
-
 <div class="container">
-  <%= pie_chart @use_logs, donut: true, suffix: "回", legend: false, class: "chart" %>
+  <% flash.each do |key, message| %>
+    <div class="flash <%= key %>">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= pie_chart @use_logs, donut: true, suffix: "回",title: "使用回数"%>
+  </div>
+  
 
   <div class="form_btns">
     <%= link_to "一覧",clothes_path, class: "form_btn"%>
@@ -9,5 +17,5 @@
   </div>
   
 
-  <!-- %= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %-->
+  <%= button_to "ログアウト", logout_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %>
 </div>

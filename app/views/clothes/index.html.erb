@@ -1,5 +1,13 @@
 <%= render "layouts/header" %>
-<div class="cloth_index_container">
+
+  <% flash.each do |key, message| %>
+    <div class="flash <%= key %>">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <div class="cloth_index_container">
+
     <% @clothes.each do |cloth| %>
       <div class="cloth_card">
         <%= link_to edit_clothe_path(cloth) do %>
@@ -23,7 +31,7 @@
 
       <div class="cloth_btn">
         <%= button_to "使用", usage_log_clothe_path(cloth), method: :post, class: "cloth_btn cloth_usage_btn" %>
-        <%= link_to "削除", clothe_path(cloth.id), data: {turbo_method: :delete, turbo_confirm: "#{cloth.name}を削除します。よろしいですか？"},class: "cloth_btn cloth_delete_btn" %>
+        <%= button_to "削除", clothe_path(cloth.id), method: :delete, data: { confirm: "#{cloth.name}を削除します。よろしいですか？"}, class: "cloth_btn cloth_delete_btn" %>
       </div>
     </div>
   <% end %>
