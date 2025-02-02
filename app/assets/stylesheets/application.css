@@ -260,8 +260,11 @@ z-index: 100;
   text-align: center;
   z-index: 150;
   width: 300px;
-  height: 30px;
   font-size: 18px;
+  left: 50%; /* 画面の中央に配置 */
+  transform: translateX(-50%); 
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
 }
 .flash.notice {
   background-color: #d4edda;
@@ -270,4 +273,8 @@ z-index: 100;
 .flash.alert {
   background-color: #f8d7da;
   color: #721c24;
+}
+.flash.fade{
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
 }

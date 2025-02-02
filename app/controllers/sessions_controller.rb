@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "ログインしました"
       redirect_to home_path
     else
-      flash.now[:alert] = "メールアドレスまたはパスワードが正しくありません"
+      flash[:alert] = "メールアドレスまたはパスワードが正しくありません"
       render :new, status: :unprocessable_entity
     end
   end
