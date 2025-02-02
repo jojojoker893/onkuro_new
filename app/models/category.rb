@@ -1,3 +1,3 @@
 class Category < ApplicationRecord
-  has_many :cloth
+  has_many :clothing
 end
