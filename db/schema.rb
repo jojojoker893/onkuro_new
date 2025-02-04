@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_14_224541) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_02_114741) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -52,16 +52,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_14_224541) do
   end
 
   create_table "clothing_usage_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "cloth_id", null: false
+    t.bigint "clothing_id", null: false
     t.bigint "user_id", null: false
     t.timestamp "used_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cloth_id"], name: "index_clothing_usage_logs_on_cloth_id"
+    t.index ["clothing_id"], name: "index_clothing_usage_logs_on_clothing_id"
     t.index ["user_id"], name: "index_clothing_usage_logs_on_user_id"
   end
 
-  create_table "cloths", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "clothings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
     t.bigint "category_id", null: false
@@ -70,10 +70,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_14_224541) do
     t.text "explanation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["brand_id"], name: "index_cloths_on_brand_id"
-    t.index ["category_id"], name: "index_cloths_on_category_id"
-    t.index ["color_id"], name: "index_cloths_on_color_id"
-    t.index ["user_id"], name: "index_cloths_on_user_id"
+    t.index ["brand_id"], name: "index_clothings_on_brand_id"
+    t.index ["category_id"], name: "index_clothings_on_category_id"
+    t.index ["color_id"], name: "index_clothings_on_color_id"
+    t.index ["user_id"], name: "index_clothings_on_user_id"
   end
 
   create_table "colors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -93,10 +93,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_14_224541) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "clothing_usage_logs", "cloths"
+  add_foreign_key "clothing_usage_logs", "clothings"
   add_foreign_key "clothing_usage_logs", "users"
-  add_foreign_key "cloths", "brands"
-  add_foreign_key "cloths", "categories"
-  add_foreign_key "cloths", "colors"
-  add_foreign_key "cloths", "users"
+  add_foreign_key "clothings", "brands"
+  add_foreign_key "clothings", "categories"
+  add_foreign_key "clothings", "colors"
+  add_foreign_key "clothings", "users"
 end

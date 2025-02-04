@@ -1,0 +1,39 @@
+<%= render "layouts/header" %>
+
+  <% flash.each do |key, message| %>
+    <div class="flash <%= key %>">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <div class="cloth_index_container">
+
+    <% @clothings.each do |clothing| %>
+      <div class="cloth_card">
+        <%= link_to edit_clothing_path(clothing) do %>
+          <div class="cloth_img">
+            <% if clothing.image.attached? %>
+              <%= image_tag clothing.image.variant(resize_to_fill:[200, 300]) %>
+            <% else %>
+              <p>画像がありません</p>
+            <% end %>
+        </div>
+      <% end %>
+
+      <div class="cloth_info">
+        <h3 class="cloth_name"><%= clothing.name %></h3>
+        <!-- p class="cloth_category"><%= clothing.category.name%></p-->
+        <!-- p class="cloth_brand"><%= clothing.brand.name%></p-->
+        <!--p class="cloth_color"><%= clothing.color.name%></p-->
+        <p class="cloth_explanation"><%= clothing.explanation%></p>
+        <p class="cloth_usage">使用回数: <%= clothing.clothing_usage_logs.count %> 回</p>
+      </div>
+
+      <div class="cloth_btn">
+        <%= button_to "使用", usage_log_clothing_path(clothing), method: :post, class: "cloth_btn cloth_usage_btn" %>
+        <%= button_to "削除", clothing_path(clothing.id), method: :delete, data: { confirm: "#{clothing.name}を削除します。よろしいですか？"}, class: "cloth_btn cloth_delete_btn" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
