@@ -42,6 +42,10 @@ gem "image_processing", "~> 1.2"
 gem "ruby-vips"
 gem "chartkick"
 gem "dotenv-rails"
+gem "chartable"
+gem "highcharts-rails"
+gem "highcharts"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

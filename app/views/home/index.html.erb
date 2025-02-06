@@ -6,10 +6,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= pie_chart @use_logs, donut: true, suffix: "回",title: "使用回数"%>
-  </div>
-  
+<div class="chart_container">
+  <%= pie_chart @use_logs, donut: true, library: {
+    title: {
+      text: '使用回数',
+      align: 'center',
+      verticalAlign: 'middle',
+      style: {
+        fontSize: '16px',
+        fontWeight: 'bold'
+      }
+    },
+    plotOptions: {
+      pie: {
+        dataLabels: {
+          enabled: true,
+          format: '{point.name}: {point.y}回',
+          style: {
+            color: '#555'
+          }
+        },
+        size: '100%',
+        innerSize: '60%'
+      }
+    }
+  } %>
+</div>
 
   <div class="form_btns">
     <%= link_to "一覧",clothings_path, class: "form_btn"%>
