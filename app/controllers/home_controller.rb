@@ -1,10 +1,11 @@
 class HomeController < ApplicationController
-  def index # モデルに書いてもいいかな
+  def index
     @use_logs = current_user.clothing
-      .includes(:clothing_usage_logs)
+      .joins(:clothing_usage_logs)
       .group("clothings.id")
       .pluck("clothings.name, COUNT(clothing_usage_logs.id)")
-      .to_h
+      .map { |name, count| [ name, count ] }
+      .sort_by { |_, count| -count }
   end
 
   def clothes_sum # 服の総量 表示されない
