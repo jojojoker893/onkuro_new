@@ -1,4 +1,10 @@
 <div class="container">
+
+  <% flash.each do |key, message| %>
+    <div class="flash <%= key %>">
+      <%= message %>
+    </div>
+  <% end %>
   
   <%= form_with url: login_path, scope: :session, local: true, html: { class: "login_form" } do |form| %>
 
@@ -13,6 +19,6 @@
     </div>
 
     <%= form.submit 'ログイン', class: "button" %>
-    
+    <%= link_to '新規アカウントの作成', new_user_path %>
   <% end %>
 </div>
