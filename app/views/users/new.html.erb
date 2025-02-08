@@ -1,4 +1,11 @@
 <div class="container">
+
+  <% flash.each do |key, message| %>
+    <div class="flash <%= key %>">
+      <%= message %>
+    </div>
+  <% end %>
+  
   <%= form_with model:@user, url: users_path, local: true do |form| %>
 
   <h1 class="users_title">新規登録</h1>
