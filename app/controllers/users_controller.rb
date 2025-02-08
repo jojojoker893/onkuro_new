@@ -11,8 +11,12 @@ class UsersController < ApplicationController
       flash[:notice] = "登録しました"
       redirect_to login_path
     else
-      flash.now[:alert] = "登録に失敗しました"
-      render :new, status: :unprocessable_entity
+      if @user.errors[:email].include?("has already been taken")
+        flash.now[:alert] = "このメールアドレスは既に使用されています"
+      else
+        flash.now[:alert] = "登録に失敗しました"
+      end
+        render :new, status: :unprocessable_entity
     end
   end
 
