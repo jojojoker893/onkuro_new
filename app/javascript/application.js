@@ -5,10 +5,10 @@ import Highcharts from "highcharts";
 Chartkick.use(Highcharts);
 window.Highcharts = Highcharts;
 
-import { Turbo } from "@hotwired/turbo-rails";
-Turbo.session.drive = false;
+//import { Turbo } from "@hotwired/turbo-rails";
+//Turbo.session.drive = false;
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
 const flashMessages = document.querySelectorAll(".flash");
 
 flashMessages.forEach((flash) => {

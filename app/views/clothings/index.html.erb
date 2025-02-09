@@ -25,13 +25,14 @@
         <!-- p class="cloth_category"><%= clothing.category.name%></p-->
         <!-- p class="cloth_brand"><%= clothing.brand.name%></p-->
         <!--p class="cloth_color"><%= clothing.color.name%></p-->
-        <p class="cloth_explanation"><%= clothing.explanation%></p>
         <p class="cloth_usage">使用回数: <%= clothing.clothing_usage_logs.count %> 回</p>
+        <p class="cloth_explanation"><%= clothing.explanation%></p>
       </div>
 
       <div class="cloth_btn">
-        <%= button_to "使用", usage_log_clothing_path(clothing), method: :post, class: "cloth_btn cloth_usage_btn" %>
-        <%= button_to "削除", clothing_path(clothing.id), method: :delete, data: { confirm: "#{clothing.name}を削除します。よろしいですか？"}, class: "cloth_btn cloth_delete_btn" %>
+        <%= button_to "+", usage_log_clothing_path(clothing), data: {turbo_method: :post}, class: "cloth_btn cloth_usage_btn" %>
+        <%= button_to "−", remove_usage_log_clothing_path(clothing), method: :delete, class: "cloth_btn cloth_usage_btn" %>
+        <%= link_to "削除", clothing_path(clothing.id),  data: { turbo_method: :delete, turbo_confirm: "#{clothing.name}を削除します。よろしいですか？"}, class: "cloth_btn cloth_delete_btn" %>
       </div>
     </div>
   <% end %>

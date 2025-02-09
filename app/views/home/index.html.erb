@@ -39,5 +39,5 @@
   </div>
   
 
-  <%= button_to "ログアウト", logout_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %>
+  <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } %>
 </div>
