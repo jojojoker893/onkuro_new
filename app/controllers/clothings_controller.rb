@@ -13,13 +13,13 @@ class ClothingsController < ApplicationController
     if @clothing.save
       redirect_to clothings_path, notice: "登録しました"
     else
-      Rails.logger.debug(@clothing.errors.full_messages)
+      flash.now[:alert] = "登録に失敗しました"
       render :new
     end
   end
 
   def edit
-    @cloth = Clothing.find(params[:id])
+    @clothing = Clothing.find(params[:id])
   end
 
   def update
@@ -27,6 +27,7 @@ class ClothingsController < ApplicationController
     if @clothing.update(clothing_params)
       redirect_to clothings_path, notice: "更新しました"
     else
+      flash.now[:alert] = "更新に失敗しました"
       render :edit
     end
   end
@@ -37,11 +38,28 @@ class ClothingsController < ApplicationController
     redirect_to clothings_path, notice: "削除しました"
   end
 
-  def usage_log
+  def usage_log #使用回数の記録
     @clothing = current_user.clothing.find(params[:id])
-    ClothingUsageLog.create!(clothing: @clothing, user: current_user, used_at: Time.current)
+    usage_log = ClothingUsageLog.new(clothing: @clothing, user: current_user, used_at: Time.current)
+    
+    if usage_log
+      usage_log.save
+      redirect_to clothings_path, notice: "使用記録を追加しました"
+    else
+      redirect_to clothings_path, alert: "使用記録を追加できませんでした"
+    end
+  end
 
-    redirect_to clothings_path, notice: "使用記録を追加しました"
+  def remove_usage_log #使用回数を減らす
+    @clothing = current_user.clothing.find(params[:id])
+    last_log = ClothingUsageLog.where(clothing: @clothing, user: current_user).order(used_at: :desc).first
+
+    if last_log
+      last_log.destroy!
+      redirect_to clothings_path, notice: "使用記録を減らしました"
+    else
+      redirect_to clothings_path, alert: "使用記録がありません"
+    end
   end
 
   def usage_order

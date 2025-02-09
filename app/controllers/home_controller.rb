@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  def index
+  def index 
     @use_logs = current_user.clothing
       .joins(:clothing_usage_logs)
       .group("clothings.id")
