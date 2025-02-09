@@ -1,7 +1,7 @@
 <%= render "layouts/header" %>
 
 <div class="container">
-  <%= form_with model: @clothing, url: clothings_path, method: "patch", html: { multipart: true } do |form| %>
+  <%= form_with model: @clothing, url: clothing_path, method: "patch", html: { multipart: true } do |form| %>
     <div>
       <% if @clothing.image.attached? %>
         <p>現在の画像</p>
@@ -35,7 +35,7 @@
     </div>
 
     <%= form.submit "更新", class: "button" %>
-    <%= link_to "戻る", clothing_path, class: "form_btn" %>
+    <%= link_to "戻る", clothings_path, class: "form_btn" %>
   
   <% end %>
 </div>
