@@ -8,7 +8,4 @@ class HomeController < ApplicationController
       .sort_by { |_, count| -count }
   end
 
-  def clothes_sum # 服の総量 表示されない
-    @total_clothings = current_user.count(:clothing).to_i
-  end
 end
