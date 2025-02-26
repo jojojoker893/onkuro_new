@@ -28,9 +28,11 @@ threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
 threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-port ENV.fetch("PORT", 3000)
-
+#port ENV.fetch("PORT", 3000)
+bind "unix:///var/www/onkuro_new/tmp/sockets/puma.sock"
 # Allow puma to be restarted by `bin/rails restart` command.
+environment ENV.fetch("RAILS_ENV"){ "production" }
+pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 plugin :tmp_restart
 
 # Run the Solid Queue supervisor inside of Puma for single-server deployments
