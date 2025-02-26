@@ -54,7 +54,7 @@ production:
   primary: &primary_production
     <<: *default
     database: onkuro_new_production
-    username: onkuro_new
+    username: root
     password: <%= ENV["ONKURO_NEW_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
