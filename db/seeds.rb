@@ -8,12 +8,12 @@ Categories.each do |line|
   Category.create!(name: line)
 end
 
-Brands = %w[Uniqlo GU Zara Adidas Nike]
+Brands = %w[LouisVuitton CHANEL Hermès Gucci Prada Dior Balenciaga SaintLaurent Fendi BottegaVeneta CommedesGarçons UNIQLO Nike Adidas ZARA H&M BEAMS URBANRESEARCH nano・universe AcneStudios]
 Brands.each do |line|
   Brand.create!(name: line)
 end
 
-Colors = %w[赤 青 緑 黒 白]
+Colors = %w[赤 青 緑 黄 オレンジ 紫 ピンク 茶 白 黒 灰 ベージュ]
 Colors.each do |line|
   Color.create!(name: line)
 end
