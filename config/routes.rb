@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :colors, only: [ :index, :new, :create ]
   resources :maps, only: [ :index ]
 
-  resources :clothings do
+  resources :clothings, only: [ :index, :new, :create, :show, :update, :destroy]do
     member do
       post :usage_log
       delete :remove_usage_log
