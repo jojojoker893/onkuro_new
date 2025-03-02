@@ -8,8 +8,9 @@ Chartkick.use(Highcharts);
 //import { Turbo } from "@hotwired/turbo-rails";
 //Turbo.session.drive = false;
 
-document.addEventListener("turbo:load", removeFlashMessage)
-document.addEventListener("turbo:render",removeFlashMessage)
+document.addEventListener("DOMContentLoaded",removeFlashMessage);
+document.addEventListener("turbo:load", removeFlashMessage);
+document.addEventListener("turbo:render",removeFlashMessage);
 
 function removeFlashMessage() {
 const flashMessages = document.querySelectorAll(".flash");
