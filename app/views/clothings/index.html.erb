@@ -1,11 +1,5 @@
 <%= render "layouts/header" %>
 
-  <% flash.each do |key, message| %>
-    <div class="flash <%= key %>">
-      <%= message %>
-    </div>
-  <% end %>
-
   <div class="cloth_index_container">
 
     <% @clothings.each do |clothing| %>

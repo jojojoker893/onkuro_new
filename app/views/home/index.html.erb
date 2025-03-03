@@ -1,10 +1,5 @@
 <%= render "layouts/header" %>
 <div class="container">
-  <% flash.each do |key, message| %>
-    <div class="flash <%= key %>">
-      <%= message %>
-    </div>
-  <% end %>
 
 <div class="chart_container">
   <%= pie_chart @use_logs, donut: true, library: {
