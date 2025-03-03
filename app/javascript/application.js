@@ -10,15 +10,15 @@ Chartkick.use(Highcharts);
 
 //document.addEventListener("DOMContentLoaded",removeFlashMessage);
 //document.addEventListener("turbo:load", removeFlashMessage);
-document.addEventListener("turbo:render",removeFlashMessage);
+//document.addEventListener("turbo:render",removeFlashMessage);
 
-function removeFlashMessage() {
-const flashMessages = document.querySelectorAll(".flash");
+//function removeFlashMessage() {
+//const flashMessages = document.querySelectorAll(".flash");
 
-  flashMessages.forEach((flash) => {
-    setTimeout(()=> {
-      flash.classList.add("fade");
-      setTimeout(()=> flash.remove(), 500);
-    }, 1000);
-  });
-}
+  //flashMessages.forEach((flash) => {
+    //setTimeout(()=> {
+      //flash.classList.add("fade");
+      //setTimeout(()=> flash.remove(), 500);
+    //}, 1000);
+  //});
+//}

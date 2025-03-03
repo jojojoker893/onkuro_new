@@ -1,9 +1,4 @@
 <%= render "layouts/header" %>
-<% flash.each do |key, message| %>
-    <div class="flash <%= key %>">
-      <%= message %>
-    </div>
-  <% end %>
 
 <div class="container">
   <%= form_with model: @clothing, url: clothing_path, method: "patch", html: { multipart: true } do |form| %>
