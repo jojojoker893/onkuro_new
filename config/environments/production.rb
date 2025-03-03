@@ -87,5 +87,5 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
   config.assets.compile = true
-  config.action_view.form_with_generates_remote_forms = ture
+  config.action_view.form_with_generates_remote_forms = true
 end
