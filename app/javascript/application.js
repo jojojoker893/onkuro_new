@@ -1,8 +1,11 @@
 import "@hotwired/turbo-rails"
-import "controllers"
+import "./controllers"
 import Chartkick from "chartkick"
 import Highcharts from "highcharts"
 Chartkick.use(Highcharts);
+
+Turbo.session.drive = false
+
 //window.Highcharts = Highcharts;
 
 //import { Turbo } from "@hotwired/turbo-rails";
