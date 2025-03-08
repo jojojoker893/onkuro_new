@@ -5,7 +5,7 @@
 //Chartkick.use(Highcharts);
 
 // Import modules
-import Highcharts from "highcharts";
+import * as Highcharts from "highcharts";
 import * as Chartkick from "chartkick";
 import { Chart } from "chart.js"; // ここを修正！
 
