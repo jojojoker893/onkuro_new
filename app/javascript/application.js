@@ -7,7 +7,7 @@
 // Import modules
 import Highcharts from "highcharts";
 import * as Chartkick from "chartkick";
-import Chart from "chart.js";
+import { Chart } from "chart.js"; // ここを修正！
 
 window.Chartkick = Chartkick;
 Chartkick.use(Chart);
