@@ -2,7 +2,7 @@
 pin "application"
 pin "highcharts", to: "https://code.highcharts.com/highcharts.js" # @12.1.2
 pin "chartkick", to: "https://cdn.jsdelivr.net/npm/chartkick@5.0.1/dist/chartkick.min.js" # @5.0.1
-pin "chart.js", to: "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"
+pin 'chart.js', to: 'https://ga.jspm.io/npm:chart.js@4.4.6/dist/chart.js'
 pin "@hotwired/turbo-rails", to: "turbo.min.js"
 pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
