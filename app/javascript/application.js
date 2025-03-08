@@ -10,7 +10,7 @@ import * as Chartkick from "chartkick";
 import { Chart } from "chart.js"; // ここを修正！
 
 window.Chartkick = Chartkick;
-Chartkick.use(Chart);
+Chartkick.Chart = Chart;
 import "@hotwired/turbo-rails";
 import "@hotwired/stimulus";
 import "@hotwired/stimulus-loading";
