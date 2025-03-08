@@ -1,27 +1,19 @@
-import "@hotwired/turbo-rails"
-import "./controllers"
-import Chartkick from "chartkick"
-import Highcharts from "highcharts"
-Chartkick.use(Highcharts);
+//import "@hotwired/turbo-rails"
+//import "./controllers"
+//import Chartkick from "chartkick"
+//import Highcharts from "highcharts"
+//Chartkick.use(Highcharts);
 
-Turbo.session.drive = false
+// Import modules
+import Highcharts from "highcharts";
+import Chartkick from "chartkick";
+import "@hotwired/turbo-rails";
+import "@hotwired/stimulus";
+import "@hotwired/stimulus-loading";
+import "controllers";
 
-//window.Highcharts = Highcharts;
+// Debugging: 確認のために Highcharts を出力
+document.addEventListener("turbo:load", function () {
+  console.log("Highcharts:", Highcharts);
+});
 
-//import { Turbo } from "@hotwired/turbo-rails";
-//Turbo.session.drive = false;
-
-//document.addEventListener("DOMContentLoaded",removeFlashMessage);
-//document.addEventListener("turbo:load", removeFlashMessage);
-//document.addEventListener("turbo:render",removeFlashMessage);
-
-//function removeFlashMessage() {
-//const flashMessages = document.querySelectorAll(".flash");
-
-  //flashMessages.forEach((flash) => {
-    //setTimeout(()=> {
-      //flash.classList.add("fade");
-      //setTimeout(()=> flash.remove(), 500);
-    //}, 1000);
-  //});
-//}
