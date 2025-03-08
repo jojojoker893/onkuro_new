@@ -6,7 +6,11 @@
 
 // Import modules
 import Highcharts from "highcharts";
-import Chartkick from "chartkick";
+import * as Chartkick from "chartkick";
+import Chart from "chart.js";
+
+window.Chartkick = Chartkick;
+Chartkick.use(Chart);
 import "@hotwired/turbo-rails";
 import "@hotwired/stimulus";
 import "@hotwired/stimulus-loading";
