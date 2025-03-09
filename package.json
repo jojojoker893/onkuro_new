@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "chart.js": "^4.4.7",
-    "chartkick": "^5.0.1",
-    "highcharts": "^12.1.2"
+    "chartkick": "^5.0.1"
   }
 }

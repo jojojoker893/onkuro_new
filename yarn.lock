@@ -32,8 +32,3 @@ date-fns@>=2:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-4.1.0.tgz#64b3d83fff5aa80438f5b1a633c2e83b8a1c2d14"
   integrity sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==
-
-highcharts@^12.1.2:
-  version "12.1.2"
-  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-12.1.2.tgz#826114935b3ffb6b99dc906da00f137667a67fbb"
-  integrity sha512-paZ72q1um0zZT1sS+O/3JfXVSOLPmZ0zlo8SgRc0rEplPFPQUPc4VpkgQS8IUTueeOBgIWwVpAWyC9tBYbQ0kg==

@@ -43,8 +43,6 @@ gem "ruby-vips"
 gem "chartkick"
 gem "dotenv-rails"
 gem "chartable"
-gem "highcharts-rails"
-gem "highcharts"
 gem "aws-sdk-s3"
 
 group :development, :test do

@@ -1,6 +1,6 @@
 # Pin npm packages by running ./bin/importmap
 pin "application"
-pin "highcharts", to: "https://code.highcharts.com/highcharts.js" # @12.1.2
+#pin "highcharts", to: "https://code.highcharts.com/highcharts.js" # @12.1.2
 # pin "chartkick", to: "https://cdn.jsdelivr.net/npm/chartkick@5.0.1/dist/chartkick.min.js" # @5.0.1
 pin "chartkick"
 pin 'chart.js', to: 'https://ga.jspm.io/npm:chart.js@4.4.6/dist/chart.js'
