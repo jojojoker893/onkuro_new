@@ -29,7 +29,11 @@ min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
 threads min_threads_count, max_threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-bind "unix:///var/www/onkuro_new/tmp/sockets/puma.sock"
+if Rails.env.production?
+  bind "unix:///var/www/onkuro_new/tmp/sockets/puma.sock"
+else
+  bind "tcp://127.0.0.1:3000"
+end
 
 # Allow puma to be restarted by `bin/rails restart` command.
 environment ENV.fetch("RAILS_ENV") { "production" }
