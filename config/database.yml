@@ -22,15 +22,15 @@ production:
     password: <%= ENV["ONKURO_NEW_DATABASE_PASSWORD"] %>
     host: onkuro-db.c74m22q2ww83.ap-northeast-1.rds.amazonaws.com
     port: 3306
-  cache:
-    <<: *primary_production
-    database: onkuro_new_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: onkuro_new_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: onkuro_new_production_cable
-    migrations_paths: db/cable_migrate
+  # cache:
+  #   <<: *primary_production
+  #   database: onkuro_new_production_cache
+  #   migrations_paths: db/cache_migrate
+  # queue:
+  #   <<: *primary_production
+  #   database: onkuro_new_production_queue
+  #   migrations_paths: db/queue_migrate
+  # cable:
+  #   <<: *primary_production
+  #   database: onkuro_new_production_cable
+  #   migrations_paths: db/cable_migrate
