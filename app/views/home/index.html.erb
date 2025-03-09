@@ -2,30 +2,7 @@
 <div class="container">
 
 <div class="chart_container">
-  <%= pie_chart @use_logs, donut: true, library: {
-    title: {
-      text: '使用回数',
-      align: 'center',
-      verticalAlign: 'middle',
-      style: {
-        fontSize: '16px',
-        fontWeight: 'bold'
-      }
-    },
-    plotOptions: {
-      pie: {
-        dataLabels: {
-          enabled: true,
-          format: '{point.name}: {point.y}回',
-          style: {
-            color: '#555'
-          }
-        },
-        size: '100%',
-        innerSize: '60%'
-      }
-    }
-  } %>
+  <%= pie_chart @use_logs, donut: true%>
 </div>
 
   <div class="form_btns">
