@@ -2,12 +2,14 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: <%= ENV["ONKURO_NEW_DATABASE_PASSWORD"] %>
+  #username: root
+  #password: <%= ENV["ONKURO_NEW_DATABASE_PASSWORD"] %>
 
 development:
   <<: *default
   database: onkuro_new_development
+  username: root
+  password: <%= ENV["ONKURO_NEW_DATABASE_PASSWORD"] %>
   host: localhost
 
 test:
@@ -18,8 +20,10 @@ production:
   primary: &primary_production
     <<: *default
     database: onkuro_new_production
-    username: <%= ENV["ONKURO_USER"] %>
-    password: <%= ENV["ONKURO_NEW_DATABASE_PASSWORD"] %>
+    username: <%= Rails.application.credentials.dig(:db, :username) %>
+    password: <%= Rails.application.credentials.dig(:db, :password) %>
+    #username: <%= ENV["ONKURO_USER"] %>
+    #password: <%= ENV["ONKURO_NEW_DATABASE_PASSWORD"] %>
     host: onkuro-db.c74m22q2ww83.ap-northeast-1.rds.amazonaws.com
     port: 3306
   # cache:
