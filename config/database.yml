@@ -2,7 +2,7 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
+  username: <%= ENV["ONKURO_USER"] %>
   password: <%= ENV["ONKURO_NEW_DATABASE_PASSWORD"] %>
 
 development:
@@ -18,7 +18,7 @@ production:
   primary: &primary_production
     <<: *default
     database: onkuro_new_production
-    username: root
+    username: <%= ENV["ONKURO_USER"] %>
     password: <%= ENV["ONKURO_NEW_DATABASE_PASSWORD"] %>
     host: onkuro-db.c74m22q2ww83.ap-northeast-1.rds.amazonaws.com
     port: 3306
