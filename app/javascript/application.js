@@ -5,7 +5,7 @@
 //Chartkick.use(Highcharts);
 
 // Import modules
-import * as Highcharts from "highcharts";
+//import * as Highcharts from "highcharts";
 //import * as Chartkick from "chartkick";
 //import "chartkick"
 //import { Chart } from "chart.js"; // ここを修正！
@@ -23,14 +23,27 @@ import "controllers";
 //   console.log("Highcharts:", Highcharts);
 // });
 
-//import Chartkick from "chartkick";
-//import Chart from "chart.js"; // Chart.jsの最新バージョンを使用
+import * as Highcharts from "highcharts"; // 修正
 
-// Chartkick に Chart.js を設定する
-//Chartkick.use(Chart);
+document.addEventListener("DOMContentLoaded", function () {
+  window.Highcharts.chart("chart_container", {
+    chart: { type: "pie" },
+    title: { text: "" },
+    series: [{
+      name: "使用回数",
+      colorByPoint: true,
+      data: [
+        { name: "T-Shirts", y: 10 },
+        { name: "Jeans", y: 15 },
+        { name: "Jackets", y: 7 },
+        { name: "Dresses", y: 5 },
+        { name: "Shoes", y: 8 }
+      ]
+    }],
+    tooltip: {
+      pointFormat: "{series.name}: <b>{point.y}回</b>"
+    }
+  });
+});
 
-// import "@hotwired/turbo-rails";
-// import "@hotwired/stimulus";
-// import "@hotwired/stimulus-loading";
-// import "controllers";
 

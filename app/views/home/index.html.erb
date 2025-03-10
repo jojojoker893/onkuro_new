@@ -1,8 +1,6 @@
 <%= render "layouts/header" %>
 <div class="container">
-
-<div class="chart_container">
-  <%= pie_chart @use_logs, donut: true, suffix: "回" %>
+  <div id="chart_container"></div>
 </div>
 
   <div class="form_btns">
