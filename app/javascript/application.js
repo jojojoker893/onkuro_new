@@ -25,7 +25,7 @@ import "controllers";
 
 import * as Highcharts from "highcharts"; // 修正
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("turbo:load", function () {
   window.Highcharts.chart("chart_container", {
     chart: { type: "pie" },
     title: { text: "" },

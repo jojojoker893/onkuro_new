@@ -23,12 +23,12 @@
 
   <body>
     <%= yield %>
-    <turbo-frame id="flash" data-turbo-cache="false">
+    <div id="flash" data-turbo="false">
       <% flash.each do |key, message| %>
         <div class="flash <%= key %>">
           <%= message %>
         </div>
       <% end %>
-    </turbo-frame>
+    </div>
   </body>
 </html>

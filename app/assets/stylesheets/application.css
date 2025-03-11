@@ -106,7 +106,13 @@ z-index: 100;
 .cloth_delete_btn:hover{
   background-color: #1fa3db;
 }
-
+.logout_btn{
+  padding: 10px;
+  outline: none;
+  display: block;
+  margin: 10px auto;
+  cursor: pointer;
+}
 
 .container {
   display: flex;
@@ -114,7 +120,7 @@ z-index: 100;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100vh;
+  height: 65vh;
   margin: 0;
   background-color: #fff;
   gap: 20px;
@@ -268,9 +274,4 @@ z-index: 100;
 .flash.fade{
   opacity: 0;
   transition: opacity 0.5s ease-out;
-}
-
-.chart_container {
-  display: block !important;
-  height: 300px !important;
 }
