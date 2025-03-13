@@ -26,7 +26,10 @@ import "controllers";
 import * as Highcharts from "highcharts"; // 修正
 
 document.addEventListener("turbo:load", function () {
-  window.Highcharts.chart("chart_container", {
+  let chartContainer = document.getElementById("chart_container")
+  if (!chartContainer) return;
+  
+  let chart = window.Highcharts.chart("chart_container", {
     chart: { type: "pie" },
     title: { text: "" },
     series: [{
@@ -43,6 +46,9 @@ document.addEventListener("turbo:load", function () {
     tooltip: {
       pointFormat: "{series.name}: <b>{point.y}回</b>"
     }
+  });
+  window.addEventListener('resize', function() {
+    chart.reflow();
   });
 });
 

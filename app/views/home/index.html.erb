@@ -1,14 +1,12 @@
 <%= render "layouts/header" %>
 <div class="container">
   <div id="chart_container"></div>
-</div>
 
   <div class="form_btns">
     <%= link_to "一覧",clothings_path, class: "form_btn"%>
     <%= link_to "服を登録する", new_clothing_path, class: "form_btn" %>
   </div>
   
-
   <!--%= link_to "ログアウト", logout_path, data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } %-->
   <%= button_to "ログアウト", logout_path, method: :delete, data: { turbo: false, confirm: 'ログアウトしますか?' }, class: "logout_btn" %>
 </div>

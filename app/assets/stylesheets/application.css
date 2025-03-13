@@ -120,7 +120,7 @@ z-index: 100;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 65vh;
+  height: 100vh;
   margin: 0;
   background-color: #fff;
   gap: 20px;
@@ -215,7 +215,8 @@ z-index: 100;
 
 .chart{
   display: flex;
-  max-width: 100%;
+  align-items: center;
+  width: 100%;
   justify-content: center;
 }
 
