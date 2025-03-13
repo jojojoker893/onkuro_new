@@ -4,10 +4,22 @@
 
   <script>
     function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'),{
-        center: {lat:35.6895, lng:139.6917},
-        zoom: 12
+      navigator.geolocation.getCurrentPosition((position) => {
+        var userLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        var map = new google.maps.Map(document.getElementById('map'),{
+          center: userLocation,
+          zoom: 16
+        });
+
+      new google.maps.Marker({
+        position: userLocation,
+        map: map
       });
+    });
   }
   </script>
 
@@ -16,5 +28,3 @@
   <div id="map" style="height: 800px; width: 100%;"></div>
 </div>
 
-現在地を取得
-現在地を中心に表示 centerを現在地としたい
