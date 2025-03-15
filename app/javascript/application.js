@@ -25,31 +25,4 @@ import "controllers";
 
 import * as Highcharts from "highcharts"; // 修正
 
-document.addEventListener("turbo:load", function () {
-  let chartContainer = document.getElementById("chart_container")
-  if (!chartContainer) return;
-  
-  let chart = window.Highcharts.chart("chart_container", {
-    chart: { type: "pie" },
-    title: { text: "" },
-    series: [{
-      name: "使用回数",
-      colorByPoint: true,
-      data: [
-        { name: "T-Shirts", y: 10 },
-        { name: "Jeans", y: 15 },
-        { name: "Jackets", y: 7 },
-        { name: "Dresses", y: 5 },
-        { name: "Shoes", y: 8 }
-      ]
-    }],
-    tooltip: {
-      pointFormat: "{series.name}: <b>{point.y}回</b>"
-    }
-  });
-  window.addEventListener('resize', function() {
-    chart.reflow();
-  });
-});
-
 
