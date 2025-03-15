@@ -2,6 +2,33 @@
 <div class="container">
   <div id="chart_container"></div>
 
+  <div id="chart_container"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let chartContainer = document.getElementById("chart_container");
+
+      Highcharts.chart("chart_container", {
+        chart: { type: "pie" },
+        title: { text: "使用回数" },
+        series: [{
+          name: "使用回数",
+          colorByPoint: true,
+          data: [
+            { name: "T-Shirts", y: 10 },
+            { name: "Jeans", y: 15 },
+            { name: "Jackets", y: 7 },
+            { name: "Dresses", y: 5 },
+            { name: "Shoes", y: 8 }
+          ]
+        }],
+        tooltip: {
+          pointFormat: "{series.name}: <b>{point.y}回</b>"
+        }
+      });
+    });
+  </script>
+
   <div class="form_btns">
     <%= link_to "一覧",clothings_path, class: "form_btn"%>
     <%= link_to "服を登録する", new_clothing_path, class: "form_btn" %>
