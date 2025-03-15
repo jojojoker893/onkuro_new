@@ -23,12 +23,10 @@
 
   <body>
     <%= yield %>
-    <div id="flash" data-turbo="false">
       <% flash.each do |key, message| %>
         <div class="flash <%= key %>">
           <%= message %>
         </div>
       <% end %>
-    </div>
   </body>
 </html>
