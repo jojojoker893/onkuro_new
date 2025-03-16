@@ -15,9 +15,12 @@
           zoom: 15
         });
 
+      const image = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+
       new google.maps.Marker({
         position: userLocation,
-        map: map
+        map: map,
+        icon: image
       });
       nearShowStore(map, userLocation);
     });
