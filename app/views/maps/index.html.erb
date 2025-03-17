@@ -20,6 +20,7 @@
       new google.maps.Marker({
         position: userLocation,
         map: map,
+        title: "あなたの現在地",
         icon: image
       });
       nearShowStore(map, userLocation);
@@ -35,14 +36,32 @@
       keyword: "古着屋 リサイクルショップ"
     }, (results, status) => {
       results.forEach((place) => {
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
           position: place.geometry.location,
           map: map,
-          title: place.name
+          title: place.name,
         });
+
+      const contents =  `
+        <div>
+          <strong>${place.name}</strong><br>
+          <strong>住所:</strong>${place.vicinity}
+        </div>`;
+
+      const infoWindow = new google.maps.InfoWindow({
+        content: contents
+      });
+
+      marker.addListener('click', () => {
+        infoWindow.open(map,marker);
+      });
       });
     }
   )}
+
+  
+
+  
 
   </script>
 
