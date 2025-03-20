@@ -1,11 +1,9 @@
 class HomeController < ApplicationController
-  def index 
+  def index
     @use_logs = current_user.clothing
       .joins(:clothing_usage_logs)
       .group("clothings.id")
       .pluck("clothings.name, COUNT(clothing_usage_logs.id)")
-      .map { |name, count| [ name, count ] }
-      .sort_by { |_, count| -count }
+      .map { |name, count| { name: name, y: count } }
   end
-
 end
