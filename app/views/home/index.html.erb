@@ -11,6 +11,7 @@
       let chartData = <%= raw @use_logs.to_json %>;
 
       Highcharts.chart("chart_container", {
+        accessibility: { enabled: false },
         chart: { type: "pie" },
         title: { text: "使用回数" },
         series: [{
