@@ -10,6 +10,11 @@
 
       let chartData = <%= raw @use_logs.to_json %>;
 
+      if (chartData.length === 0){
+        chartContainer.innerHTML = "<p>使用データがありません</p>";
+        return;
+      }
+
       Highcharts.chart("chart_container", {
         accessibility: { enabled: false },
         chart: { type: "pie" },
