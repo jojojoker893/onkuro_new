@@ -8,19 +8,15 @@
     document.addEventListener("turbo:load", function () {
       let chartContainer = document.getElementById("chart_container");
 
+      let chartData = <%= raw @use_logs.to_json %>;
+
       Highcharts.chart("chart_container", {
         chart: { type: "pie" },
         title: { text: "使用回数" },
         series: [{
           name: "使用回数",
           colorByPoint: true,
-          data: [
-            { name: "T-Shirts", y: 10 },
-            { name: "Jeans", y: 15 },
-            { name: "Jackets", y: 7 },
-            { name: "Dresses", y: 5 },
-            { name: "Shoes", y: 8 }
-          ]
+          data: chartData
         }],
         tooltip: {
           pointFormat: "{series.name}: <b>{point.y}回</b>"
