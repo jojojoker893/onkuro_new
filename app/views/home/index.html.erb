@@ -1,9 +1,7 @@
 <%= render "layouts/header" %>
 <div class="container">
   <div id="chart_container"></div>
-
-  <div id="chart_container"></div>
-
+  
   <script>
     document.addEventListener("turbo:load", function () {
       let chartContainer = document.getElementById("chart_container");
@@ -14,6 +12,8 @@
         chartContainer.innerHTML = "<p>使用データがありません</p>";
         return;
       }
+
+      chartData.sort((a, b)=> b.y - a.y);
 
       Highcharts.chart("chart_container", {
         accessibility: { enabled: false },
