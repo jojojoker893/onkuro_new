@@ -1,6 +1,9 @@
 <%= render "layouts/header" %>
 
   <div class="cloth_index_container">
+    <%= link_to "登録順", clothings_path %>
+    <%= link_to "使用回数の多い順", clothings_path(order: "usage_desc") %>
+    <%= link_to "使用回数の少ない順", clothings_path(order: "usage_asc") %>
 
     <% @clothings.each do |clothing| %>
       <div class="cloth_card">

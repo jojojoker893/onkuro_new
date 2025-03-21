@@ -1,6 +1,14 @@
 class ClothingsController < ApplicationController
   def index
-    @clothings = current_user.clothing.includes(:clothing_usage_logs)
+    # @clothings = current_user.clothing.includes(:clothing_usage_logs)
+    case params[:order]
+    when "usage_asc"
+      @clothings = current_user.clothing.usage_log_count.order_usage("ASC")
+    when "usage_desc"
+      @clothings = current_user.clothing.usage_log_count.order_usage("DESC")
+    else
+      @clothings = current_user.clothing.order_created_at
+    end
   end
 
   def new
@@ -38,10 +46,10 @@ class ClothingsController < ApplicationController
     redirect_to clothings_path, notice: "削除しました"
   end
 
-  def usage_log #使用回数の記録
+  def usage_log # 使用回数の記録
     @clothing = current_user.clothing.find(params[:id])
     usage_log = ClothingUsageLog.new(clothing: @clothing, user: current_user, used_at: Time.current)
-    
+
     if usage_log
       usage_log.save
       redirect_to clothings_path, notice: "使用記録を追加しました"
@@ -50,7 +58,7 @@ class ClothingsController < ApplicationController
     end
   end
 
-  def remove_usage_log #使用回数を減らす
+  def remove_usage_log # 使用回数を減らす
     @clothing = current_user.clothing.find(params[:id])
     last_log = ClothingUsageLog.where(clothing: @clothing, user: current_user).order(used_at: :desc).first
 
@@ -62,16 +70,9 @@ class ClothingsController < ApplicationController
     end
   end
 
-  def usage_order
-    @usage_count_log = current_user.clothing
-    .includes(:clothing_usage_logs)
-    .joins(clothing_usage_logs)
-    .order("clothing_usage_logs.used_at: :DESC")
-  end
-
   private
 
   def clothing_params
-    params.require(:clothing).permit(:name, :category_id, :brand_id, :color_id, :explanation, :image)
+    params.require(:clothing).permit(:name, :category_id, :brand_id, :color_id, :explanation, :image, :order)
   end
 end
