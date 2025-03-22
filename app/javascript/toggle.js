@@ -1,4 +1,3 @@
-console.log("toggle.jsおk");
 document.addEventListener("turbo:load", () => {
   const icon = document.getElementById("search-toggle")
   const form = document.getElementById("search-form")
