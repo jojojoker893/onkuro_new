@@ -19,4 +19,7 @@ class Clothing < ApplicationRecord
 
   # @@使用回数の降順、昇順で並び替え
   scope :order_usage, ->(sort_order = "DESC") { order(Arel.sql("usage_count #{sort_order}")) }
+
+  # @@ジャンルごとの並び替え
+  # scope :order_category, -> { order(:category) }
 end
