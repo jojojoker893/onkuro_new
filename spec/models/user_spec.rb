@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User do
-  before(:each) do 
+  before(:each) do
     User.delete_all
   end
 
@@ -9,14 +9,14 @@ RSpec.describe User do
     it "有効なuserの場合保存されるか" do
       expect(build(:user)).to be_valid
     end
-    
+
     it "nameがなければ無効" do
       user = build(:user, name: nil)
       user.valid?
       expect(user.errors[:name]).to include("can't be blank")
     end
 
-    it "emailがなければ無効" do 
+    it "emailがなければ無効" do
       user = build(:user, email: nil)
       user.valid?
       expect(user.errors[:email]).to include("can't be blank")
@@ -41,6 +41,5 @@ RSpec.describe User do
       user.valid?
       expect(user.errors[:email]).to include("has already been taken")
     end
-    
   end
 end
