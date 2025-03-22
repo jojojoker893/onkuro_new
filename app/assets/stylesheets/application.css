@@ -243,7 +243,31 @@
   gap: 4px;
 }
 
-
 .toggle-hidden {
   display: none;
 }
+
+/* 画像アップロードフォーム */
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  border: 2px dashed #ccc ;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.upload-container.dragover {
+  border-color: #42bdf5;
+  background-color: #e6f7ff;
+}
+
+.img-upload {
+  width: 70px;
+  height: 70px;
+}
+

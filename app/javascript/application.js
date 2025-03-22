@@ -26,4 +26,5 @@ import "controllers";
 import * as Highcharts from "highcharts"; // 修正
 import "flash";
 import "toggle";
+import "upload";
 
