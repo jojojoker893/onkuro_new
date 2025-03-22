@@ -1,19 +1,17 @@
 <% content_for :header_seach do %>
-  <div id="seach_toggle" style="cursor: pointer;">
-    <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort', class: "seach_item")%>
-    <!-- %= link_to "登録順", clothings_path %>
-    < !-- %= link_to "使用回数の多い順", clothings_path(order: "usage_desc") %>
-    < !-- %= link_to "使用回数の少ない順", clothings_path(order: "usage_asc") %-->
+  <div id="search_toggle" style="cursor: pointer;">
+    <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort')%>
+
   </div>
 
-  <div id="seach_form" style="display: none;">
+  <div id="search_form" style="display: none;">
     <%= form_with url: clothings_path, method: :get, local: true do %>
       <%= select_tag :order, options_for_select([
         ['登録順', 'created_at'],
         ['使用回数が多い順', 'usage_desc'],
         ['使用回数が少ない順', 'usage_asc']
       ]), onchange: "this.form.submit()" %>
-      <% end %>
+    <% end %>
   </div>
 
 
