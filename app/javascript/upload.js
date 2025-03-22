@@ -1,5 +1,6 @@
 document.addEventListener("turbo:load", () => {
   const uploadZone = document.getElementById("uploadContainer");
+  const input = document.getElementById("imageInput");
 
   ["dragenter", "dragover"].forEach(eventName => {
     uploadZone.addEventListener(eventName, (e) => {
@@ -16,5 +17,7 @@ document.addEventListener("turbo:load", () => {
   });
 
   uploadZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    input.files = e.dataTransfer.files;
   });
-})
+});
