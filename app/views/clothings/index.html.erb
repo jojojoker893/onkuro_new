@@ -1,10 +1,10 @@
 <% content_for :header_seach do %>
-  <div id="search_toggle" style="cursor: pointer;">
+<div class="search-wrapper">
+  <div id="search-toggle" style="cursor: pointer;">
     <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort')%>
-
   </div>
 
-  <div id="search_form" style="display: none;">
+  <div id="search-form" class="toggle-hidden">
     <%= form_with url: clothings_path, method: :get, local: true do %>
       <%= select_tag :order, options_for_select([
         ['登録順', 'created_at'],
@@ -13,7 +13,7 @@
       ]), onchange: "this.form.submit()" %>
     <% end %>
   </div>
-
+</div>
 
 <% end %>
 

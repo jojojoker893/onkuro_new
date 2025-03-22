@@ -237,10 +237,13 @@
 }
 
 /* ソートメニュー */
-#search_toggle {
+.search-wrapper {
   display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-#search_form {
+
+.toggle-hidden {
   display: none;
 }
