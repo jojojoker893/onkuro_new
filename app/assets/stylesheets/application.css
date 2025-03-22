@@ -258,7 +258,12 @@
   border-radius: 8px;
   padding: 20px;
   cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
 
+.upload-container.dragover {
+  border-color: #42bdf5;
+  background-color: #e6f7ff;
 }
 
 .img-upload {

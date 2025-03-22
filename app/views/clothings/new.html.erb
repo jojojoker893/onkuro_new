@@ -4,7 +4,7 @@
 <div class="container">
   <%= form_with model: @clothing, url: clothings_path, multipart: true do |form| %>
     
-      <div class="upload-container">
+      <div class="upload-container", id="uploadContainer">
         <%= image_tag "cloud_upload_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg", class: "img-upload" %>
         <p>ここにファイルをドラッグ&ドロップ<br>または</p>
         <%= form.file_field :image, accept: "image/*",class: "img-form" %>
