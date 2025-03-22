@@ -4,14 +4,12 @@
 <div class="container">
   <%= form_with model: @clothing, url: clothings_path, multipart: true do |form| %>
     
-      <div>
-        <%= form.file_field :image, accept: "image/*",class: "img_form", id: "img_input_form" %>
+      <div class="upload-container">
+        <%= image_tag "cloud_upload_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg", class: "img-upload" %>
+        <p>ここにファイルをドラッグ&ドロップ<br>または</p>
+        <%= form.file_field :image, accept: "image/*",class: "img-form" %>
       </div>
 
-      <div>
-        <%= image_tag "", id: "img_preview", style: "display: none; max-width: 300px;" %>
-      </div>
-    
       <div>
         <%= form.text_field :name, placeholder: "name", class: "form_input" %>
       </div>
