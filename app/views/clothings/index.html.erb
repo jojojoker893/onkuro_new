@@ -3,6 +3,9 @@
   <div id="search-toggle" style="cursor: pointer;">
     <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort')%>
   </div>
+  <div id="filter-toggle" style="cursor: pointer;">
+    <%= image_tag('filter_list_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'filter')%>
+  </div>
 
   <div id="search-form" class="toggle-hidden">
     <%= form_with url: clothings_path, method: :get, local: true do %>
@@ -13,6 +16,13 @@
       ]), onchange: "this.form.submit()" %>
     <% end %>
   </div>
+
+  <div id="filter-form" class="filter-hidden">
+
+
+  </div>
+
+
 </div>
 
 <% end %>
