@@ -1,13 +1,13 @@
 <% content_for :header_seach do %>
 <div class="search-wrapper">
-  <div id="search-toggle" style="cursor: pointer;">
+  <div id="search-button" style="cursor: pointer;">
     <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort')%>
   </div>
-  <div id="filter-toggle" style="cursor: pointer;">
+  <div id="filter-button" style="cursor: pointer;">
     <%= image_tag('filter_list_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'filter')%>
   </div>
 
-  <div id="search-form" class="toggle-hidden">
+  <div id="search-form" class="hidden">
     <%= form_with url: clothings_path, method: :get, local: true do %>
       <%= select_tag :order, options_for_select([
         ['登録順', 'created_at'],
@@ -17,9 +17,12 @@
     <% end %>
   </div>
 
-  <div id="filter-form" class="filter-hidden">
-
-
+  <div id="filter-form" class="hidden">
+    <%= form_with url: clothings_path, method: :get, local: true do %>
+      <%= select_tag :order, options_for_select([
+        ['カテゴリ順', 'filter_category'],
+      ]), onchange: "this.form.submit()" %>
+    <% end %>
   </div>
 
 

@@ -1,15 +1,14 @@
 document.addEventListener("turbo:load", () => {
-  toggleVisialize("search-toggle", "search-form");
-  toggleVisialize("filter-toggle", "filter-form");
+  toggleVisialize("search-button", "search-form");
+  toggleVisialize("filter-button", "filter-form");
 
-  function toggleVisialize(toggleId, formId) {
-    const toggle = document.getElementById(toggleId);
-    const form = document.getElementById(formId);
+  function toggleVisialize(buttonId, targetId) {
+    const btn = document.getElementById(buttonId)
+    const target = document.getElementById(targetId)
 
-    if(toggle && form) {
-      toggle.addEventListener("click", () => {
-        form.classList.toggle("toggle-vision");
-        form.classList.toggle("toggle-hidden");
+    if (btn && target) {
+      btn.addEventListener("click", () => {
+        target.classList.toggle("hidden");
       });
     }
   }
