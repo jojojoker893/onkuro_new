@@ -1,0 +1,40 @@
+<%= render "layouts/header" %>
+<div class="container">
+  <div id="chart_container"></div>
+  
+  <script>
+    document.addEventListener("turbo:load", function () {
+      let chartContainer = document.getElementById("chart_container");
+
+      let chartData = <%= raw @use_logs.to_json %>;
+
+      if (chartData.length === 0){
+        chartContainer.innerHTML = "<p>使用データがありません</p>";
+        return;
+      }
+
+      chartData.sort((a, b)=> b.y - a.y);
+
+      Highcharts.chart("chart_container", {
+        accessibility: { enabled: false },
+        chart: { type: "pie" },
+        title: { text: "使用回数" },
+        series: [{
+          name: "使用回数",
+          colorByPoint: true,
+          data: chartData
+        }],
+        tooltip: {
+          pointFormat: "{series.name}: <b>{point.y}回</b>"
+        }
+      });
+    });
+  </script>
+
+  <div class="form_btns">
+    <%= link_to "一覧",clothings_path, class: "form_btn"%>
+    <%= link_to "服を登録する", new_clothing_path, class: "form_btn" %>
+  </div>
+  
+  <%= button_to "ログアウト", logout_path, method: :delete, data: { turbo: false, confirm: 'ログアウトしますか?' }, class: "logout_btn" %>
+</div>
