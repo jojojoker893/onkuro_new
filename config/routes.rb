@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "graph/index"
   root to: "sessions#new"
   #root to: "users#new"
 
