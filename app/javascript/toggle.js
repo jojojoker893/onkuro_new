@@ -1,11 +1,15 @@
 document.addEventListener("turbo:load", () => {
-  const icon = document.getElementById("search-toggle")
-  const form = document.getElementById("search-form")
+  toggleVisialize("search-button", "search-form");
+  toggleVisialize("filter-button", "filter-form");
 
-  if (icon && form) {
-    icon.addEventListener("click",() => {
-      form.classList.toggle("toggle-vision")
-      form.classList.toggle("toggle-hidden")
-    });
+  function toggleVisialize(buttonId, targetId) {
+    const btn = document.getElementById(buttonId)
+    const target = document.getElementById(targetId)
+
+    if (btn && target) {
+      btn.addEventListener("click", () => {
+        target.classList.toggle("hidden");
+      });
+    }
   }
 });
