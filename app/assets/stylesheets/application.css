@@ -1,3 +1,7 @@
+body {
+  font-family: 'Noto Selif', 'Inter', sans-serif;
+}
+
 /* ヘッダー */
 .site_header {
   display: flex;
@@ -17,7 +21,6 @@
 
 .header_logo {
   font-size: 26px;
-  font-family: 'Roboto', sans-serif;
   font-weight: bold;
   color: white;
 }
@@ -136,6 +139,7 @@
 .service-list p {
   justify-content: center;
   text-align: center;
+  font-weight: bold;
 }
 
 .service-icon {

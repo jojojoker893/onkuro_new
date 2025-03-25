@@ -1,38 +1,39 @@
 <%= render "layouts/header" %>
 
-
-<div class="container">
-  <%= form_with model: @clothing, url: clothings_path, multipart: true do |form| %>
-    
-      <div class="upload-container", id="uploadContainer">
-        <%= image_tag "cloud_upload_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg", class: "img-upload" %>
-        <p>ここにファイルをドラッグ&ドロップ<br>または</p>
-        <%= form.file_field :image, accept: "image/*",class: "img-form", id: "imageInput" %>
-      </div>
-
-      <div>
-        <%= form.text_field :name, placeholder: "name", class: "form_input" %>
-      </div>
+<body>
+  <div class="container">
+    <%= form_with model: @clothing, url: clothings_path, multipart: true do |form| %>
       
-      <div>
-        <!-- %= form.text_field :category_id, placeholder: "カテゴリ", class: "form_input" % --> 
-        <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: "カテゴリを選択してください" },  { class: "form_select" } %>
-      </div>
+        <div class="upload-container", id="uploadContainer">
+          <%= image_tag "cloud_upload_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg", class: "img-upload" %>
+          <p>ここにファイルをドラッグ&ドロップ<br>または</p>
+          <%= form.file_field :image, accept: "image/*",class: "img-form", id: "imageInput" %>
+        </div>
 
-      <div>
-        <%= form.collection_select :color_id, Color.all, :id, :name, { include_blank: "色を選択してください" }, { class: "form_select" } %>
-      </div>
+        <div>
+          <%= form.text_field :name, placeholder: "name", class: "form_input" %>
+        </div>
+        
+        <div>
+          <!-- %= form.text_field :category_id, placeholder: "カテゴリ", class: "form_input" % --> 
+          <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: "カテゴリを選択してください" },  { class: "form_select" } %>
+        </div>
+
+        <div>
+          <%= form.collection_select :color_id, Color.all, :id, :name, { include_blank: "色を選択してください" }, { class: "form_select" } %>
+        </div>
+        
+        <div>
+          <%= form.collection_select :brand_id, Brand.all, :id, :name, { include_blank: "ブランドを選択してください" }, { class: "form_select" } %>
+        </div>
+
+        <div>
+          <%= form.text_area :explanation, placeholder: "explanation", class: "form_input" %>
+        </div>
+
+        <%= form.submit "登録", class: "button" %>
+        <%= link_to "戻る", home_path, class: "form_btn"%>
       
-      <div>
-        <%= form.collection_select :brand_id, Brand.all, :id, :name, { include_blank: "ブランドを選択してください" }, { class: "form_select" } %>
-      </div>
-
-      <div>
-        <%= form.text_area :explanation, placeholder: "explanation", class: "form_input" %>
-      </div>
-
-      <%= form.submit "登録", class: "button" %>
-      <%= link_to "戻る", home_path, class: "form_btn"%>
-    
-  <% end %>
-</div>
+    <% end %>
+  </div>
+</body>

@@ -1,68 +1,69 @@
 <% content_for :header_seach do %>
-<div class="search-wrapper">
-  <div id="search-button" style="cursor: pointer;">
-    <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort')%>
-  </div>
-  <div id="filter-button" style="cursor: pointer;">
-    <%= image_tag('filter_list_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'filter')%>
-  </div>
-
-  <div id="search-form" class="hidden">
-    <%= form_with url: clothings_path, method: :get, local: true do %>
-      <%= hidden_field_tag :category_id, params[:category_id] %>
-      <%= select_tag :order, options_for_select([
-        ['登録順', 'created_at'],
-        ['使用回数が多い順', 'usage_desc'],
-        ['使用回数が少ない順', 'usage_asc']
-      ], params[:order]), onchange: "this.form.submit()" %>
-    <% end %>
-  </div>
-
-  <div id="filter-form" class="hidden">
-    <%= form_with url: clothings_path, method: :get, local: true do %>
-      <%= hidden_field_tag :order, params[:order] %>
-      <%= select_tag :category_id,
-        options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
-        include_blank: "全て表示", onchange: "this.form.submit()" %>
-    <% end %>
-  </div>
-
-
-</div>
-
-<% end %>
-
-<%= render "layouts/header" %>
-
-  <div class="cloth_index_container">
-
-    <% @clothings.each do |clothing| %>
-      <div class="cloth_card">
-        <%= link_to edit_clothing_path(clothing) do %>
-          <div class="cloth_img">
-            <% if clothing.image.attached? %>
-              <%= image_tag clothing.image.variant(resize_to_fill:[200, 300]) %>
-            <% else %>
-              <p>画像がありません</p>
-            <% end %>
-        </div>
-      <% end %>
-
-      <div class="cloth_info">
-        <h3 class="cloth_name"><%= clothing.name %></h3>
-        <!-- p class="cloth_category"><%= clothing.category.name%></p-->
-        <!-- p class="cloth_brand"><%= clothing.brand.name%></p-->
-        <!--p class="cloth_color"><%= clothing.color.name%></p-->
-        <p class="cloth_usage">使用回数: <%= clothing.clothing_usage_logs.count %> 回</p>
-        <p class="cloth_explanation"><%= clothing.explanation%></p>
-      </div>
-
-      <div class="cloth_btn">
-        <%= button_to "+", usage_log_clothing_path(clothing), data: {turbo_method: :post}, class: "cloth_btn cloth_usage_btn" %>
-        <%= button_to "−", remove_usage_log_clothing_path(clothing), method: :delete, class: "cloth_btn cloth_usage_btn" %>
-        <%= link_to "削除", clothing_path(clothing.id), data: { turbo_method: :delete, turbo_confirm: "#{clothing.name}を削除します。よろしいですか？"}, class: "cloth_btn cloth_delete_btn" %>
-      </div>
+<body>
+  <div class="search-wrapper">
+    <div id="search-button" style="cursor: pointer;">
+      <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort')%>
     </div>
+    <div id="filter-button" style="cursor: pointer;">
+      <%= image_tag('filter_list_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'filter')%>
+    </div>
+
+    <div id="search-form" class="hidden">
+      <%= form_with url: clothings_path, method: :get, local: true do %>
+        <%= hidden_field_tag :category_id, params[:category_id] %>
+        <%= select_tag :order, options_for_select([
+          ['登録順', 'created_at'],
+          ['使用回数が多い順', 'usage_desc'],
+          ['使用回数が少ない順', 'usage_asc']
+        ], params[:order]), onchange: "this.form.submit()" %>
+      <% end %>
+    </div>
+
+    <div id="filter-form" class="hidden">
+      <%= form_with url: clothings_path, method: :get, local: true do %>
+        <%= hidden_field_tag :order, params[:order] %>
+        <%= select_tag :category_id,
+          options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
+          include_blank: "全て表示", onchange: "this.form.submit()" %>
+      <% end %>
+    </div>
+
+
+  </div>
+
   <% end %>
 
-</div>
+  <%= render "layouts/header" %>
+
+    <div class="cloth_index_container">
+
+      <% @clothings.each do |clothing| %>
+        <div class="cloth_card">
+          <%= link_to edit_clothing_path(clothing) do %>
+            <div class="cloth_img">
+              <% if clothing.image.attached? %>
+                <%= image_tag clothing.image.variant(resize_to_fill:[200, 300]) %>
+              <% else %>
+                <p>画像がありません</p>
+              <% end %>
+          </div>
+        <% end %>
+
+        <div class="cloth_info">
+          <h3 class="cloth_name"><%= clothing.name %></h3>
+          <!-- p class="cloth_category"><%= clothing.category.name%></p-->
+          <!-- p class="cloth_brand"><%= clothing.brand.name%></p-->
+          <!--p class="cloth_color"><%= clothing.color.name%></p-->
+          <p class="cloth_usage">使用回数: <%= clothing.clothing_usage_logs.count %> 回</p>
+          <p class="cloth_explanation"><%= clothing.explanation%></p>
+        </div>
+
+        <div class="cloth_btn">
+          <%= button_to "+", usage_log_clothing_path(clothing), data: {turbo_method: :post}, class: "cloth_btn cloth_usage_btn" %>
+          <%= button_to "−", remove_usage_log_clothing_path(clothing), method: :delete, class: "cloth_btn cloth_usage_btn" %>
+          <%= link_to "削除", clothing_path(clothing.id), data: { turbo_method: :delete, turbo_confirm: "#{clothing.name}を削除します。よろしいですか？"}, class: "cloth_btn cloth_delete_btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</body>
