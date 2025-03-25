@@ -6,12 +6,12 @@
   <script>
     function initMap() {
       navigator.geolocation.getCurrentPosition((position) => {
-        let userLocation = {
+        const userLocation = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
 
-        let map = new google.maps.Map(document.getElementById('map'),{
+        const map = new google.maps.Map(document.getElementById('map'),{
           center: userLocation,
           zoom: 15
         });
@@ -53,8 +53,12 @@
         content: contents
       });
 
-      marker.addListener('click', () => {
+      marker.addListener('mouseover', () => {
         infoWindow.open(map,marker);
+      });
+
+      marker.addListener('mouseout', ()=> {
+        infoWindow.close();
       });
       });
     }
