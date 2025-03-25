@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   get "/home", to: "home#index"
-
+  get "/graph", to: "graph#index"
   get "/maps", to: "maps#index"
 
   resources :users, only: [ :new, :create ]

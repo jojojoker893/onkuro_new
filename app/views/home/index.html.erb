@@ -1,41 +1,68 @@
-<%= render "layouts/header" %>
-<div class="container">
-  <div id="chart_container"></div>
+<body>
   
-  <script>
-    document.addEventListener("turbo:load", function () {
-      let chartContainer = document.getElementById("chart_container");
+<div class="service-container">
 
-      let chartData = <%= raw @use_logs.to_json %>;
+  <div class="service-title">
+    <h1>ようこそ、オンクロへ</h1> 
 
-      if (chartData.length === 0){
-        chartContainer.innerHTML = "<p>使用データがありません</p>";
-        return;
-      }
+    <p>オンクロは、あなたのクローゼットをオンラインで管理できるサービスです。</p>
+    <p> 登録した服の情報を可視化して、整理・見直し・手放す判断をサポートします。</p>
 
-      chartData.sort((a, b)=> b.y - a.y);
+    <div classstyle="text-align: center;">
+      <%= link_to "さっそく使用してみる", graph_path,
+        style: "padding: 0.75rem 1.5rem; background-color: #1fa3db; color: white; border-radius: 8px; text-decoration: none; font-weight: bold;" %>
+    </div>
 
-      Highcharts.chart("chart_container", {
-        accessibility: { enabled: false },
-        chart: { type: "pie" },
-        title: { text: "使用回数" },
-        series: [{
-          name: "使用回数",
-          colorByPoint: true,
-          data: chartData
-        }],
-        tooltip: {
-          pointFormat: "{series.name}: <b>{point.y}回</b>"
-        }
-      });
-    });
-  </script>
-
-  <div class="form_btns">
-    <%= link_to "一覧",clothings_path, class: "form_btn"%>
-    <%= link_to "服を登録する", new_clothing_path, class: "form_btn" %>
   </div>
-  
-  <!--%= link_to "ログアウト", logout_path, data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } %-->
-  <%= button_to "ログアウト", logout_path, method: :delete, data: { turbo: false, confirm: 'ログアウトしますか?' }, class: "logout_btn" %>
+
+  <h2 class="service-discription">主な機能</h2>
+
+  <ul class="service-content">
+
+    <li class="service-list">
+      <%= image_tag("md-salman-tWOz2_EK5EQ-unsplash.jpg", class: "service-icon") %>
+      <p>服の登録・編集・削除</p>
+      <div>
+        あなたの持っている服をアプリに登録し、<br>名前やカテゴリ、ブランドなどの情報を自由に編集・削除できます。<br>持ち物を正確に把握し、無駄な買い物を防ぎます。
+      </div>
+    </li>
+
+    <li class="service-list">
+      <%= image_tag("christian-bolt-VW5VjskNXZ8-unsplash.jpg", class: "service-icon") %>
+      <p>服の絞り込み・並び替え</p>
+      <div>
+        カテゴリやブランド、使用回数などで服を簡単にフィルタリング。<br>よく使う服・あまり着ていない服をすぐに見つけて整理できます。
+      </div>
+    </li>
+
+    <li class="service-list">
+      <%= image_tag("sarah-dorweiler-fr0J5-GIVyg-unsplash.jpg", class: "service-icon" ) %>
+      <p>使用回数のグラフ表示</p>
+      <div>
+        どの服をどれだけ着ているかをグラフで視覚化。<br>使っていない服を手放すきっかけにもなり、クローゼットの最適化に役立ちます。
+      </div>
+    </li>
+
+    <li class="service-list">
+      <%= image_tag("yasu-shots-_y6hMz1pJC0-unsplash.jpg", class: "service-icon") %>
+      <p>お近くの古着屋・リサイクルショップを表示</p>
+      <div>
+        現在地をもとに、近くのリサイクルショップや古着屋を地図で表示。<br>不要になった服を手放すときの行き先に迷いません。
+      </div>
+    </li>
+
+  </ul>
+
 </div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <p>&copy; 2025 オンクロ - Online Closet</p>
+    <nav>
+      <a href="https://github.com/jojojoker893/onkuro_new">このサービスについて</a>
+      <a href="mailto: xiaolinshijia7@gmail.com">お問い合わせ</a>
+    </nav>
+  </div>
+</footer>
+
+</body>

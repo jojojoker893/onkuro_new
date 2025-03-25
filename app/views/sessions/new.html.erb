@@ -1,18 +1,19 @@
-<div class="container">
+<body>
+    <div class="container">
+    <%= form_with url: login_path, scope: :session, local: true, html: { class: "login_form" } do |form| %>
 
-  <%= form_with url: login_path, scope: :session, local: true, html: { class: "login_form" } do |form| %>
+      <h1 class="login_title">ログイン</h1>
 
-    <h1 class="login_title">ログイン</h1>
+      <div>
+        <%= form.email_field :email, placeholder: "email", class: "input_field" %>
+      </div>
 
-    <div>
-      <%= form.email_field :email, placeholder: "email", class: "input_field" %>
-    </div>
+      <div>
+        <%= form.password_field :password, placeholder: "password", class: "input_field" %>
+      </div>
 
-    <div>
-      <%= form.password_field :password, placeholder: "password", class: "input_field" %>
-    </div>
-
-    <%= form.submit 'ログイン', class: "button" %>
-    <%= link_to '新規アカウントの作成', new_user_path %>
-  <% end %>
-</div>
+      <%= form.submit 'ログイン', class: "button" %>
+      <%= link_to '新規アカウントの作成', new_user_path %>
+    <% end %>
+  </div>
+</body>
