@@ -21,5 +21,8 @@ class Clothing < ApplicationRecord
   scope :order_usage, ->(sort_order = "DESC") { order(Arel.sql("usage_count #{sort_order}")) }
 
   # @@絞り機能 カテゴリ、ブランド、カラー
-  scope :filter_category, ->(category_id) { where(category_id: category_id)  if category_id.present?}
+  scope :filter_category, ->(category_id) { where(category_id: category_id)  if category_id.present? }
+
+  # @@検索機能
+  scope :search_keyword, ->(keyword) { where("name LIKE ?", "%" + keyword + "%") }
 end

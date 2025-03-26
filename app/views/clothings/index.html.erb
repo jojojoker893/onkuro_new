@@ -1,16 +1,19 @@
-<% content_for :header_seach do %>
 <body>
+  <% content_for :header_seach do %>
   <div class="search-wrapper">
-    <div id="search-button" style="cursor: pointer;">
+    <%= form_with url: clothings_path, method: :get, local: true do %>
+      <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード検索" %>
+      <%= submit_tag "検索" %>
+    <% end %>
+
+    <div id="search-button">
       <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort')%>
     </div>
-    <div id="filter-button" style="cursor: pointer;">
-      <%= image_tag('filter_list_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'filter')%>
-    </div>
 
-    <div id="search-form" class="hidden">
+    <div id="search-form">
       <%= form_with url: clothings_path, method: :get, local: true do %>
         <%= hidden_field_tag :category_id, params[:category_id] %>
+        <%= hidden_field_tag :keyword, params[:keyword] %>
         <%= select_tag :order, options_for_select([
           ['登録順', 'created_at'],
           ['使用回数が多い順', 'usage_desc'],
@@ -19,9 +22,14 @@
       <% end %>
     </div>
 
-    <div id="filter-form" class="hidden">
+    <div id="filter-button">
+      <%= image_tag('filter_list_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'filter')%>
+    </div>
+
+    <div id="filter-form">
       <%= form_with url: clothings_path, method: :get, local: true do %>
         <%= hidden_field_tag :order, params[:order] %>
+        <%= hidden_field_tag :keyword, params[:keyword] %>
         <%= select_tag :category_id,
           options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
           include_blank: "全て表示", onchange: "this.form.submit()" %>

@@ -1,17 +1,23 @@
 class ClothingsController < ApplicationController
   def index
     @categories = Category.all
+    @clothings = Clothing.all
 
+    # 検索
+    @clothings = @clothings.search_keyword(params[:keyword]) if params[:keyword].present?
+
+    # カテゴリフィルター
+    @clothings = @clothings.filter_category(params[:category_id]) if params[:category_id].present?
+
+    # ソート機能
     case params[:order]
     when "usage_asc"
-      @clothings = current_user.clothing.usage_log_count.order_usage("ASC")
+      @clothings = @clothings.usage_log_count.order_usage("ASC")
     when "usage_desc"
-      @clothings = current_user.clothing.usage_log_count.order_usage("DESC")
+      @clothings = @clothings.usage_log_count.order_usage("DESC")
     else
-      @clothings = current_user.clothing.order_created_at
+      @clothings = @clothings.order_created_at
     end
-
-    @clothings = @clothings.filter_category(params[:category_id])
   end
 
   def new
@@ -76,6 +82,6 @@ class ClothingsController < ApplicationController
   private
 
   def clothing_params
-    params.require(:clothing).permit(:name, :category_id, :brand_id, :color_id, :explanation, :image, :order)
+    params.require(:clothing).permit(:name, :category_id, :brand_id, :color_id, :explanation, :image, :order, :keyword)
   end
 end
