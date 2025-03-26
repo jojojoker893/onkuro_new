@@ -355,10 +355,6 @@ body {
   gap: 4px;
 }
 
-.hidden {
-  display: none;
-}
-
 /* 画像アップロードフォーム */
 .upload-container {
   display: flex;
