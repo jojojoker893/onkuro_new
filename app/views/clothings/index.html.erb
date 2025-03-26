@@ -1,6 +1,11 @@
-<% content_for :header_seach do %>
 <body>
+  <% content_for :header_seach do %>
   <div class="search-wrapper">
+    <%= form_with url: clothings_path, method: :get, local: true do %>
+      <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード検索" %>
+      <%= submit_tag "検索" %>
+    <% end %>
+
     <div id="search-button">
       <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort')%>
     </div>
