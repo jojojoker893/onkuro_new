@@ -1,5 +1,8 @@
 body {
   font-family: 'Noto Selif', 'Inter', sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* ヘッダー */
@@ -379,3 +382,14 @@ body {
   height: 70px;
 }
 
+/* マップページ */
+.maps_title {
+  padding-top: 45px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+#map {
+  height: 880px;
+  width: 100%;
+}
