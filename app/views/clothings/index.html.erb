@@ -3,7 +3,7 @@
   <div class="search-wrapper">
     <%= form_with url: clothings_path, method: :get, local: true do %>
       <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード検索" %>
-      <%= submit_tag "検索" %>
+      <%= submit_tag "検索"%>
     <% end %>
 
     <div id="search-button">
@@ -36,6 +36,7 @@
       <% end %>
     </div>
 
+    <%= button_to"リセット", clothings_path, method: :get %>
 
   </div>
 
