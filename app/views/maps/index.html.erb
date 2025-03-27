@@ -1,71 +1,80 @@
 <%= render "layouts/header" %>
+<body>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&libraries=places&callback=initMap" async defer></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.dig(:google_maps, :GOOGLE_MAPS_API_KEY) %>&libraries=places&callback=initMap" async defer></script>
+  <% googlemaps_api_key = 
+      if Rails.env.production?
+        Rails.application.credentials.dig(:google_maps, :GOOGLE_MAPS_API_KEY)
+      else
+        ENV["GOOGLE_MAPS_API_KEY"]
+      end
+  %>
 
-  <script>
-    function initMap() {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const userLocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= googlemaps_api_key %>&libraries=places&callback=initMap" async defer></script> 
 
-        const map = new google.maps.Map(document.getElementById('map'),{
-          center: userLocation,
-          zoom: 15
-        });
+    <script>
+      function initMap() {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
 
-      const image = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+          const map = new google.maps.Map(document.getElementById('map'),{
+            center: userLocation,
+            zoom: 15
+          });
 
-      new google.maps.Marker({
-        position: userLocation,
-        map: map,
-        title: "あなたの現在地",
-        icon: image
-      });
-      nearShowStore(map, userLocation);
-    });
-  }
+        const image = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 
-  function nearShowStore(map,userLocation){
-    const service = new google.maps.places.PlacesService(map)
-    
-    service.nearbySearch({
-      location: userLocation,
-      radius: 5000,
-      keyword: "古着屋 リサイクルショップ"
-    }, (results, status) => {
-      results.forEach((place) => {
-        const marker = new google.maps.Marker({
-          position: place.geometry.location,
+        new google.maps.Marker({
+          position: userLocation,
           map: map,
-          title: place.name,
+          title: "あなたの現在地",
+          icon: image
         });
-
-      const contents =  `
-        <div>
-          <strong>${place.name}</strong><br>
-          <strong>住所:</strong>${place.vicinity}
-        </div>`;
-
-      const infoWindow = new google.maps.InfoWindow({
-        content: contents
-      });
-
-      marker.addListener('mouseover', () => {
-        infoWindow.open(map,marker);
-      });
-
-      marker.addListener('mouseout', ()=> {
-        infoWindow.close();
-      });
+        nearShowStore(map, userLocation);
       });
     }
-  )}
+
+    function nearShowStore(map,userLocation){
+      const service = new google.maps.places.PlacesService(map)
+      
+      service.nearbySearch({
+        location: userLocation,
+        radius: 5000,
+        keyword: "古着屋 リサイクルショップ"
+      }, (results, status) => {
+        results.forEach((place) => {
+          const marker = new google.maps.Marker({
+            position: place.geometry.location,
+            map: map,
+            title: place.name,
+          });
+
+        const contents =  `
+          <div>
+            <strong>${place.name}</strong><br>
+            <strong>住所:</strong>${place.vicinity}
+          </div>`;
+
+        const infoWindow = new google.maps.InfoWindow({
+          content: contents
+        });
+
+        marker.addListener('mouseover', () => {
+          infoWindow.open(map,marker);
+        });
+
+        marker.addListener('mouseout', ()=> {
+          infoWindow.close();
+        });
+        });
+      }
+    )}
 
   </script>
 
-<h1>Google Maps 表示</h1>
-<div id="map" style="height: 800px; width: 100%;"></div>
+<h1 class="maps_title">付近の古着屋・リサイクルショップを表示</h1>
+<div id="map"></div>
 
+</body>
