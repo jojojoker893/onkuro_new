@@ -1,0 +1,16 @@
+<%= render "layouts/header" %>
+<body>
+  <div class="container">
+  <h2>プロフィール編集</h2>
+    <div>基本情報</div>
+    <%= form_with model: @user, url: user_path, method: :patch do |form| %>
+      <div>
+        <%= form.label :name, "name" %>
+        <%= form.text_field :name %>
+        <%= form.label :email, "email" %>
+        <%= form.text_field :email %>
+      </div>
+
+    <% end %>
+  </div>
+</body>
