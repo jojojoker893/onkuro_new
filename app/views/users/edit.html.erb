@@ -1,16 +1,32 @@
 <%= render "layouts/header" %>
 <body>
-  <div class="container">
-  <h2>プロフィール編集</h2>
-    <div>基本情報</div>
-    <%= form_with model: @user, url: user_path, method: :patch do |form| %>
-      <div>
-        <%= form.label :name, "name" %>
-        <%= form.text_field :name %>
-        <%= form.label :email, "email" %>
-        <%= form.text_field :email %>
-      </div>
+  <div class="profile-container">
+    <h2 class="profile-title">プロフィール編集</h2>
+      <div class="profile">基本情報</div>
+      <%= form_with model: @user, url: user_path, method: :patch do |form| %>
+        <ul class="profile-list">
+          <li> 
+            <%= form.label :name, "name" %> 
+            <%= form.text_field :name %>
+            <%= form.submit "更新" %>
+          </li>
 
-    <% end %>
+          <li>
+            <%= form.label :email, "email" %>
+            <%= form.text_field :email %>
+            <%= form.submit "更新"%>
+          </li>
+
+          <li>
+            パスワード変更
+          </li>
+
+          <li>
+            退会について
+          </li>
+        </ul>
+      <% end %>
+
+      <%= button_to "ログアウト", logout_path, method: :delete, data: { turbo: false, confirm: 'ログアウトしますか?' }, class: "logout_btn" %>
   </div>
 </body>
