@@ -393,3 +393,35 @@ body {
   height: 880px;
   width: 100%;
 }
+
+/* プロフィール設定画面 */
+.profile-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.profile-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 2px solid #1fa3db;
+}
+
+.profile-section {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.profile-list {
+  list-style: none;
+  padding: 1rem;
+  margin: 0%;
+}
+
+.profile-list li {
+  padding: 1rem;
+  font-weight: bold;
+  border-bottom: 2px solid #ccc;
+
+}
