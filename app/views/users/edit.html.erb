@@ -1,0 +1,33 @@
+<%= render "layouts/header" %>
+<body>
+  <div class="profile-container">
+    <h2 class="profile-title">プロフィール編集</h2>
+      <div class="profile-section">基本情報</div>
+        <%= form_with model: @user, url: user_path, method: :patch do |form| %>
+        <ul class="profile-list">
+          <li> 
+            <%= form.label :name, "ユーザ名" %> 
+            <%= form.text_field :name %>
+          </li>
+
+          <li>
+            <%= form.label :email, "メールアドレス" %>
+            <%= form.text_field :email %>
+          </li>
+            <div class="form-center">
+              <%= form.submit "更新", class: "submit-btn"%>
+            </div>
+
+          <li>
+            <%= link_to "パスワードの変更", edit_password_user_path, class: "profile-password" %>
+          </li>
+
+          <li>
+            退会について
+          </li>
+        </ul>
+      <% end %>
+
+      <%= button_to "ログアウト", logout_path, method: :delete, data: { turbo: false, confirm: 'ログアウトしますか?' }, class: "logout_btn" %>
+  </div>
+</body>

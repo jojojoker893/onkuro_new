@@ -19,10 +19,50 @@ class UsersController < ApplicationController
         render :new, status: :unprocessable_entity
     end
   end
+    def update
+      @user = current_user
+      if @user.update(user_params)
+        flash[:notice] = "更新しました"
+        redirect_to user_path
+      else
+        flash.now[:alert] = "更新に失敗しました"
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def update_password
+      @user = current_user
+      if @user.update_password(params[:user][:current_password], password_params)
+        flash[:notice] = "パスワードを変更しました"
+        redirect_to edit_password_user_path
+      else
+        flash.now[:alert] = "変更に失敗しました"
+        render :edit_password, status: :unprocessable_entity # よくよく考えたらこれなに
+      end
+    end
+
+    def edit
+      @user = current_user
+    end
+
+    def edit_password
+      @user = current_user
+    end
+
+    def destroy
+      current_user.destroy
+      reset_session
+      flash[:notice] = "アカウントを削除しました"
+      redirect_to root_path
+    end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email)
+  end
+
+  def password_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end

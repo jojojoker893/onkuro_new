@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root to: "sessions#new"
-  #root to: "users#new"
 
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
@@ -11,6 +10,14 @@ Rails.application.routes.draw do
   get "/maps", to: "maps#index"
 
   resources :users, only: [ :new, :create ]
+
+  resource :user, only: [ :edit, :update, :destroy ] do
+    get "password/edit", to: "users#edit_password", as: :edit_password
+    patch "password", to: "users#update_password", as: :user_password
+    get "unsubscribe", to: "users#unsubscribe", as: :unsubscribe
+    delete "withdraw", to: "users#withdraw"
+  end
+
   resources :categories, only: [ :index, :new, :create ]
   resources :brands, only: [ :index, :new, :create ]
   resources :colors, only: [ :index, :new, :create ]
@@ -22,4 +29,5 @@ Rails.application.routes.draw do
       delete :remove_usage_log
     end
   end
+
 end
