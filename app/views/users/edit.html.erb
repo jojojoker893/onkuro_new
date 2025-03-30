@@ -8,13 +8,18 @@
           <li> 
             <%= form.label :name, "ユーザ名" %> 
             <%= form.text_field :name %>
-            <%= form.label :email, "メールアドレス" %>
-            <%= form.text_field :email %>
-            <%= form.submit "更新"%>
           </li>
 
           <li>
-            <%= link_to "パスワードの変更", edit_password_user_path %>
+            <%= form.label :email, "メールアドレス" %>
+            <%= form.text_field :email %>
+          </li>
+            <div class="form-center">
+              <%= form.submit "更新", class: "submit-btn"%>
+            </div>
+
+          <li>
+            <%= link_to "パスワードの変更", edit_password_user_path, class: "profile-password" %>
           </li>
 
           <li>
