@@ -1,0 +1,19 @@
+<%= render "layouts/header" %>
+<body>
+  <div class="profile-container">
+    <h2 class="profile-title">アカウント削除</h2>
+      <%= form_with model: @user, url: unsubscribe_user_path, method: :patch do |form| %>
+      <ul class="profile-list">
+        <li> 
+          一度アカウントを削除すると、二度と元に戻せません。<br>十分ご注意ください。
+        </li>
+      </ul>
+    <% end %>
+
+    <%= button_to "削除", withdraw_user_path, method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除します。よろしいですか？"}, class: "logout_btn" %>
+
+    <div>
+    <%= link_to "戻る", edit_user_path, class: "back-link" %>
+    </div>
+
+</body>

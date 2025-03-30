@@ -23,11 +23,11 @@
           </li>
 
           <li>
-            退会について
+            <%= link_to "退会について", unsubscribe_user_path, class: "profile-password" %>
           </li>
         </ul>
       <% end %>
 
-      <%= button_to "ログアウト", logout_path, method: :delete, data: { turbo: false, confirm: 'ログアウトしますか?' }, class: "logout_btn" %>
+      <%= button_to "ログアウト", logout_path, method: :delete, data: { turbo_method: :delete, turbo_confirm: "ログアウトします。よろしいですか？"}, class: "logout_btn" %>
   </div>
 </body>

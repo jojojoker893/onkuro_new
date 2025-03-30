@@ -56,10 +56,14 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
 
+    def unsubscribe
+      @user = current_user
+    end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
   def password_params
