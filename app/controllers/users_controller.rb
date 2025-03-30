@@ -30,7 +30,22 @@ class UsersController < ApplicationController
       end
     end
 
+    def update_password
+      @user = current_user
+      if @user.update_password(params[:user][:current_password], password_params)
+        flash[:notice] = "パスワードを変更しました"
+        redirect_to edit_password_user_path
+      else
+        flash.now[:alert] = "変更に失敗しました"
+        render :edit_password, status: :unprocessable_entity # よくよく考えたらこれなに
+      end
+    end
+
     def edit
+      @user = current_user
+    end
+
+    def edit_password
       @user = current_user
     end
 
@@ -44,10 +59,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    permitted = [ :name, :email ]
-    if params[:user][:password].present?
-      permitted += [ :password, :password_confirmation ]
-    end
-    params.require(:user).permit(permitted)
+    params.require(:user).permit(:name, :email)
+  end
+
+  def password_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end
