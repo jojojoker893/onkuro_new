@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  root to: "sessions#new"
+  root to: "home#index"
 
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  get "/home", to: "home#index"
   get "/graph", to: "graph#index"
   get "/maps", to: "maps#index"
 
