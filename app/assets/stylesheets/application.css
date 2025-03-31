@@ -213,14 +213,27 @@ body {
   color: black;
 }
 
-.cloth_usage_btn,
+.cloth_usage_btn {
+  background-color: #42bdf5;
+  width: 40px;
+  height: 30px;
+  font-size: 18px;
+}
 .cloth_delete_btn {
   background-color: #42bdf5;
+  width: 40px;
 }
 
 .cloth_usage_btn:hover,
 .cloth_delete_btn:hover {
   background-color: #1fa3db;
+}
+
+.clothing-search-btn {
+  background-color: #1fa3db;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 /* ログアウトボタン */
