@@ -1,7 +1,7 @@
 class ClothingsController < ApplicationController
   def index
     @categories = Category.all
-    @clothings = Clothing.all
+    @clothings = current_user.clothing
 
     # 検索
     @clothings = @clothings.search_keyword(params[:keyword]) if params[:keyword].present?
