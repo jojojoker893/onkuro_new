@@ -1,24 +1,27 @@
-# README
+## Onkuro
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+『Onkuro』はクローゼットをオンラインで管理できるサービスです。<br>
+登録した服の情報を可視化して、整理・見直し・手放す判断をサポートします
 
-Things you may want to cover:
+### リンク: https://onkuro.online/
 
-* Ruby version
+## トップページ
 
-* System dependencies
 
-* Configuration
 
-* Database creation
+## インフラ構成図
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## 使用技術スタック
+- Ruby on Rails 
+- MySQL
+- AWS
+- JavaScript
+- HTML/CSS
 
-* Deployment instructions
+## 実装機能
+### ユーザ機能
+### 非ユーザ機能
 
-* ...
+

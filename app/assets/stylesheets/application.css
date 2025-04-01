@@ -403,13 +403,19 @@ body {
 
 /* マップページ */
 .maps_title {
-  padding-top: 45px;
-  font-size: 26px;
+  position: fixed;
   font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  z-index: 200;
+  padding-top: 15px;
+  left: 38%;
+  color: white;
+  font-size: 20px;
 }
 
 #map {
-  height: 880px;
+  height: 1200px;
   width: 100%;
 }
 
