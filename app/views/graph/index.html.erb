@@ -1,6 +1,8 @@
-<%= render "layouts/header" %>
 <body>
-  
+
+
+  <%= render "layouts/header" %>
+
   <div class="container">
     <div id="chart_container"></div>
     
@@ -8,7 +10,7 @@
       document.addEventListener("turbo:load", function () {
         let chartContainer = document.getElementById("chart_container");
 
-        let chartData = <%= raw @use_logs.to_json %>;
+        let chartData = <%= raw @graph_data.to_json %>;
 
         if (chartData.length === 0){
           chartContainer.innerHTML = "<p>使用データがありません</p>";
