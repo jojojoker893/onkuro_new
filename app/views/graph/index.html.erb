@@ -1,20 +1,16 @@
 <body>
   <% content_for :header_usagedata do %>
     <%= form_with url: graph_path, method: :get, local: true do %>
-      <div>
-        <label>開始日</label>
-        <%= date_field_tag :startdate, params[:startdate]%>
-      </div>
-    
-      <div>
-        <label>終了日</label>
-        <%= date_field_tag :enddate, params[:enddate] %>
-      </div>
+        <div>
+          <label>使用期間を指定してください</label>
+          <%= date_field_tag :startdate, params[:startdate]%>
+          <label>~</label>
+          <%= date_field_tag :enddate, params[:enddate] %>
+          <%= submit_tag "グラフを表示", class: "clothing-search-btn"%>
+          <%= button_to"リセット", graph_path, method: :get, class: "clothing-search-btn" %>
+        </div>
+    <% end %>
 
-      <div>
-        <%= submit_tag "グラフを表示" %>
-      </div>
-      <% end %>
   <% end %>
 
   <%= render "layouts/header" %>
