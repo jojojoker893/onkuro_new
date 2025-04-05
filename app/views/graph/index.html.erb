@@ -1,5 +1,21 @@
 <body>
+  <% content_for :header_usagedata do %>
+    <%= form_with url: graph_path, method: :get, local: true do %>
+      <div>
+        <label>開始日</label>
+        <%= date_field_tag :startdate, params[:startdate]%>
+      </div>
+    
+      <div>
+        <label>終了日</label>
+        <%= date_field_tag :enddate, params[:enddate] %>
+      </div>
 
+      <div>
+        <%= submit_tag "グラフを表示" %>
+      </div>
+      <% end %>
+  <% end %>
 
   <%= render "layouts/header" %>
 
