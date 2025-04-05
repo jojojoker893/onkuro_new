@@ -226,14 +226,16 @@ body {
 
 .cloth_usage_btn:hover,
 .cloth_delete_btn:hover {
-  background-color: #1fa3db;
+  background-color: #42bdf5;
 }
 
 .clothing-search-btn {
-  background-color: #1fa3db;
-  color: white;
+  background-color: #42bdf5;
   border-radius: 8px;
   cursor: pointer;
+  margin: 1cap;
+  border: 1px solid #000;
+  color: #FFFFFF;
 }
 
 /* ログアウトボタン */
