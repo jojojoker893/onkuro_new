@@ -1,6 +1,20 @@
-<%= render "layouts/header" %>
 <body>
-  
+  <% content_for :header_usagedata do %>
+    <%= form_with url: graph_path, method: :get, local: true do %>
+        <div>
+          <label>使用期間を指定してください</label>
+          <%= date_field_tag :startdate, params[:startdate]%>
+          <label>~</label>
+          <%= date_field_tag :enddate, params[:enddate] %>
+          <%= submit_tag "グラフを表示", class: "clothing-search-btn"%>
+          <%= button_to"リセット", graph_path, method: :get, class: "clothing-search-btn" %>
+        </div>
+    <% end %>
+
+  <% end %>
+
+  <%= render "layouts/header" %>
+
   <div class="container">
     <div id="chart_container"></div>
     
@@ -8,7 +22,7 @@
       document.addEventListener("turbo:load", function () {
         let chartContainer = document.getElementById("chart_container");
 
-        let chartData = <%= raw @use_logs.to_json %>;
+        let chartData = <%= raw @graph_data.to_json %>;
 
         if (chartData.length === 0){
           chartContainer.innerHTML = "<p>使用データがありません</p>";
