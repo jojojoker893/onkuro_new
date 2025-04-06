@@ -24,11 +24,22 @@
         </div>
         
         <div>
-          <%= form.collection_select :brand_id, Brand.all, :id, :name, { include_blank: "ブランドを選択してください" }, { class: "form_select" } %>
+          <button onclick="openModal()" class="modal-open">ブランドを選択してください</button>
+          <%= render "shared/brand_modal", brands: Brand.all %>
         </div>
+        
+        <script>
+          function openModal(){
+            document.getElementById("modal").classList.remove("hidden")
+          }
+          function closeModal(){
+            document.getElementById("modal").classList.add("hidden")
+          }
+        </script>
+
 
         <div>
-          <%= form.text_area :explanation, placeholder: "explanation", class: "form_input" %>
+          <%= form.text_area :explanation, placeholder: "例：〇〇で購入", class: "form_input" %>
         </div>
 
         <%= form.submit "登録", class: "button" %>
