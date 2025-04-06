@@ -623,3 +623,14 @@ body {
   flex-wrap: wrap;
   gap: 12px 16px;
 }
+
+.select-button {
+  margin-top: 1rem;
+  padding: 10px 30px;
+  font-size: 14px;
+  border: none;
+  background-color: #1fa3db;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
