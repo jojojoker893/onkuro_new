@@ -1,0 +1,82 @@
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <button onclick="closeModal()" class="modal-close">&times;</button>
+    <h2 class="modal-title">ブランドを選択</h2>
+    <input type="text" placeholder="ブランド名を入力してください" class="modal-search" id="brand-search"/>
+
+    <div class="modal-index">
+      <% ("A".."Z").each do |char| %>
+        <a href="#brand-<%= char.downcase %>" class="modal-index-link"><%= char %></a>
+      <% end %>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("brand-search");
+
+        searchInput.addEventListener("input", function () {
+          const keyword = this.value.toLowerCase();
+          const items = document.querySelectorAll(".brand-search");
+
+          let firstMatch = null;
+
+          items.forEach(item => {
+            const name = item.querySelector(".brand-name").textContent.toLowerCase();
+            const isMatch = name.includes(keyword);
+
+            item.style.display = isMatch ? "" : "none";
+
+            if (isMatch && !firstMatch) {
+              firstMatch = item;
+            }
+          });
+
+          if (firstMatch) {
+            firstMatch.scrollIntoView({ behavior: "smooth", block: "start"});
+          }
+        });
+      });
+    </script>
+    
+    <div class="modal-group">
+      <% group_brands = brands.group_by { |b| b.name[0].upcase } %>
+        <% group_brands.sort.each do |head, val| %>
+          <div id="brand-<%= head.downcase %>">
+            <h3 class="modal-section-title"><%= head %></h3>
+            <ul class="modal-list">
+              <% val.each do |brand| %>
+                <li class="brand-search">
+                  <label class="modal-brand-item">
+                    <%= radio_button_tag "selected_brand", brand.id, false, data: { name: brand.name } %>
+                    <span class="brand-name"> <%= brand.name %> </span>
+                  </label>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" onclick="confirmBrand()" class="select-button">選択する</button>
+    </div>
+
+    <script>
+      function confirmBrand() {
+        const selected = document.querySelector('input[name="selected_brand"]:checked');
+        if (selected) {
+          const brandId = selected.value;
+          const brandName = selected.dataset.name;
+
+          document.getElementById("brand-select-button").textContent = brandName;
+          document.getElementById("hidden-brand-id").value = brandId;
+
+          closeModal();
+        } else {
+          alert("ブランドを選択してください")
+        }
+      }
+    </script>
+
+  </div>
+</div>
