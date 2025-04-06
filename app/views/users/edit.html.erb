@@ -5,14 +5,24 @@
       <div class="profile-section">基本情報</div>
         <%= form_with model: @user, url: user_path, method: :patch do |form| %>
         <ul class="profile-list">
-          <li> 
-            <%= form.label :name, "ユーザ名" %> 
-            <%= form.text_field :name %>
+          <li class="form-group">
+            <div class="form-label">
+              <%= form.label :name, "ユーザ名" %>
+            </div> 
+            
+            <div class="form-input">
+              <%= form.text_field :name %>
+            </div>
           </li>
 
-          <li>
-            <%= form.label :email, "メールアドレス" %>
-            <%= form.text_field :email %>
+          <li class="form-group">
+            <div class="form-label">
+              <%= form.label :email, "メールアドレス" %>
+            </div>
+            
+            <div class="form-label">
+              <%= form.text_field :email %>
+            </div>
           </li>
             <div class="form-center">
               <%= form.submit "更新", class: "submit-btn"%>
