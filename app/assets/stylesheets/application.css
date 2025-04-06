@@ -519,7 +519,7 @@ body {
   border-radius: 8px;
   width: 90%;
   max-width: 800px;
-  text-align: center;
+  position: relative;
 }
 
 .modal-text {
@@ -543,8 +543,9 @@ body {
 .modal-close {
   background-color: #e2e8f0;
   color: #2d3748;
-  display: flex;
-  
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
 
 .modal-group {
