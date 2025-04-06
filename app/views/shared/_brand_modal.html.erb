@@ -11,7 +11,7 @@
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("turbo:load", function () {
         const searchInput = document.getElementById("brand-search");
 
         searchInput.addEventListener("input", function () {
@@ -21,7 +21,10 @@
           let firstMatch = null;
 
           items.forEach(item => {
-            const name = item.querySelector(".brand-name").textContent.toLowerCase();
+            const brandSpan = item.querySelector(".brand-name");
+            if (!brandSpan) return;
+
+            const name = brandSpan.textContent.toLowerCase();
             const isMatch = name.includes(keyword);
 
             item.style.display = isMatch ? "" : "none";
