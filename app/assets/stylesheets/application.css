@@ -527,17 +527,15 @@ body {
   font-size: 14px;
 }
 
-.modal-open,
-.modal-close {
+.modal-open {
   padding: 8px 16px;
-  border: none;
+  border: solid 1px #222;
   border-radius: 6px;
   cursor: pointer;
-}
-
-.modal-open {
-  background-color: #42bdf5;
-  color: white;
+  width: 320px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #777;
 }
 
 .modal-close {
@@ -546,6 +544,10 @@ body {
   position: absolute;
   top: 16px;
   right: 16px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .modal-group {

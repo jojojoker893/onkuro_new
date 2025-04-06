@@ -56,7 +56,27 @@
           </div>
       <% end %>
     </div>
+    
+    <div class="modal-footer">
+      <button type="button" onclick="confirmBrand()" class="select-button">選択する</button>
+    </div>
 
+    <script>
+      function confirmBrand() {
+        const selected = document.querySelector('input[name="selected_brand"]:checked');
+        if (selected) {
+          const brandId = selected.value;
+          const brandName = selected.dataset.name;
+
+          document.getElementById("brand-select-button").textContent = brandName;
+          document.getElementById("hidden-brand-id").value = brandId;
+
+          closeModal();
+        } else {
+          alert("ブランドを選択してください")
+        }
+      }
+    </script>
 
   </div>
 </div>

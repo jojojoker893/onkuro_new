@@ -15,7 +15,6 @@
         </div>
         
         <div>
-          <!-- %= form.text_field :category_id, placeholder: "カテゴリ", class: "form_input" % --> 
           <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: "カテゴリを選択してください" },  { class: "form_select" } %>
         </div>
 
@@ -24,7 +23,8 @@
         </div>
         
         <div>
-          <button onclick="openModal()" class="modal-open">ブランドを選択してください</button>
+          <button onclick="openModal()" class="modal-open" id="brand-select-button">ブランドを選択してください</button>
+          <%= hidden_field_tag :selected_brand_id, nil, id: "hidden-brand-id" %>
           <%= render "shared/brand_modal", brands: Brand.all %>
         </div>
         
