@@ -469,14 +469,22 @@ body {
   list-style: none;
   padding: 1rem;
   margin: 0%;
+}
 
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  width: 150px;  
 }
 
 .profile-list li {
   padding: 1rem;
   font-weight: bold;
   border-bottom: 2px solid #ccc;
-
 }
 
 .profile-password {
