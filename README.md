@@ -50,3 +50,4 @@
 - ユーザ名、メールアドレスの更新
 - パスワードの変更
 - アカウント削除&ログアウトができます
+<img style="width:80%" alt="スクリーンショット 2025-04-11 10 49 33" src="https://github.com/user-attachments/assets/8c6688d5-9729-4991-9382-49eb9e944ce5" />
