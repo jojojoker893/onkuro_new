@@ -48,11 +48,7 @@ class ClothingsController < ApplicationController
   end
 
   def remove_usage_log # 使用回数を減らす
-    @clothing = current_user.clothing.find(params[:id])
-    last_log = ClothingUsageLog.where(clothing: @clothing, user: current_user).order(used_at: :desc).first
-
-    if last_log
-      last_log.destroy!
+    if ClothingUsageLog.remove_usage_log(user: current_user, clothing_id: params[:id])
       redirect_to clothings_path, notice: "使用記録を減らしました"
     else
       redirect_to clothings_path, alert: "使用記録がありません"

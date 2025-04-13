@@ -9,6 +9,12 @@ class ClothingUsageLog < ApplicationRecord
     create(user: user, clothing: clothing, used_at: Time.current)
   end
 
+  def self.remove_usage_log(user:, clothing_id:) # 使用回数の削除
+    clothing = user.clothings.find(clothing_id)
+    log = ClothingUsageLog.where(user: user, clothing: clothing).order(used_at: :desc).first
+    log&.destroy
+  end
+
   scope :usage_period, ->(user_id, startdate, enddate) {
     joins(:clothing)
     .where(clothings: { user_id: user_id })
