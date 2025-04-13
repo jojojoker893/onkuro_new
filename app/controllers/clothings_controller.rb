@@ -1,23 +1,7 @@
 class ClothingsController < ApplicationController
   def index
     @categories = Category.all
-    @clothings = current_user.clothing
-
-    # 検索
-    @clothings = @clothings.search_keyword(params[:keyword]) if params[:keyword].present?
-
-    # カテゴリフィルター
-    @clothings = @clothings.filter_category(params[:category_id]) if params[:category_id].present?
-
-    # ソート機能
-    case params[:order]
-    when "usage_asc"
-      @clothings = @clothings.usage_log_count.order_usage("ASC")
-    when "usage_desc"
-      @clothings = @clothings.usage_log_count.order_usage("DESC")
-    else
-      @clothings = @clothings.order_created_at
-    end
+    @clothings = Clothing.search_with_params(user: current_user, params: params)
   end
 
   def new
