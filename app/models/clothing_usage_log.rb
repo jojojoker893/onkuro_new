@@ -4,6 +4,11 @@ class ClothingUsageLog < ApplicationRecord
 
   validates :used_at, presence: true
 
+  def self.usage_log(user:, clothing_id:) # 使用回数の記録
+    clothing = user.clothings.find(clothing_id)
+    create(user: user, clothing: clothing, used_at: Time.current)
+  end
+
   scope :usage_period, ->(user_id, startdate, enddate) {
     joins(:clothing)
     .where(clothings: { user_id: user_id })

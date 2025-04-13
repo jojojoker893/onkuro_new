@@ -40,11 +40,7 @@ class ClothingsController < ApplicationController
   end
 
   def usage_log # 使用回数の記録
-    @clothing = current_user.clothing.find(params[:id])
-    usage_log = ClothingUsageLog.new(clothing: @clothing, user: current_user, used_at: Time.current)
-
-    if usage_log
-      usage_log.save
+    if ClothingUsageLog.usage_log(user: current_user, clothing_id: params[:id])
       redirect_to clothings_path, notice: "使用記録を追加しました"
     else
       redirect_to clothings_path, alert: "使用記録を追加できませんでした"
