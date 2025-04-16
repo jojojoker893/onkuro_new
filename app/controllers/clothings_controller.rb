@@ -1,23 +1,7 @@
 class ClothingsController < ApplicationController
   def index
     @categories = Category.all
-    @clothings = current_user.clothing
-
-    # 検索
-    @clothings = @clothings.search_keyword(params[:keyword]) if params[:keyword].present?
-
-    # カテゴリフィルター
-    @clothings = @clothings.filter_category(params[:category_id]) if params[:category_id].present?
-
-    # ソート機能
-    case params[:order]
-    when "usage_asc"
-      @clothings = @clothings.usage_log_count.order_usage("ASC")
-    when "usage_desc"
-      @clothings = @clothings.usage_log_count.order_usage("DESC")
-    else
-      @clothings = @clothings.order_created_at
-    end
+    @clothings = Clothing.search_with_params(user: current_user, params: params)
   end
 
   def new
@@ -56,11 +40,7 @@ class ClothingsController < ApplicationController
   end
 
   def usage_log # 使用回数の記録
-    @clothing = current_user.clothing.find(params[:id])
-    usage_log = ClothingUsageLog.new(clothing: @clothing, user: current_user, used_at: Time.current)
-
-    if usage_log
-      usage_log.save
+    if ClothingUsageLog.usage_log(user: current_user, clothing_id: params[:id])
       redirect_to clothings_path, notice: "使用記録を追加しました"
     else
       redirect_to clothings_path, alert: "使用記録を追加できませんでした"
@@ -68,11 +48,7 @@ class ClothingsController < ApplicationController
   end
 
   def remove_usage_log # 使用回数を減らす
-    @clothing = current_user.clothing.find(params[:id])
-    last_log = ClothingUsageLog.where(clothing: @clothing, user: current_user).order(used_at: :desc).first
-
-    if last_log
-      last_log.destroy!
+    if ClothingUsageLog.remove_usage_log(user: current_user, clothing_id: params[:id])
       redirect_to clothings_path, notice: "使用記録を減らしました"
     else
       redirect_to clothings_path, alert: "使用記録がありません"
