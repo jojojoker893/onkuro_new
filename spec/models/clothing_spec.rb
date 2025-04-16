@@ -24,4 +24,15 @@ RSpec.describe Clothing, type: :model do
       expect(result).not_to include(jacket)
     end
   end
+
+  describe "並び替え" do
+    let!(:old) { create(:clothing, created_at: 2.days.ago) }
+    let!(:new) { create(:clothing, created_at: Time.zone.now) }
+
+    it "登録した順に並ぶこと" do
+      result = Clothing.order_created_at
+      expect(result.first).to eq(new)
+      expect(result.second).to eq(old)
+    end
+  end
 end
