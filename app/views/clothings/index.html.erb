@@ -43,9 +43,10 @@
   <% end %>
 
   <%= render "layouts/header" %>
-
+    <p class="clothing-count">
+      表示中：<%= @clothings.count %> 件
+    </p>
     <div class="cloth_index_container">
-
       <% @clothings.each do |clothing| %>
         <div class="cloth_card">
           <%= link_to edit_clothing_path(clothing) do %>
