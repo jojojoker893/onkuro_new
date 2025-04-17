@@ -7,11 +7,21 @@
 
     <nav class="nav">
       <ul class="nav_wrapper">
-        <li><%= link_to image_tag('pie_chart_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'graph', class: "nav_item"), graph_path%></li>
-        <li><%= link_to image_tag('apparel_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg', alt: 'cloth', class: "nav_item"), new_clothing_path%></li>
-        <li><%= link_to image_tag('door_sliding_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg', alt: 'door', class: "nav_item"), clothings_path%></li>
-        <li><%= link_to image_tag('pin_drop_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg', alt: 'pin', class: "nav_item"), maps_path%></li>
-        <li><%= link_to image_tag('settings_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg', alt: 'setting', class: "nav_item"), edit_user_path(current_user)%></li>
+        <li><%= link_to image_tag('pie_chart_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'graph', class: "nav_item"), graph_path%>
+          <div class="list-item">グラフ</div>
+        </li>
+        <li><%= link_to image_tag('apparel_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg', alt: 'cloth', class: "nav_item"), new_clothing_path%>
+          <div class="list-item">登録</div>
+        </li>
+        <li><%= link_to image_tag('door_sliding_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg', alt: 'door', class: "nav_item"), clothings_path%>
+          <div class="list-item">一覧</div>
+        </li>
+        <li><%= link_to image_tag('pin_drop_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg', alt: 'pin', class: "nav_item"), maps_path%>
+          <div class="list-item">マップ</div>
+        </li>
+        <li><%= link_to image_tag('settings_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg', alt: 'setting', class: "nav_item"), edit_user_path(current_user)%>
+          <div class="list-item">設定</div>
+        </li>
       </ul>
     </nav>
 </header>
