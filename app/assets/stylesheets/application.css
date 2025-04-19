@@ -81,6 +81,11 @@ body {
   font-weight: bold;
 }
 
+.usage_filter {
+  padding: 12px 20px;
+  margin-top: 70px;
+}
+
 /* ホーム画面 */
 .service-container {
   max-width: auto;
@@ -657,7 +662,8 @@ body {
 
 /* スマホ版 */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
+  /* ホーム画面 */
   .service-title h1 {
     font-size: 1.5rem;
   }
@@ -684,4 +690,24 @@ body {
   .service-icon {
     max-height: 150px;
   }
+
+  /* グラフページの検索フォーム */
+  .usage_filter form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .usage_filter input[type="date"] {
+    max-width: 150px;
+    font-size: 14px;
+  }
+  
+  .clothing-search-btn {
+    width: nowrap;
+    padding: 4px 12px;
+    font-size: 11px;
+  }
+
+  
 }
