@@ -9,7 +9,7 @@ class ClothingsController < ApplicationController
   end
 
   def create
-    @clothing = current_user.clothing.new(clothing_params)
+    @clothing = current_user.clothings.new(clothing_params)
 
     if @clothing.save
       redirect_to clothings_path, notice: "登録しました"
