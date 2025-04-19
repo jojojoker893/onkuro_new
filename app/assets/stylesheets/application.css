@@ -654,3 +654,34 @@ body {
   border-radius: 8px;
   cursor: pointer;
 }
+
+/* スマホ版 */
+
+@media screen and (max-width: 768px) {
+  .service-title h1 {
+    font-size: 1.5rem;
+  }
+
+  .service-title p {
+    font-size: 0.9rem;
+  }
+
+  .service-discription {
+    font-size: 1.2rem;
+  }
+
+  .service-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .service-list {
+    width: 90%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .service-icon {
+    max-height: 150px;
+  }
+}
