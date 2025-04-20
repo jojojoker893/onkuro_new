@@ -6,6 +6,10 @@
 
 ### リンク: https://onkuro.online/
 
+## テストユーザアカウント
+- メールアドレス: test@example.com
+- パスワード: password
+
 ## トップページ
 <img style="width: 80%" alt="トップページ" src="https://github.com/user-attachments/assets/bd703ebc-76f1-4baf-a218-f3c2bb21f9ed" />
 
@@ -121,6 +125,4 @@ Onkuro では、服の使用履歴を CLOTHING_USAGE_LOGS テーブルに1レコ
 - ブランド名など項目が多くなる部分はモーダルウィンドウを作成し検索を簡単にした
 - 余計な機能やボタンを増やさず、直感的に使用できるレイアウトを意識した
 
-## テストユーザアカウント
-- メールアドレス: test@example.com
-- パスワード: password
+
