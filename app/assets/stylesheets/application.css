@@ -778,8 +778,10 @@ body {
 
   /* グラフ */
   #chart_container {
+    width: 100%;
     max-width: 100%;
-    height: 250px;
+    height: 300px;
+    margin: 0 auto;
   }
 
   /* 一覧ページ */
