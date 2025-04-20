@@ -188,7 +188,7 @@ body {
   justify-content: center;
   gap: 20px;
   padding: 20px;
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 /* カードデザイン */
@@ -424,9 +424,12 @@ body {
 
 /* ソートメニュー */
 .search-wrapper {
+  margin-top: 120px;
   display: flex;
   align-items: center;
   gap: 4px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* 画像アップロードフォーム */
@@ -709,5 +712,21 @@ body {
     font-size: 11px;
   }
 
-  
+  /* グラフ */
+  .chart {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  /* 一覧ページ */
+  .search-wrapper {
+    padding-top: 100px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+
 }
