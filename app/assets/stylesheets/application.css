@@ -714,5 +714,16 @@ body {
     max-width: 100%;
     padding: 1rem;
   }
-  
+
+  /* 一覧ページ */
+  .search-wrapper {
+    padding-top: 120px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+
 }

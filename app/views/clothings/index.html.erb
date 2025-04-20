@@ -1,5 +1,10 @@
 <body>
-  <% content_for :header_seach do %>
+  <%= render "layouts/header" %>
+
+  <p class="clothing-count">
+    表示中：<%= @clothings.count %> 件
+  </p>
+
   <div class="search-wrapper">
     <%= form_with url: clothings_path, method: :get, local: true do %>
       <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード検索" %>
@@ -40,12 +45,6 @@
 
   </div>
 
-  <% end %>
-
-  <%= render "layouts/header" %>
-    <p class="clothing-count">
-      表示中：<%= @clothings.count %> 件
-    </p>
     <div class="cloth_index_container">
       <% @clothings.each do |clothing| %>
         <div class="cloth_card">
