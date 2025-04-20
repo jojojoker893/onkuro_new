@@ -835,4 +835,49 @@ body {
     display: none;
   }
 
+  /* カードデザイン */
+  .cloth_card {
+    width: 160px;
+    padding: 10px;
+  }
+
+  .cloth_img img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .cloth_name {
+    font-size: 14px;
+    margin: 4px 0 2px 0; /* 上下の余白を狭める */
+  }
+
+  .cloth_explanation,
+  .cloth_usage {
+    font-size: 12px;
+    margin: 2px 0;
+  }
+
+  .cloth_btn {
+    justify-content: space-between;
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  .cloth_usage_btn,
+  .cloth_delete_btn {
+    width: 34px;
+    height: 28px;
+    font-size: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cloth_delete_btn {
+    width: 60px; /* 削除だけ幅広め */
+  }
+
 }
