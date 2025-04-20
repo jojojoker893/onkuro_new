@@ -269,8 +269,12 @@ body {
   border: 1px solid #000;
   color: #FFFFFF;
   text-decoration: none;
-  font-size: 14px;
-  padding: 2px 4px;
+  font-size: 10px;
+  padding: 6.5px 5px;
+}
+
+.reset-btn:hover {
+  background-color: #1fa3db;
 }
 
 /* ログアウトボタン */
@@ -295,7 +299,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100vh;
+  height: 110vh;
   margin: 0;
   background-color: #fff;
   gap: 20px;
@@ -386,6 +390,17 @@ body {
   align-items: center;
   width: 100%;
   justify-content: center;
+}
+
+.graph-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
 }
 
 /* フラッシュメッセージ */
