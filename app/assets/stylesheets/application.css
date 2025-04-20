@@ -720,7 +720,7 @@ body {
 
   /* 一覧ページ */
   .search-wrapper {
-    padding-top: 120px;
+    padding-top: 100px;
     margin-bottom: 16px;
     display: flex;
     flex-wrap: wrap;
