@@ -779,8 +779,7 @@ body {
   /* グラフ */
   #chart_container {
     max-width: 100%;
-    width: 100vw;
-    height: 500px;
+    height: 250px;
   }
 
   /* 一覧ページ */
