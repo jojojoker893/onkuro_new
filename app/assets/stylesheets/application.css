@@ -784,7 +784,7 @@ body {
   
   #chart_container {
     width: 100vw;
-    height: 400px;
+    height: 400px !important;
     max-width: 100%;
     margin: 0 auto;
   }
