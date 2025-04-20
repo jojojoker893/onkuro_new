@@ -778,15 +778,16 @@ body {
 
   /* グラフ */
 
-  .graph-container {
-    padding: 0 8px;
-  }
-  
   #chart_container {
     width: 100vw;
-    height: 400px;
+    height: 500px !important;
     max-width: 100%;
     margin: 0 auto;
+    padding: 0;
+  }
+
+  .graph-container {
+    padding: 0 4px;
   }
 
   /* 一覧ページ */
