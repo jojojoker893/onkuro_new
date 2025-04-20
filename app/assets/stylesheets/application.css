@@ -714,19 +714,24 @@ body {
 
   /* グラフ */
   .chart {
-    max-width: 100%;
+    max-width: 600px;
+    width: 90%;
     padding: 1rem;
   }
 
   /* 一覧ページ */
   .search-wrapper {
-    padding-top: 100px;
-    margin-bottom: 16px;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin: 0 auto;
+    margin-top: 110px;
+    padding: 8px 12px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
+
 
 
 }
