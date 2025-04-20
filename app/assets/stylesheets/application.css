@@ -527,16 +527,10 @@ body {
 }
 
 /* マップページ */
-.maps_title {
-  position: fixed;
-  font-weight: bold;
-  text-align: center;
-  justify-content: center;
-  z-index: 200;
-  padding-top: 15px;
-  left: 38%;
+.map_title {
   color: white;
-  font-size: 20px;
+  font-size: 16px;
+  margin-left: 20px;
 }
 
 #map {
@@ -783,10 +777,10 @@ body {
   }
 
   /* グラフ */
-  .chart {
-    max-width: 600px;
+  #chart_container {
+    max-width: 500px;
     width: 90%;
-    padding: 1rem;
+    margin: 0 auto;
   }
 
   /* 一覧ページ */
@@ -801,10 +795,16 @@ body {
 
   .search-row {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    flex-wrap: wrap;
     gap: 8px;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .reset-btn {
+    padding: 5px 8px;
+    font-size: 12px;
   }
 
   .search-block,
@@ -878,6 +878,17 @@ body {
 
   .cloth_delete_btn {
     width: 60px; /* 削除だけ幅広め */
+  }
+
+  /* マップタイトル */
+  .map_title {
+    font-size: 14px;
+    margin-left: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    font-weight: bold;
   }
 
 }

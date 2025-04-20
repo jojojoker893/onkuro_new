@@ -1,6 +1,10 @@
 <header class="site_header">
   <div class="header_logo">Onkuro</div>
 
+  <div class="map_title">
+    <%= yield :map_title %>
+  </div>
+
     <nav class="nav">
       <ul class="nav_wrapper">
         <li><%= link_to image_tag('pie_chart_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'graph', class: "nav_item"), graph_path%>
