@@ -33,7 +33,9 @@
 
         Highcharts.chart("chart_container", {
           accessibility: { enabled: false },
-          chart: { type: "pie" },
+          chart: { type: "pie",
+            height: 400
+          },
           title: { text: "使用回数" },
           series: [{
             name: "使用回数",
