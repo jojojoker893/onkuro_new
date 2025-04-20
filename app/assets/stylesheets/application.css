@@ -709,5 +709,10 @@ body {
     font-size: 11px;
   }
 
+  /* グラフ */
+  .chart {
+    max-width: 100%;
+    padding: 1rem;
+  }
   
 }
