@@ -778,9 +778,9 @@ body {
 
   /* グラフ */
   #chart_container {
-    max-width: 500px;
-    width: 90%;
-    margin: 0 auto;
+    max-width: 100%;
+    width: 100vw;
+    height: 500px;
   }
 
   /* 一覧ページ */
@@ -877,7 +877,7 @@ body {
   }
 
   .cloth_delete_btn {
-    width: 60px; /* 削除だけ幅広め */
+    width: 60px; 
   }
 
   /* マップタイトル */
@@ -889,6 +889,11 @@ body {
     text-overflow: ellipsis;
     max-width: 150px;
     font-weight: bold;
+  }
+
+  #map {
+    height: 100vh;
+    width: 100%;
   }
 
 }
