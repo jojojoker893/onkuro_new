@@ -527,16 +527,10 @@ body {
 }
 
 /* マップページ */
-.maps_title {
-  position: fixed;
-  font-weight: bold;
-  text-align: center;
-  justify-content: center;
-  z-index: 200;
-  padding-top: 15px;
-  left: 38%;
+.map_title {
   color: white;
-  font-size: 20px;
+  font-size: 16px;
+  margin-left: 20px;
 }
 
 #map {
@@ -884,6 +878,17 @@ body {
 
   .cloth_delete_btn {
     width: 60px; /* 削除だけ幅広め */
+  }
+
+  /* マップタイトル */
+  .map_title {
+    font-size: 14px;
+    margin-left: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    font-weight: bold;
   }
 
 }

@@ -1,7 +1,10 @@
 <body>
-  <%= render "layouts/header" %>
 
-  <div class="maps_title">付近の古着屋・リサイクルショップを表示</div>
+  <% content_for :map_title do %>
+    <span>古着屋マップ</span>
+  <% end %>
+
+  <%= render "layouts/header" %>    
 
   <% googlemaps_api_key = 
       if Rails.env.production?
