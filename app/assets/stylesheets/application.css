@@ -777,11 +777,16 @@ body {
   }
 
   /* グラフ */
+
+  .graph-container {
+    padding: 24px 8px;
+    min-height: 400px; 
+  }
+  
+
   #chart_container {
     width: 100%;
-    max-width: 100%;
-    height: 300px;
-    margin: 0 auto;
+    height: 360px;
   }
 
   /* 一覧ページ */
