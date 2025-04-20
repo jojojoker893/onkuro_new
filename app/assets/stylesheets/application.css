@@ -188,7 +188,7 @@ body {
   justify-content: center;
   gap: 20px;
   padding: 20px;
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 /* カードデザイン */
@@ -424,9 +424,12 @@ body {
 
 /* ソートメニュー */
 .search-wrapper {
+  margin-top: 120px;
   display: flex;
   align-items: center;
   gap: 4px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* 画像アップロードフォーム */
