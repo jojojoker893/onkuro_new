@@ -13,10 +13,8 @@ class Clothing < ApplicationRecord
     clothings = clothings.filter_category(params[:category_id]) if params[:category_id].present? # カテゴリフィルター
 
     case params[:order] # ソート機能
-    when "usage_asc"
-      clothings = clothings.usage_log_count.order_usage("ASC")
-    when "usage_desc"
-      clothings = clothings.usage_log_count.order_usage("DESC")
+    when "usage_asc", "usage_desc"
+      clothings = clothings.usage_log_count.order_usage(params[:order] == "usage_asc" ? "ASC" : "DESC")
     else
       clothings = clothings.order_created_at
     end
@@ -27,7 +25,7 @@ class Clothing < ApplicationRecord
   # @@使用回数を取得
   scope :usage_log_count, -> {
     left_joins(:clothing_usage_logs)
-    .select("clothings.* , COUNT(clothing_usage_logs.id) as usage_count")
+    .select("clothings.*, COUNT(clothing_usage_logs.id) AS usage_count")
     .group("clothings.id")
   }
 
