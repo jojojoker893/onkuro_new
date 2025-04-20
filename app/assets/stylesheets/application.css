@@ -777,7 +777,9 @@ body {
   }
 
   /* グラフ */
-
+  .graph-container {
+    height: 450px;
+  }
   
 
   /* 一覧ページ */
