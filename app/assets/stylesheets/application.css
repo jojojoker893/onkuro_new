@@ -783,46 +783,31 @@ body {
   
 
   /* 一覧ページ */
-  .search-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-    margin-top: 120px;
-    box-sizing: border-box;
+  .search-row {
+    gap: 4px;
+    justify-content: center;
   }
 
-  .search-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+  .search-block {
+    margin-top: 20px;
+  }
+
+  .search-block form,
+  .sort-block form,
+  .filter-block form {
+    margin: 0;
+    padding: 0;
+  }
+
+  .select-box {
+    width: auto;
+    max-width: 100px;
   }
 
   .reset-btn {
-    padding: 5px 8px;
-    font-size: 12px;
-  }
-
-  .search-block,
-  .sort-block,
-  .filter-block,
-  .reset-block {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .search-input,
-  .select-box,
-  .clothing-search-btn {
-    font-size: 12px;
-    padding: 4px 8px;
-    height: 28px;
-    white-space: nowrap;
+    padding: 4px 6px;
+    font-size: 10px;
+    margin: 0;
   }
 
   .icon {
