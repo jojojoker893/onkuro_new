@@ -2,7 +2,6 @@ class ClothingsController < ApplicationController
   def index
     @categories = Category.all
     @clothings = Clothing.search_with_params(user: current_user, params: params)
-    @clothings_count = current_user.clothings.count
   end
 
   def new
