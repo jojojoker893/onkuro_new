@@ -11,6 +11,8 @@ class Clothing < ApplicationRecord
     clothings = user.clothings
     clothings = clothings.search_keyword(params[:keyword]) if params[:keyword].present?  # 検索
     clothings = clothings.filter_category(params[:category_id]) if params[:category_id].present? # カテゴリフィルター
+    clothings = clothings.filter_brand(params[:brand_id]) if params[:brand_id].present?
+    clothings = clothings.filter_color(params[:color_id]) if params[:color_id].present?
 
     case params[:order] # ソート機能
     when "usage_asc", "usage_desc"
@@ -37,6 +39,8 @@ class Clothing < ApplicationRecord
 
   # @@絞り機能 カテゴリ、ブランド、カラー
   scope :filter_category, ->(category_id) { where(category_id: category_id)  if category_id.present? }
+  scope :filter_brand, ->(brand_id) { where(brand_id: brand_id)  if brand_id.present? }
+  scope :filter_color, ->(color_id) { where(color_id: color_id)  if color_id.present? }
 
   # @@検索機能
   scope :search_keyword, ->(keyword) { where("name LIKE ?", "%" + keyword + "%") }

@@ -1,6 +1,8 @@
 class ClothingsController < ApplicationController
   def index
     @categories = Category.all
+    @brands = Brand.all
+    @colors = Color.all
     @clothings = Clothing.search_with_params(user: current_user, params: params)
   end
 

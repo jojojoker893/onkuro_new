@@ -7,76 +7,69 @@
 
   <div class="search-wrapper">
   
-  <!-- 1行目：検索フォーム -->
+  <%= form_with url: clothings_path, method: :get, local: true do %>
   <div class="search-row">
     <div class="search-block">
-      <%= form_with url: clothings_path, method: :get, local: true do %>
-        <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード検索", class: "search-input" %>
-        <%= submit_tag "検索", class: "clothing-search-btn" %>
-      <% end %>
+      <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード検索", class: "search-input" %>
     </div>
-  </div>
 
-  <!-- 並び替え -->
-  <!-- 2行目：並び替え・フィルター・リセット -->
-  <div class="search-row">
     <div class="sort-block">
-      <%= image_tag('swap_vert_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'sort', class: 'icon') %>
-      <%= form_with url: clothings_path, method: :get, local: true do %>
-        <%= hidden_field_tag :category_id, params[:category_id] %>
-        <%= hidden_field_tag :keyword, params[:keyword] %>
-        <%= select_tag :order, options_for_select([
-          ['登録順', 'created_at'],
-          ['使用回数が多い順', 'usage_desc'],
-          ['使用回数が少ない順', 'usage_asc']
-        ], params[:order]), class: "select-box", onchange: "this.form.submit()" %>
-      <% end %>
+      <%= select_tag :order, options_for_select([
+        ['登録順', 'created_at'],
+        ['使用回数が多い順', 'usage_desc'],
+        ['使用回数が少ない順', 'usage_asc']
+      ], params[:order]), class: "select-box" %>
     </div>
 
     <div class="filter-block">
-      <%= image_tag('filter_list_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg', alt: 'filter', class: 'icon') %>
-      <%= form_with url: clothings_path, method: :get, local: true do %>
-        <%= hidden_field_tag :order, params[:order] %>
-        <%= hidden_field_tag :keyword, params[:keyword] %>
-        <%= select_tag :category_id,
-          options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
-          include_blank: "全て表示",
-          class: "select-box",
-          onchange: "this.form.submit()" %>
-      <% end %>
+      <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), include_blank: "全カテゴリ", class: "select-box" %>
     </div>
 
-    <div class="reset-block">
-      <%= button_to "リセット", clothings_path, method: :get, class: "clothing-search-btn" %>
+    <div class="filter-block">
+      <%= select_tag :brand_id, options_from_collection_for_select(@brands, :id, :name, params[:brand_id]), include_blank: "全ブランド", class: "select-box" %>
+    </div>
+
+    <div class="filter-block">
+      <%= select_tag :color_id, options_from_collection_for_select(@colors, :id, :name, params[:color_id]), include_blank: "全カラー", class: "select-box" %>
+    </div>
+
+    <div class="submit-block">
+      <%= submit_tag "絞り込む", class: "clothing-search-btn" %>
+      <%= link_to "リセット", clothings_path, class: "reset-btn" %>
     </div>
   </div>
-</div>
+<% end %>
 
-    <div class="cloth_index_container">
-      <% @clothings.each do |clothing| %>
-        <div class="cloth_card">
-          <%= link_to edit_clothing_path(clothing) do %>
-            <div class="cloth_img">
-              <% if clothing.image.attached? %>
-                <%= image_tag clothing.image.variant(resize_to_fill:[200, 300]) %>
-              <% else %>
-                <p>画像がありません</p>
-              <% end %>
+
+    <div class="cloth_index_container">   
+      <% if @clothings.any? %>
+        <% @clothings.each do |clothing| %>
+          <div class="cloth_card">
+            <%= link_to edit_clothing_path(clothing) do %>
+              <div class="cloth_img">
+                <% if clothing.image.attached? %>
+                  <%= image_tag clothing.image.variant(resize_to_fill:[200, 300]) %>
+                <% else %>
+                  <p>画像がありません</p>
+                <% end %>
+            </div>
+          <% end %>
+      
+          <div class="cloth_info">
+            <h3 class="cloth_name"><%= clothing.name %></h3>
+            <p class="cloth_explanation"><%= clothing.explanation%></p>
+            <p class="cloth_usage">使用回数: <%= clothing.clothing_usage_logs.count %> 回</p>
           </div>
-        <% end %>
 
-        <div class="cloth_info">
-          <h3 class="cloth_name"><%= clothing.name %></h3>
-          <p class="cloth_explanation"><%= clothing.explanation%></p>
-          <p class="cloth_usage">使用回数: <%= clothing.clothing_usage_logs.count %> 回</p>
+          <div class="cloth_btn">
+            <%= button_to "+", usage_log_clothing_path(clothing), data: {turbo_method: :post}, class: "cloth_btn cloth_usage_btn" %>
+            <%= button_to "−", remove_usage_log_clothing_path(clothing), method: :delete, class: "cloth_btn cloth_usage_btn" %>
+            <%= link_to "削除", clothing_path(clothing.id), data: { turbo_method: :delete, turbo_confirm: "#{clothing.name}を削除します。よろしいですか？"}, class: "cloth_btn cloth_delete_btn" %>
+          </div>
         </div>
-
-        <div class="cloth_btn">
-          <%= button_to "+", usage_log_clothing_path(clothing), data: {turbo_method: :post}, class: "cloth_btn cloth_usage_btn" %>
-          <%= button_to "−", remove_usage_log_clothing_path(clothing), method: :delete, class: "cloth_btn cloth_usage_btn" %>
-          <%= link_to "削除", clothing_path(clothing.id), data: { turbo_method: :delete, turbo_confirm: "#{clothing.name}を削除します。よろしいですか？"}, class: "cloth_btn cloth_delete_btn" %>
-        </div>
-      </div>
+      <% end %>
+    <% else %>
+      <p style="text-align: center; margin-top: 20px;">該当する服はありません</p>
     <% end %>
   </div>
 </body>
