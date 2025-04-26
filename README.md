@@ -13,6 +13,11 @@
 ## トップページ
 <img style="width: 80%" alt="トップページ" src="https://github.com/user-attachments/assets/bd703ebc-76f1-4baf-a218-f3c2bb21f9ed" />
 
+## スマホ版
+
+![output](https://github.com/user-attachments/assets/41c70403-b012-4c9c-bca3-7af7e74fdc17)
+
+
 
 ## インフラ構成図
 <img style="width: 50%" alt="インフラ構成図" src="https://github.com/user-attachments/assets/01ffaf34-f3ef-41ed-bd99-45557db55483" />
@@ -124,5 +129,6 @@ Onkuro では、服の使用履歴を CLOTHING_USAGE_LOGS テーブルに1レコ
 - 総使用回数だけでなく、指定した期間の使用回数を取得できるようにした
 - ブランド名など項目が多くなる部分はモーダルウィンドウを作成し検索を簡単にした
 - 余計な機能やボタンを増やさず、直感的に使用できるレイアウトを意識した
+- レスポンシブ対応をしてスマホユーザでも使えるようにした
 
 
