@@ -22,15 +22,19 @@
     </div>
 
     <div class="filter-block">
-      <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), include_blank: "全カテゴリ", class: "select-box" %>
+      <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), include_blank: "カテゴリ", class: "select-box" %>
     </div>
 
     <div class="filter-block">
-      <%= select_tag :brand_id, options_from_collection_for_select(@brands, :id, :name, params[:brand_id]), include_blank: "全ブランド", class: "select-box" %>
+      <button type="button" onclick="openBrandModalForIndex()" class="modal-open-index" id="brand-select-button">
+          <%= @brands.find_by(id: params[:brand_id])&.name || "ブランド" %>
+      </button>
+      <%= hidden_field_tag :brand_id, params[:brand_id], id: "hidden-brand-id" %>
+      <%= render "shared/brand_modal_index", brands: @brands %> 
     </div>
 
     <div class="filter-block">
-      <%= select_tag :color_id, options_from_collection_for_select(@colors, :id, :name, params[:color_id]), include_blank: "全カラー", class: "select-box" %>
+      <%= select_tag :color_id, options_from_collection_for_select(@colors, :id, :name, params[:color_id]), include_blank: "カラー", class: "select-box" %>
     </div>
 
     <div class="submit-block">

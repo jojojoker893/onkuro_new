@@ -1,0 +1,84 @@
+<div id="brand-modal-index" class="modal hidden">
+  <div class="modal-content">
+    <button type="button" onclick="closeBrandModalForIndex()" class="modal-close">&times;</button>
+    <h2 class="modal-title">ブランドを選択</h2>
+
+    <input type="text" placeholder="ブランド名を入力" id="brand-search-index" class="modal-search" />
+
+    <div class="modal-index">
+      <% ("A".."Z").each do |char| %>
+        <a href="#brand-<%= char.downcase %>" class="modal-index-link"><%= char %></a>
+      <% end %>
+    </div>
+
+    <div class="modal-group">
+      <% group_brands = brands.group_by { |b| b.name[0].upcase } %>
+      <% group_brands.sort.each do |head, val| %>
+        <div id="brand-<%= head.downcase %>">
+          <h3 class="modal-section-title"><%= head %></h3>
+          <ul class="modal-list">
+            <% val.each do |brand| %>
+              <li class="brand-search">
+                <label class="modal-brand-item">
+                  <%= radio_button_tag "selected_brand_index", brand.id, false, data: { name: brand.name } %>
+                  <span class="brand-name"><%= brand.name %></span>
+                </label>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" onclick="confirmBrandForIndex()" class="select-button">選択する</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("turbo:load", () => {
+  const searchInput = document.getElementById("brand-search-index");
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.toLowerCase();
+      const items = document.querySelectorAll("#brand-modal-index .brand-search");
+
+      let firstMatch = null;
+      items.forEach(item => {
+        const brandName = item.querySelector(".brand-name").textContent.toLowerCase();
+        const isMatch = brandName.includes(keyword);
+        item.style.display = isMatch ? "" : "none";
+        if (isMatch && !firstMatch) firstMatch = item;
+      });
+      if (firstMatch) {
+        firstMatch.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+});
+
+function openBrandModalForIndex() {
+  document.getElementById("brand-modal-index").classList.remove("hidden");
+}
+
+function closeBrandModalForIndex() {
+  document.getElementById("brand-modal-index").classList.add("hidden");
+}
+
+function confirmBrandForIndex() {
+  const selected = document.querySelector('input[name="selected_brand_index"]:checked');
+  if (selected) {
+    const brandId = selected.value;
+    const brandName = selected.dataset.name;
+
+    
+    document.getElementById("brand-select-button").textContent = brandName;
+    document.getElementById("hidden-brand-id").value = brandId;
+
+    closeBrandModalForIndex();
+  } else {
+    alert("ブランドを選択してください");
+  }
+}
+</script>
