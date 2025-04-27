@@ -26,7 +26,7 @@
     </div>
 
     <div class="filter-block">
-      <button type="button" onclick="openBrandModalForIndex()" class="modal-open" id="brand-select-button">
+      <button type="button" onclick="openBrandModalForIndex()" class="modal-open-index" id="brand-select-button">
           <%= @brands.find_by(id: params[:brand_id])&.name || "ブランド" %>
       </button>
       <%= hidden_field_tag :brand_id, params[:brand_id], id: "hidden-brand-id" %>

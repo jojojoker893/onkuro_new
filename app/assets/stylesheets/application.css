@@ -388,6 +388,15 @@ body {
   margin-top: 10px;
 }
 
+.modal-open-index {
+  padding: 2px 8px;
+  font-size: 12px;
+  border: solid 1px ;
+  border-radius: 6px;
+  border-color: #ccc;
+  background-color: white;
+}
+
 /* グラフ用チャート */
 .chart {
   display: flex;
