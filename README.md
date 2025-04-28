@@ -11,7 +11,7 @@
 - パスワード: password
 
 ## トップページ
-<img style="width: 80%" alt="トップページ" src="https://github.com/user-attachments/assets/bd703ebc-76f1-4baf-a218-f3c2bb21f9ed" />
+<img style="width: 70%" alt="トップページ" src="https://github.com/user-attachments/assets/bd703ebc-76f1-4baf-a218-f3c2bb21f9ed" />
 
 ## スマホ版
 
@@ -101,13 +101,13 @@ erDiagram
 ### 付近の古着屋、リサイクルショップを表示
 - 自身の位置情報を取得し、周辺5kmの古着屋、リサイクルショップの取得をしいらない服の売り場に困りません<br>(身バレ防止の為ランダムな位置情報を入れた画像です。)
 - 赤ピンがホバーした際に店の詳細情報が表示されます
-<img style="width:70%" alt="位置情報" src="https://github.com/user-attachments/assets/e3417ab4-01b9-4874-8779-a41fd119e968" />
+<img style="width:67%" alt="位置情報" src="https://github.com/user-attachments/assets/e3417ab4-01b9-4874-8779-a41fd119e968" />
 
 ### アカウント管理
 - ユーザ名、メールアドレスの更新
 - パスワードの変更
 - アカウント削除&ログアウトができます
-<img style="width:70%" alt="スクリーンショット 2025-04-11 10 49 33" src="https://github.com/user-attachments/assets/8c6688d5-9729-4991-9382-49eb9e944ce5" />
+<img style="width:67%" alt="スクリーンショット 2025-04-11 10 49 33" src="https://github.com/user-attachments/assets/8c6688d5-9729-4991-9382-49eb9e944ce5" />
 
 ## 技術的に工夫したところ
 ### 位置情報を保存せず、現在地の取得
