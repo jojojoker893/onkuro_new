@@ -42,7 +42,7 @@ class ClothingsController < ApplicationController
   end
 
   def usage_log # 使用回数の記録
-    if ClothingUsageLog.usage_log(user: current_user, clothing_id: params[:id])
+    if RecordUsageLogUseCase.new(user: current_user, clothing_id: params[:id]).add
       redirect_to clothings_path, notice: "使用記録を追加しました"
     else
       redirect_to clothings_path, alert: "使用記録を追加できませんでした"
@@ -50,7 +50,7 @@ class ClothingsController < ApplicationController
   end
 
   def remove_usage_log # 使用回数を減らす
-    if ClothingUsageLog.remove_usage_log(user: current_user, clothing_id: params[:id])
+    if RecordUsageLogUseCase.new(user: current_user, clothing_id: params[:id]).remove
       redirect_to clothings_path, notice: "使用記録を減らしました"
     else
       redirect_to clothings_path, alert: "使用記録がありません"
