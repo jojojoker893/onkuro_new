@@ -7,7 +7,7 @@ class ClothingSearch
   end
 
   def call
-    clothings = Clothing.where(user_id: user_id)
+    clothings = Clothing.where(user_id: user)
     clothings = clothings.search_keyword(params[:keyword]) if params[:keyword].present?  # 検索
     clothings = clothings.filter_category(params[:category_id]) if params[:category_id].present? # カテゴリフィルター
     clothings = clothings.filter_brand(params[:brand_id]) if params[:brand_id].present? # ブランドフィルター
