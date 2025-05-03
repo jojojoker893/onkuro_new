@@ -3,7 +3,7 @@ class GraphController < ApplicationController
     startdate = Time.zone.parse(params[:startdate]) rescue nil
     enddate = Time.zone.parse(params[:enddate]) rescue nil
 
-    @graph_data = GraphUseCase.new(
+    @graph_data = ClothingUsageGraph.new(
       user: current_user,
       startdate: startdate,
       enddate: enddate

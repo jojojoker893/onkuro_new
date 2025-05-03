@@ -1,4 +1,4 @@
-class ClothingSearchUseCase
+class ClothingSearch
   def initialize(user:, params:)
     @user = user
     @params = params

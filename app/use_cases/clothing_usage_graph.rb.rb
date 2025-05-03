@@ -1,4 +1,4 @@
-class GraphUseCase
+class ClothingUsageGraph
   def initialize(user:, startdate:, enddate:)
     @user = user
     @startdate = startdate

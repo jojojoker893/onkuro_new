@@ -1,4 +1,4 @@
-class RecordUsageLogUseCase
+class RecordUsageLog
   def initialize(user:, clothing_id:)
     @user = user
     @clothing_id = clothing_id

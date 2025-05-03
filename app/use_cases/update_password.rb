@@ -1,4 +1,4 @@
-class UpdatePasswordUseCase
+class UpdatePassword
   def initialize(user, current_password:, new_params:)
     @user = user
     @current_password = current_password
