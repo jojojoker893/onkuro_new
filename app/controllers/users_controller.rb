@@ -32,12 +32,13 @@ class UsersController < ApplicationController
 
     def update_password
       @user = current_user
-      if @user.update_password(params[:user][:current_password], password_params)
+      result = UpdatePassword.new(current_user, current_password: params[:user][:current_password], new_params: password_params).call
+      if result
         flash[:notice] = "パスワードを変更しました"
         redirect_to edit_password_user_path
       else
         flash.now[:alert] = "変更に失敗しました"
-        render :edit_password, status: :unprocessable_entity # よくよく考えたらこれなに
+        render :edit_password, status: :unprocessable_entity
       end
     end
 
