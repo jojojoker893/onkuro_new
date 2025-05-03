@@ -2,12 +2,12 @@ class ClothingUsageGraph
   def initialize(user:, startdate:, enddate:)
     @user = user
     @startdate = startdate
-    @startdate = enddate
+    @enddate = enddate
   end
 
   def call
     if @startdate.present? && @enddate.present?
-      usage_data = ClothingUsageLog.usage_period(current_user, startdate, enddate)
+      usage_data = ClothingUsageLog.usage_period(@user, @startdate, @enddate)
     else
       usage_data = @user.clothings
       .joins(:clothing_usage_logs)
