@@ -1,15 +1,17 @@
 class ClothingUsageGraph
-  def initialize(user:, startdate:, enddate:)
+  attr_reader :user, :start_date, :end_date
+
+  def initialize(user:, start_date:, end_date:)
     @user = user
-    @startdate = startdate
-    @enddate = enddate
+    @start_date = start_date
+    @end_date = end_date
   end
 
   def call
-    if @startdate.present? && @enddate.present?
-      usage_data = ClothingUsageLog.usage_period(@user, @startdate, @enddate)
+    if start_date.present? && end_date.present?
+      usage_data = ClothingUsageLog.usage_period(user.id, start_date, end_date)
     else
-      usage_data = @user.clothings
+      usage_data = user.clothings
       .joins(:clothing_usage_logs)
       .group("clothings.id")
       .pluck("clothings.name, COUNT(clothing_usage_logs.id)")
