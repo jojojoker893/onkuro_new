@@ -1,4 +1,9 @@
 class ClothingReport
+  ORDER_DIRECTIONS = {
+    "usage_asc" => "ASC",
+    "usage_desc" => "DESC"
+}.freeze
+
   def initialize(user_id:, params:)
     @user_id = user_id
     @params = params
@@ -11,17 +16,20 @@ class ClothingReport
     clothings = clothings.filter_brand(params[:brand_id]) if params[:brand_id].present? # ブランドフィルター
     clothings = clothings.filter_color(params[:color_id]) if params[:color_id].present? # カラーフィルター
 
-    case params[:order] # ソート機能
-    when "usage_asc", "usage_desc"
-      clothings = clothings.usage_log_count.order_usage(params[:order] == "usage_asc" ? "ASC" : "DESC")
-    else
-      clothings = clothings.order_created_at
-    end
 
-    clothings
+    apply_ordering(clothings)
   end
 
   private
 
   attr_reader :user_id, :params
+
+  def apply_ordering # 並び替え
+    if order_direction.present?
+      scope.usage_log_count.order_usage(order_direction)
+    else
+    scope.order_created_at
+    end
+  end
+  def order_direction = ORDER_DIRECTIONS[@params[:order]]
 end
