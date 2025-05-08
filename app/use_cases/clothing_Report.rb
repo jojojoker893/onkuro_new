@@ -1,6 +1,4 @@
 class ClothingReport
-  attr_reader :user_id, :params
-
   def initialize(user_id:, params:)
     @user_id = user_id
     @params = params
@@ -22,4 +20,8 @@ class ClothingReport
 
     clothings
   end
+
+  private
+
+  attr_reader :user_id, :params
 end
