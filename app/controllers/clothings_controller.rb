@@ -3,7 +3,7 @@ class ClothingsController < ApplicationController
     @categories = Category.all
     @brands = Brand.all
     @colors = Color.all
-    @clothings = ClothingSearch.new(user: current_user, params: params).call
+    @clothings = ClothingReport.new(user_id: current_user.id, params: params).call
   end
 
   def new
