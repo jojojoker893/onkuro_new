@@ -4,10 +4,10 @@ class ClothingUsageLog < ApplicationRecord
 
   validates :used_at, presence: true
 
-  scope :usage_period, ->(user_id, startdate, enddate) {
+  scope :usage_period, ->(user_id, start_date, end_date) {
     joins(:clothing)
     .where(clothings: { user_id: user_id })
-    .where(used_at: startdate.beginning_of_day..enddate.end_of_day)
+    .where(used_at: start_date.beginning_of_day..end_date.end_of_day)
     .group("clothings.id", "clothings.name")
     .pluck("clothings.name, COUNT(clothing_usage_logs.id)")
   }

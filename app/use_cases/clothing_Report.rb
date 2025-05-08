@@ -24,7 +24,7 @@ class ClothingReport
 
   attr_reader :user_id, :params
 
-  def apply_ordering # 並び替え
+  def apply_ordering(scope) # 並び替え
     if order_direction.present?
       scope.usage_log_count.order_usage(order_direction)
     else
