@@ -31,8 +31,8 @@ class UsersController < ApplicationController
       end
     end
 
-    def update_password
-      result = UpdatePassword.new(
+    def password_update
+      result = PasswordUpdater.new(
         current_user,
         current_password: params[:user][:current_password],
         new_params: password_params).call
