@@ -4,7 +4,7 @@ class RecordUsageLogRemove
     @clothing_id = clothing_id
   end
 
-  def remove # 使用回数を減らす
+  def call # 使用回数を減らす
     clothing = @user.clothings.find_by(id: @clothing_id)
     return false unless clothing
 
