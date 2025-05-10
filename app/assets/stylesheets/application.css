@@ -192,6 +192,13 @@ body {
   justify-content: start;
 }
 
+.pagination-links {
+  text-align: center;
+  margin: 40px 0;
+  display: block;
+  width: 100%;
+}
+
 /* カードデザイン */
 .cloth_card {
   width: 220px;
