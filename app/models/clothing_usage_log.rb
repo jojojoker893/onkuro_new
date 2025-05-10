@@ -4,21 +4,10 @@ class ClothingUsageLog < ApplicationRecord
 
   validates :used_at, presence: true
 
-  def self.usage_log(user:, clothing_id:) # 使用回数の記録
-    clothing = user.clothings.find(clothing_id)
-    create(user: user, clothing: clothing, used_at: Time.current)
-  end
-
-  def self.remove_usage_log(user:, clothing_id:) # 使用回数の削除
-    clothing = user.clothings.find(clothing_id)
-    log = ClothingUsageLog.where(user: user, clothing: clothing).order(used_at: :desc).first
-    log&.destroy
-  end
-
-  scope :usage_period, ->(user_id, startdate, enddate) {
+  scope :usage_period, ->(user_id, start_date, end_date) {
     joins(:clothing)
     .where(clothings: { user_id: user_id })
-    .where(used_at: startdate.beginning_of_day..enddate.end_of_day)
+    .where(used_at: start_date.beginning_of_day..end_date.end_of_day)
     .group("clothings.id", "clothings.name")
     .pluck("clothings.name, COUNT(clothing_usage_logs.id)")
   }
