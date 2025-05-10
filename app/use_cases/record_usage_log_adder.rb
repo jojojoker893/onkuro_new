@@ -4,17 +4,20 @@ class RecordUsageLogAdder
     @clothing_id = clothing_id
   end
 
-
-  def add # 使用回数の記録
-    clothing = @user.clothings.find_by(id: @clothing_id)
+  def call # 使用回数の記録
+    clothing = user.clothings.find_by(id: clothing_id)
     return false unless clothing
 
     usege_log = ClothingUsageLog.create(
-      user: @user,
+      user: user,
       clothing: clothing,
       used_at: Time.current
     )
 
     usege_log
   end
+
+
+  private
+  attr_reader :user, :clothing_id
 end
