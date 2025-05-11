@@ -19,6 +19,7 @@ class UsersController < ApplicationController
         render :new, status: :unprocessable_entity
     end
   end
+
     def update
       @user = current_user
       if @user.update(user_params)
@@ -30,14 +31,18 @@ class UsersController < ApplicationController
       end
     end
 
-    def update_password
-      @user = current_user
-      if @user.update_password(params[:user][:current_password], password_params)
+    def password_update
+      result = PasswordUpdater.new(
+        current_user,
+        current_password: params[:user][:current_password],
+        new_params: password_params).call
+
+      if result
         flash[:notice] = "パスワードを変更しました"
         redirect_to edit_password_user_path
       else
         flash.now[:alert] = "変更に失敗しました"
-        render :edit_password, status: :unprocessable_entity # よくよく考えたらこれなに
+        render :edit_password, status: :unprocessable_entity
       end
     end
 

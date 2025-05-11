@@ -7,23 +7,6 @@ class Clothing < ApplicationRecord
   has_one_attached :image
   has_many :clothing_usage_logs, dependent: :destroy
 
-  def self.search_with_params(user:, params:)
-    clothings = user.clothings
-    clothings = clothings.search_keyword(params[:keyword]) if params[:keyword].present?  # 検索
-    clothings = clothings.filter_category(params[:category_id]) if params[:category_id].present? # カテゴリフィルター
-    clothings = clothings.filter_brand(params[:brand_id]) if params[:brand_id].present?
-    clothings = clothings.filter_color(params[:color_id]) if params[:color_id].present?
-
-    case params[:order] # ソート機能
-    when "usage_asc", "usage_desc"
-      clothings = clothings.usage_log_count.order_usage(params[:order] == "usage_asc" ? "ASC" : "DESC")
-    else
-      clothings = clothings.order_created_at
-    end
-
-    clothings
-  end
-
   # @@使用回数を取得
   scope :usage_log_count, -> {
     left_joins(:clothing_usage_logs)
