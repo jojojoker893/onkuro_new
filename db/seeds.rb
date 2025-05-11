@@ -1,14 +1,22 @@
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+
 Categories = %w[トップス ジャケット/アウター パンツ オールインワン・サロペット スカート ワンピース/ドレス フォーマルスーツ/小物 バッグ シューズ アクセサリ その他]
 Categories.each do |line|
   Category.create!(name: line)
 end
 
-Brands = %w[LouisVuitton CHANEL Hermès Gucci Prada Dior Balenciaga SaintLaurent Fendi BottegaVeneta CommedesGarçons UNIQLO Nike Adidas ZARA H&M BEAMS URBANRESEARCH nano・universe AcneStudios]
+Brands = %w[
+  LouisVuitton CHANEL Hermès Gucci Prada Dior Balenciaga SaintLaurent Fendi
+  BottegaVeneta Loewe CELINE Burberry Valentino AlexanderMcQueen Givenchy MiuMiu
+  UNIQLO GU ZARA H&M GAP Bershka Forever21 SHEIN WEGO GLOBAL_WORK niko_and...
+  Nike Adidas Puma Reebok NewBalance ASICS Champion FILA Converse VANS
+  THE_NORTH_FACE Patagonia Columbia UnderArmour DESCENTE Arc'teryx
+  Supreme STÜSSY X-LARGE BAPE KITH OffWhite AderError PALACE CarharttWIP
+  WTAPS Neighborhood HUMANMADE FearOfGod Essentials
+  UNITED_ARROWS BEAUTY&YOUTH JOURNAL_STANDARD SHIPS BEAMS URBANRESEARCH
+  nano・universe EDIFICE STUDIOUS PublicTokyo nonnative COMOLI YAECA AURALEE kolor sacai
+  Stylenanda CHUU Mixxmix IMVELY GentleMonster LIPHOP Dunst
+  MIKIHOUSE BABYDOLL BREEZE MARKEY’S petitbateau その他
+]
 Brands.each do |line|
   Brand.create!(name: line)
 end
