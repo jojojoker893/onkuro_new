@@ -42,6 +42,9 @@ jobs:
           ruby-version: '3.3.5'
           bundler-cache: true
 
+      - name: Remove spring binstub
+        run: bin/spring binstub --remove --all || true
+
       - name: Prepare DB and run RSpec
         env:
           RAILS_ENV: test
