@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with: 
+          ruby-version: '3.3.5'
+          bundler-cache: true
+
+      - name: Run RuboCop
+        run: bundle exec rubocop 
+
+  test: 
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env: 
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v4 
+
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install -y default-libmysqlclient-dev libvips
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.5'
+          bundler-cache: true
+
+      - name: Remove spring binstub
+        run: bin/spring binstub --remove --all || true
+
+      - name: Prepare DB and run RSpec
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: mysql2://127.0.0.1:3306
+        run: |
+            bin/rails db:create
+            bin/rails db:schema:load
+            bundle exec rspec
