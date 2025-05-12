@@ -3,7 +3,7 @@ class ClothingsController < ApplicationController
     @categories = Category.all
     @brands = Brand.all
     @colors = Color.all
-    @clothings = Clothing.search_with_params(user: current_user, params: params)
+    @clothings = Clothing.search_with_params(user: current_user, params: params).page(params[:page]).per(8)
   end
 
   def new
