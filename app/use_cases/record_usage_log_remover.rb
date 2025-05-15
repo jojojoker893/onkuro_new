@@ -17,5 +17,6 @@ class RecordUsageLogRemover
   end
 
   private
+
   attr_reader :user, :clothing_id
 end

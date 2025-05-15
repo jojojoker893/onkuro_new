@@ -19,5 +19,6 @@ class RecordUsageLogAdder
 
 
   private
+
   attr_reader :user, :clothing_id
 end

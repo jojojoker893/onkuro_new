@@ -10,6 +10,7 @@ class PasswordUpdater
   end
 
   private
+
   attr_reader :user, :current_password, :new_params
 
   def update_current_password

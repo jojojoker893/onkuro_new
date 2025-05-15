@@ -11,6 +11,7 @@ class ClothingUsageGraph
   end
 
   private
+
   attr_reader :user, :start_date, :end_date
 
   def usage_data_range_or_all
