@@ -31,5 +31,6 @@ class ClothingReport
     scope.order_created_at
     end
   end
+
   def order_direction = ORDER_DIRECTIONS[@params[:order]]
 end
