@@ -49,13 +49,14 @@
       location: userLocation,
       radius: 5000,
       keyword: "古着屋 リサイクルショップ"
-    }, (results, status) => {
-      results.forEach((place) => {
-        const marker = new google.maps.Marker({
-          position: place.geometry.location,
-          map: map,
-          title: place.name,
-        });
+    }, 
+      (results, status) => {
+        results.forEach((place) => {
+          const marker = new google.maps.Marker({
+            position: place.geometry.location,
+            map: map,
+            title: place.name,
+          });
 
         const contents = `
           <div>
