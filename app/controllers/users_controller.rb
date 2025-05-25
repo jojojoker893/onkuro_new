@@ -38,8 +38,8 @@ class UsersController < ApplicationController
           flash[:notice] = "パスワードを変更しました"
           redirect_to edit_password_user_path
       else
-          flash.now[:alert] = "新しいパスワードの更新に失敗しました"
-          render :edit_password, status: :unprocessable_entity
+        flash.now[:alert] = "変更に失敗しました"
+        render :edit_password, status: :unprocessable_entity
       end
     end
 

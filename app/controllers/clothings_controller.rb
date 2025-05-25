@@ -4,6 +4,7 @@ class ClothingsController < ApplicationController
     @brands = Brand.all
     @colors = Color.all
     @clothings = ClothingReport.new(user_id: current_user.id, params: params).call
+    @clothings = Clothing.search_with_params(user: current_user, params: params).page(params[:page]).per(8)
   end
 
   def new

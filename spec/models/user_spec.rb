@@ -36,7 +36,7 @@ RSpec.describe User do
 
     let!(:test_user) { create(:user, email: "hoge@example.com") }
 
-    it "重複したemailなら無効" do 
+    it "重複したemailなら無効" do
       user = build(:user, email: test_user.email)
       user.valid?
       expect(user.errors[:email]).to include("has already been taken")
