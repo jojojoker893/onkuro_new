@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resource :user, only: [ :edit, :update, :destroy ] do
     get "password/edit", to: "users#edit_password", as: :edit_password
-    patch "password", to: "users#update_password", as: :user_password
+    patch "password", to: "users#password_update", as: :user_password
     get "destroy", to: "users#unsubscribe", as: :unsubscribe
     delete "withdraw", to: "users#destroy"
   end

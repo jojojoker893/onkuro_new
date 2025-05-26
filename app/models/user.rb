@@ -5,11 +5,11 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6 }, on: :create
 
-  def update_password(current_password, new_params) # この引数どっからきてるん
-    if authenticate(current_password) # authenticateはなに？？
+  def update_password(current_password, new_params)
+    if authenticate(current_password)
       update(new_params)
     else
-      errors.add(:current_password, "が正しくありません") # errors.addってなに
+      errors.add(:currnet_password, "が正しくありません")
       false
     end
   end

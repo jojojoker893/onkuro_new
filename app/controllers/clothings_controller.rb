@@ -3,6 +3,7 @@ class ClothingsController < ApplicationController
     @categories = Category.all
     @brands = Brand.all
     @colors = Color.all
+    @clothings = ClothingReport.new(user_id: current_user.id, params: params).call
     @clothings = Clothing.search_with_params(user: current_user, params: params).page(params[:page]).per(8)
   end
 
@@ -42,7 +43,7 @@ class ClothingsController < ApplicationController
   end
 
   def usage_log # 使用回数の記録
-    if ClothingUsageLog.usage_log(user: current_user, clothing_id: params[:id])
+    if RecordUsageLogAdder.new(user: current_user, clothing_id: params[:id]).call
       redirect_to clothings_path, notice: "使用記録を追加しました"
     else
       redirect_to clothings_path, alert: "使用記録を追加できませんでした"
@@ -50,7 +51,7 @@ class ClothingsController < ApplicationController
   end
 
   def remove_usage_log # 使用回数を減らす
-    if ClothingUsageLog.remove_usage_log(user: current_user, clothing_id: params[:id])
+    if RecordUsageLogRemover.new(user: current_user, clothing_id: params[:id]).call
       redirect_to clothings_path, notice: "使用記録を減らしました"
     else
       redirect_to clothings_path, alert: "使用記録がありません"
