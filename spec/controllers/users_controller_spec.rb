@@ -7,20 +7,18 @@ RSpec.describe UsersController, type: :controller do
     session[:user_id] = user.id
   end
 
-  describe "users_controller" do
-    context "現在のパスワードを入力した場合" do
-      it "パスワードが更新される" do
-        patch :password_update, params: {
-          user: {
-            current_password: "password",
-            password: "new_password",
-            password_confirmation: "new_password"
-          }
+  context "現在のパスワードを入力した場合" do
+    it "パスワードが更新される" do
+      patch :password_update, params: {
+        user: {
+          current_password: "password",
+          password: "new_password",
+          password_confirmation: "new_password"
         }
+      }
 
-        expect(response).to redirect_to edit_password_user_path
-        expect(flash[:notice]).to eq("パスワードを変更しました")
-      end
+      expect(response).to redirect_to edit_password_user_path
+      expect(flash[:notice]).to eq("パスワードを変更しました")
     end
   end
 
