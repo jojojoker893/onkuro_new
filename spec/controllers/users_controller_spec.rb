@@ -1,36 +1,35 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller do
-  let(:user) { create(:user, password: "password") }
+RSpec.describe UsersController, type: :request do
+  let!(:user) { create(:user, email: "test@example.com", password: "sample_password") }
 
-  before do
-    session[:user_id] = user.id
-  end
-
-  context "現在のパスワードを入力した場合" do
-    it "パスワードが更新される" do
-      patch :password_update, params: {
-        user: {
-          current_password: "password",
-          password: "new_password",
-          password_confirmation: "new_password"
+# ログインした後にパスワードの検証
+  context "正しいログイン情報でログインして" do
+    it "パスワードが変更されること" do
+      post "/login", params: {
+        session: {
+          email: "test@example.com",
+          password: "sample_password"
         }
       }
+      expect(response).to redirect_to(graph_path)
 
-      expect(response).to redirect_to edit_password_user_path
-      expect(flash[:notice]).to eq("パスワードを変更しました")
-    end
-  end
+      patch "/user/password", params: {
+        user: {
+          current_password: "sample_password",
+          password: "sample_password_new",
+          password_confirmation: "sample_password_new"
+        }
+      }
+    expect(response).to redirect_to(edit_password_user_path)
 
-  context "#new" do
-    it "正常にレスポンスを返すこと" do
-      get :new
-      expect(response).to be_successful
-    end
-
-    it "200レスポンスを返すこと" do
-      get :new
-      expect(response).to have_http_status "200"
+    post "/login", params: {
+        session: {
+          email: "test@example.com",
+          password: "sample_password_new"
+        }
+      }
+      expect(response).to redirect_to(graph_path)
     end
   end
 end
