@@ -31,5 +31,19 @@ RSpec.describe UsersController, type: :request do
       }
       expect(response).to redirect_to(graph_path)
     end
+
+    context "正しい情報を入力した場合" do
+      it "ユーザ登録されること" do
+        post "/users", params: {
+          user: {
+          name: "test_user",
+          email: "test@exsample.com",
+          password: "sample_password",
+          password_confirmation: "sample_password"
+        }
+      }
+      expect(response).to redirect_to(login_path)
+      end
+    end
   end
 end
