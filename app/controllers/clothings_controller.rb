@@ -1,10 +1,9 @@
 class ClothingsController < ApplicationController
   def index
     @categories = Category.all
-    @brands = Brand.all
+    @brands = Brand.order(:name).all
     @colors = Color.all
-    @clothings = ClothingReport.new(user_id: current_user.id, params: params).call
-    @clothings = Clothing.search_with_params(user: current_user, params: params).page(params[:page]).per(8)
+    @clothings = ClothingReport.new(user_id: current_user.id, params: params).call.page(params[:page]).per(8)
   end
 
   def new

@@ -13,24 +13,28 @@
     </div>
 
     <div class="modal-group">
-      <% group_brands = brands.group_by do |b| 
-        initial = b.name[0].upcase
-        ("A".."Z").include?(initial) ? initial : "その他" 
-        end %>
-      <% group_brands.sort.each do |head, val| %>
-        <div id="brand-<%= head.downcase == "その他" ? "others" : head.downcase %>">
-          <h3 class="modal-section-title"><%= head %></h3>
-          <ul class="modal-list">
-            <% val.each do |brand| %> 
-              <li class="brand-search">
-                <label class="modal-brand-item">
-                  <%= radio_button_tag "selected_brand_index", brand.id, false, data: { name: brand.name } %>
-                  <span class="brand-name"><%= brand.name %></span>
-                </label>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+      <% if brands.present? %>
+        <% group_brands = brands.group_by do |b| 
+          initial = b.name[0].upcase
+          ("A".."Z").include?(initial) ? initial : "その他" 
+          end %>
+        <% group_brands.sort.each do |head, val| %>
+          <div id="brand-<%= head.downcase == "その他" ? "others" : head.downcase %>">
+            <h3 class="modal-section-title"><%= head %></h3>
+            <ul class="modal-list">
+              <% val.each do |brand| %> 
+                <li class="brand-search">
+                  <label class="modal-brand-item">
+                    <%= radio_button_tag "selected_brand_index", brand.id, false, data: { name: brand.name } %>
+                    <span class="brand-name"><%= brand.name %></span>
+                  </label>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="no-brands-message">ブランドが登録されていません</p>
       <% end %>
     </div>
 
