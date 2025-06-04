@@ -8,15 +8,14 @@ class RecordUsageLogAdder
     clothing = user.clothings.find_by(id: clothing_id)
     return false unless clothing
 
-    usege_log = ClothingUsageLog.create(
+    usage_log = ClothingUsageLog.create(
       user: user,
       clothing: clothing,
       used_at: Time.current
     )
 
-    usege_log
+    usage_log
   end
-
 
   private
 
