@@ -2,7 +2,7 @@
   <%= render "layouts/header" %>
 
   <p class="clothing-count">
-    合計：<%= @clothings.count %> 件
+    合計：<%= @clothings.total_count %> 件
   </p>
 
   <div class="search-wrapper">
@@ -76,6 +76,7 @@
       <p style="text-align: center; margin-top: 20px;">該当する服はありません</p>
     <% end %>
   </div>
+
 
   <div class="pagination-links">
     <%= paginate @clothings %>

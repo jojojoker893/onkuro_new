@@ -24,11 +24,19 @@ class ClothingReport
 
   attr_reader :user_id, :params
 
-  def apply_ordering(scope) # 並び替え
+  def apply_ordering(clothings) # 並び替え
     if order_direction.present?
-      scope.usage_log_count.order_usage(order_direction)
+      # @@使用回数を取得
+      result = clothings.joins(:clothing_usage_logs)
+      .group("clothings.id")
+      .order("COUNT(clothing_usage_logs.id) #{order_direction}")
+      .to_a
+
+      Kaminari.paginate_array(result)
+      .page(params[:page])
+      .per(8)
     else
-    scope.order_created_at
+      clothings.order_created_at.page(params[:page]).per(8)
     end
   end
 
