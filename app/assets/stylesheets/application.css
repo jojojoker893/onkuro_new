@@ -187,9 +187,10 @@ body {
   gap: 20px;
   padding: 20px;
   margin-top: 20px;
-  max-width: 1000px;      /* ここ追加 */
-  margin: 20px auto 0;    /* 中央寄せに見えるが、左からカードは並ぶ */
+  max-width: 1000px; 
+  margin: 20px auto 0;    /* 左からカードは並ぶ */
   justify-content: start;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .pagination-links {
