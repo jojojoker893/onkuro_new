@@ -58,4 +58,18 @@ RSpec.describe "Clothings", type: :request do
       expect(response.status).to eq 200
     end
   end
+
+  context "服の登録情報の更新" do
+    it "正しいパラメーターで更新されること" do
+      patch clothing_path(clothing), params: {
+        clothing: {
+          name: "update_clothing",
+          category_id: category.id,
+          brand_id: brand.id,
+          color_id: color.id
+        }
+      }
+      expect(clothing.reload.name).to eq "update_clothing"
+    end
+  end
 end
