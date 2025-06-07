@@ -72,4 +72,12 @@ RSpec.describe "Clothings", type: :request do
       expect(clothing.reload.name).to eq "update_clothing"
     end
   end
+
+  context "服の削除処理" do
+    it "服を削除できること" do
+      expect {
+        delete clothing_path(clothing.id)
+      }.to change(Clothing, :count).by(-1)
+    end
+  end
 end
