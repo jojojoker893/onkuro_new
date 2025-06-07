@@ -51,4 +51,11 @@ RSpec.describe "Clothings", type: :request do
       expect(response.status).to eq 302
     end
   end
+
+  context "服の詳細ページ表示" do
+    it "詳細ページへのリクエストが200OKであること" do
+      get edit_clothing_path(clothing.id)
+      expect(response.status).to eq 200
+    end
+  end
 end
