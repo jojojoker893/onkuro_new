@@ -1,8 +1,8 @@
 class ClothingsController < ApplicationController
   def index
     @categories = Category.all
-    @brands = Brand.order(:id)
-    @colors = Color.order(:id)
+    @brands = Brand.all
+    @colors = Color.all
     @clothings = ClothingReport.new(user_id: current_user.id, params: params).call
   end
 
