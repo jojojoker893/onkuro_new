@@ -16,70 +16,78 @@ RSpec.describe "Clothings", type: :request do
     }
     end
 
-  context "一覧ページの表示" do
-    it "一覧ページへのリクエストが200OKであること" do
-      get clothings_path
-      expect(response.status).to eq 200
-    end
+  describe "GET /clothings" do
+    context "ログインユーザーが一覧ページの表示をした時" do
+      it "一覧ページへのリクエストが200OKであること" do
+        get clothings_path
+        expect(response).to have_http_status(:ok)
+      end
 
-    it "自分の服のみ表示されること" do
-      get clothings_path
-      expect(response.body).to include(clothing.name)
+      it "自分の服のみ表示されること" do
+        get clothings_path
+        expect(response.body).to include(clothing.name)
+      end
+    end
+  end
+  describe "GET /clothings/new" do
+    context "新規作成ページを表示した時" do
+      it "新規作成ページへのリクエストが200OKであること" do
+        get new_clothing_path
+        expect(response).to have_http_status(:ok)
+      end
     end
   end
 
-  context "新規作成ページ表示" do
-    it "新規作成ページへのリクエストが200OKであること" do
-      get new_clothing_path
-      expect(response.status).to eq 200
+  describe "POST /clothings" do
+    context "正しいパラメーターを送信した時" do
+      it "服が新規登録され一覧ページへリダイレクトすること" do
+        expect {
+          post "/clothings", params: {
+            clothing: {
+              name: "new_clothing",
+              category_id: category.id,
+              brand_id: brand.id,
+              color_id: color.id
+            }
+          }
+        }.to change(Clothing, :count).by(1)
+        expect(response).to redirect_to clothings_path
+      end
     end
   end
 
-  context "服の登録" do
-    it "正しいパラメーターで登録されること" do
-      expect {
-        post "/clothings", params: {
+  describe "GET /clothings/:id" do
+    context "服の詳細ページ表示した時" do
+      it "詳細ページへのリクエストが200OKであること" do
+        get edit_clothing_path(clothing.id)
+        expect(response).to have_http_status(:ok) 
+      end
+    end
+
+    context "服の登録情報の更新をした時" do
+      it "正しいパラメーターで更新されること" do
+        patch clothing_path(clothing), params: {
           clothing: {
-            name: "new_clothing",
+            name: "update_clothing",
             category_id: category.id,
             brand_id: brand.id,
             color_id: color.id
           }
         }
-      }.to change(Clothing, :count).by(1)
-      redirect_to clothings_path
-      expect(response.status).to eq 302
+        expect(clothing.reload.name).to eq "update_clothing"
+      end
     end
   end
 
-  context "服の詳細ページ表示" do
-    it "詳細ページへのリクエストが200OKであること" do
-      get edit_clothing_path(clothing.id)
-      expect(response.status).to eq 200
-    end
-  end
+  describe "DELETE /clothings/:id" do
+    context "服の削除をした時" do
+      it "レコードが1件減り一覧ページへリダイレクトすること" do
+        expect {
+          delete clothing_path(clothing.id)
+        }.to change(Clothing, :count).by(-1)
 
-  context "服の登録情報の更新" do
-    it "正しいパラメーターで更新されること" do
-      patch clothing_path(clothing), params: {
-        clothing: {
-          name: "update_clothing",
-          category_id: category.id,
-          brand_id: brand.id,
-          color_id: color.id
-        }
-      }
-      expect(clothing.reload.name).to eq "update_clothing"
-    end
-  end
-
-  context "服の削除処理" do
-    it "服を削除できること" do
-      expect {
-        delete clothing_path(clothing.id)
-      }.to change(Clothing, :count).by(-1)
-      redirect_to clothings_path
-      expect(response.status).to eq 302
+        expect(response).to redirect_to clothings_path
+      end
     end
   end
 
