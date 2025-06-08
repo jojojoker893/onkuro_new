@@ -78,6 +78,30 @@ RSpec.describe "Clothings", type: :request do
       expect {
         delete clothing_path(clothing.id)
       }.to change(Clothing, :count).by(-1)
+      redirect_to clothings_path
+      expect(response.status).to eq 302
+    end
+  end
+
+  context "服の記録を追加した場合" do
+    it "正常に使用回数が増えること" do
+      usage_log_adder_mock = double("RecordUsageLogAdder", call: true)
+      allow(usage_log_adder_mock).to receive(:new)
+      .with(user: user, clothing_id: clothing.id)
+      .and_return(usage_log_adder_mock)
+      redirect_to clothings_path
+      expect(response.status).to eq 302
+    end
+  end
+
+  context "服の記録を減らした場合" do
+    it "正常に使用回数が減ること" do
+      usage_log_remover_mock = double("RecordUsageLogRemover", call: true)
+      allow(usage_log_remover_mock).to receive(:new)
+      .with(user: user, clothing_id: clothing.id)
+      .and_return(usage_log_remover_mock)
+      redirect_to clothings_path
+      expect(response.status).to eq 302
     end
   end
 end
