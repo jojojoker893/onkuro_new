@@ -60,7 +60,7 @@ RSpec.describe "Clothings", type: :request do
     context "服の詳細ページ表示した時" do
       it "詳細ページへのリクエストが200OKであること" do
         get edit_clothing_path(clothing.id)
-        expect(response).to have_http_status(:ok) 
+        expect(response).to have_http_status(:ok)
       end
     end
 
