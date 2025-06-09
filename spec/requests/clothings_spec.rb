@@ -16,68 +16,113 @@ RSpec.describe "Clothings", type: :request do
     }
     end
 
-  context "一覧ページの表示" do
-    it "一覧ページへのリクエストが200OKであること" do
-      get clothings_path
-      expect(response.status).to eq 200
-    end
+  describe "GET /clothings" do
+    context "ログインユーザーが一覧ページの表示をした時" do
+      it "一覧ページへのリクエストが200OKであること" do
+        get clothings_path
+        expect(response).to have_http_status(:ok)
+      end
 
-    it "自分の服のみ表示されること" do
-      get clothings_path
-      expect(response.body).to include(clothing.name)
+      it "自分の服のみ表示されること" do
+        get clothings_path
+        expect(response.body).to include(clothing.name)
+      end
+    end
+  end
+  describe "GET /clothings/new" do
+    context "新規作成ページを表示した時" do
+      it "新規作成ページへのリクエストが200OKであること" do
+        get new_clothing_path
+        expect(response).to have_http_status(:ok)
+      end
     end
   end
 
-  context "新規作成ページ表示" do
-    it "新規作成ページへのリクエストが200OKであること" do
-      get new_clothing_path
-      expect(response.status).to eq 200
+  describe "POST /clothings" do
+    context "正しいパラメーターを送信した時" do
+      it "服が新規登録され一覧ページへリダイレクトすること" do
+        expect {
+          post "/clothings", params: {
+            clothing: {
+              name: "new_clothing",
+              category_id: category.id,
+              brand_id: brand.id,
+              color_id: color.id
+            }
+          }
+        }.to change(Clothing, :count).by(1)
+        expect(response).to redirect_to clothings_path
+      end
     end
   end
 
-  context "服の登録" do
-    it "正しいパラメーターで登録されること" do
-      expect {
-        post "/clothings", params: {
+  describe "GET /clothings/:id" do
+    context "服の詳細ページ表示した時" do
+      it "詳細ページへのリクエストが200OKであること" do
+        get edit_clothing_path(clothing.id)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "服の登録情報の更新をした時" do
+      it "正しいパラメーターで更新されること" do
+        patch clothing_path(clothing), params: {
           clothing: {
-            name: "new_clothing",
+            name: "update_clothing",
             category_id: category.id,
             brand_id: brand.id,
             color_id: color.id
           }
         }
-      }.to change(Clothing, :count).by(1)
-      redirect_to clothings_path
-      expect(response.status).to eq 302
+        expect(clothing.reload.name).to eq "update_clothing"
+      end
     end
   end
 
-  context "服の詳細ページ表示" do
-    it "詳細ページへのリクエストが200OKであること" do
-      get edit_clothing_path(clothing.id)
-      expect(response.status).to eq 200
+  describe "DELETE /clothings/:id" do
+    context "服の削除をした時" do
+      it "レコードが1件減り一覧ページへリダイレクトすること" do
+        expect {
+          delete clothing_path(clothing.id)
+        }.to change(Clothing, :count).by(-1)
+
+        expect(response).to redirect_to clothings_path
+      end
     end
   end
 
-  context "服の登録情報の更新" do
-    it "正しいパラメーターで更新されること" do
-      patch clothing_path(clothing), params: {
-        clothing: {
-          name: "update_clothing",
-          category_id: category.id,
-          brand_id: brand.id,
-          color_id: color.id
-        }
-      }
-      expect(clothing.reload.name).to eq "update_clothing"
+  describe "POST /clothings/:id/usage_log" do
+    context "服の記録を追加した場合" do
+      it "正常に使用回数が増えること" do
+        usage_log_adder_mock = double("RecordUsageLogAdder", call: true)
+        allow(RecordUsageLogAdder).to receive(:new)
+        .with(user: user, clothing_id: clothing.id.to_s)
+        .and_return(usage_log_adder_mock)
+
+        post usage_log_clothing_path(clothing.id)
+
+        expect(response).to redirect_to clothings_path
+        follow_redirect!
+        expect(response.body).to include("使用記録を追加しました")
+      end
     end
   end
 
-  context "服の削除処理" do
-    it "服を削除できること" do
-      expect {
-        delete clothing_path(clothing.id)
-      }.to change(Clothing, :count).by(-1)
+  describe "DELETE /clothing/:id/remove_usage_log" do
+    context "服の記録を減らした場合" do
+      let!(:usage_log) { create(:clothing_usage_log, user: user, clothing: clothing) }
+      it "正常に使用回数が減ること" do
+        usage_log_remover_mock = double("RecordUsageLogRemover", call: true)
+        allow(RecordUsageLogRemover).to receive(:new)
+        .with(user: user, clothing_id: clothing.id.to_s)
+        .and_return(usage_log_remover_mock)
+
+        delete remove_usage_log_clothing_path(clothing.id)
+
+        expect(response).to redirect_to clothings_path
+        follow_redirect!
+        expect(response.body).to include("使用記録を減らしました")
+      end
     end
   end
 end
