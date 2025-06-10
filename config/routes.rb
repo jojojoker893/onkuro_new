@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   get "/graph", to: "graph#index"
   get "/maps", to: "maps#index"
 
-  resources :users, only: [ :new, :create ]
+  resources :users, only: [ :new, :create ] # 新規登録用
 
-  resource :user, only: [ :edit, :update, :destroy ] do
+  resource :user, only: [ :edit, :update, :destroy ] do # マイページ用
     get "password/edit", to: "users#edit_password", as: :edit_password
     patch "password", to: "users#password_update", as: :user_password
     get "destroy", to: "users#unsubscribe", as: :unsubscribe
