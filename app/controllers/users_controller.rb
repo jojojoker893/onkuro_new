@@ -11,12 +11,8 @@ class UsersController < ApplicationController
       flash[:notice] = "登録しました"
       redirect_to login_path
     else
-      if @user.errors[:email].include?("has already been taken")
-        flash.now[:alert] = "このメールアドレスは既に使用されています"
-      else
-        flash.now[:alert] = "登録に失敗しました"
-      end
-        render :new, status: :unprocessable_entity
+      flash.now[:alert] = "登録に失敗しました, #{@user.errors.full.message.to_sentence}"
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -35,8 +31,8 @@ class UsersController < ApplicationController
       @user = current_user
 
       if @user.update_password(params[:user][:current_password], password_params)
-          flash[:notice] = "パスワードを変更しました"
-          redirect_to edit_password_user_path
+        flash[:notice] = "パスワードを変更しました"
+        redirect_to edit_password_user_path
       else
         flash.now[:alert] = "変更に失敗しました"
         render :edit_password, status: :unprocessable_entity
