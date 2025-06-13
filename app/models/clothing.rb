@@ -8,7 +8,7 @@ class Clothing < ApplicationRecord
   has_many :clothing_usage_logs, dependent: :destroy
 
   # @@登録順
-  scope :order_created_at, -> { order(created_at: :desc) }
+  scope :order_by_created_at, -> { order(created_at: :desc) }
 
   # @@使用回数の降順、昇順で並び替え
   scope :order_usage, ->(sort_order = "DESC") { order(Arel.sql("usage_count #{sort_order}")) }

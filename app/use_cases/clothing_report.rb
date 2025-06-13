@@ -36,7 +36,7 @@ class ClothingReport
       .page(params[:page])
       .per(8)
     else
-      clothings.order_created_at.page(params[:page]).per(8)
+      clothings.order_by_created_at.page(params[:page]).per(8)
     end
   end
 

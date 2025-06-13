@@ -29,6 +29,7 @@ RSpec.describe "Clothings", type: :request do
       end
     end
   end
+
   describe "GET /clothings/new" do
     context "新規作成ページを表示した時" do
       it "新規作成ページへのリクエストが200OKであること" do
