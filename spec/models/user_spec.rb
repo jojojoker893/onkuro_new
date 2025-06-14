@@ -13,25 +13,25 @@ RSpec.describe User do
     it "nameがなければ無効" do
       user = build(:user, name: nil)
       user.valid?
-      expect(user.errors[:name]).to include("can't be blank")
+      expect(user.errors.full_messages).to include("Nameを入力してください")
     end
 
     it "emailがなければ無効" do
       user = build(:user, email: nil)
       user.valid?
-      expect(user.errors[:email]).to include("can't be blank")
+      expect(user.errors.full_messages).to include("Emailを入力してください")
     end
 
     it "passwordがなければ無効" do
       user = build(:user, password: nil)
       user.valid?
-      expect(user.errors[:password]).to include("can't be blank")
+      expect(user.errors.full_messages).to include("Passwordを入力してください")
     end
 
     it "passwordの長さが6文字未満なら無効" do
       user = build(:user, password: "12345")
       user.valid?
-      expect(user.errors[:password]).to include("is too short (minimum is 6 characters)")
+      expect(user.errors.full_messages).to include("Passwordは6文字以上で入力してください")
     end
 
     let!(:test_user) { create(:user, email: "hoge@example.com") }
@@ -39,7 +39,7 @@ RSpec.describe User do
     it "重複したemailなら無効" do
       user = build(:user, email: test_user.email)
       user.valid?
-      expect(user.errors[:email]).to include("has already been taken")
+      expect(user.errors.full_messages).to include("Emailはすでに存在します")
     end
   end
 end

@@ -12,9 +12,9 @@ class ClothingReport
   def call
     clothings = Clothing.where(user_id: user_id)
     clothings = clothings.search_keyword(params[:keyword]) if params[:keyword].present?  # 検索
-    clothings = clothings.filter_category(params[:category_id]) if params[:category_id].present? # カテゴリフィルター
-    clothings = clothings.filter_brand(params[:brand_id]) if params[:brand_id].present? # ブランドフィルター
-    clothings = clothings.filter_color(params[:color_id]) if params[:color_id].present? # カラーフィルター
+    clothings = clothings.filter_by_category(params[:category_id]) if params[:category_id].present? # カテゴリフィルター
+    clothings = clothings.filter_by_brand(params[:brand_id]) if params[:brand_id].present? # ブランドフィルター
+    clothings = clothings.filter_by_color(params[:color_id]) if params[:color_id].present? # カラーフィルター
 
 
     apply_ordering(clothings)
@@ -36,7 +36,7 @@ class ClothingReport
       .page(params[:page])
       .per(8)
     else
-      clothings.order_created_at.page(params[:page]).per(8)
+      clothings.order_by_created_at.page(params[:page]).per(8)
     end
   end
 
