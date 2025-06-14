@@ -19,7 +19,7 @@ RSpec.describe Clothing, type: :model do
     let!(:jacket) { create(:clothing, category: category2) }
 
     it "指定したカテゴリを返す" do
-      result = Clothing.filter_category(category1.id)
+      result = Clothing.filter_by_category(category1.id)
       expect(result).to include(tops)
       expect(result).not_to include(jacket)
     end
@@ -30,7 +30,7 @@ RSpec.describe Clothing, type: :model do
     let!(:new) { create(:clothing, created_at: Time.zone.now) }
 
     it "登録した順に並ぶこと" do
-      result = Clothing.order_created_at
+      result = Clothing.order_by_created_at
       expect(result.first).to eq(new)
       expect(result.second).to eq(old)
     end
