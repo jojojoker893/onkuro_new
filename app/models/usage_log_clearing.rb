@@ -1,4 +1,4 @@
-class UsageLogClearings < ApplicationRecord
+class UsageLogClearing < ApplicationRecord
   belongs_to :clothing
   belongs_to :user
 

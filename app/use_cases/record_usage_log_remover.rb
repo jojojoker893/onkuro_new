@@ -4,16 +4,26 @@ class RecordUsageLogRemover
     @clothing_id = clothing_id
   end
 
-  def call # 使用回数を減らす
-    clothing = user.clothings.find_by(id: clothing_id) # ユーザーの服を探す
-    return false unless clothing # falseなら服を返す
+  def call # 使用を取り消した履歴を残す
+    clothing = user.clothings.find_by(id: clothing_id)
+    return false unless clothing
 
-    log = ClothingUsageLog.where(user: user, clothing: clothing) # 使用ログテーブルからユーザーの服を探し使用した降順にならべ最新のレコードを取得
-    .order(used_at: :desc).first
+    # 使用回数ログより減少ログが多くならないようにする
+    usage_log_count = clothing.clothing_usage_logs.count
+    reduced_log_count = clothing.usage_log_clearing.count
 
-    return false unless log # falseならlogを返す
+    if usage_log_count > reduced_log_count
+        reduced_log = UsageLogClearing.create(
+          user: user,
+          clothing: clothing,
+          reduced_at: Time.current
+        )
 
-    log.destroy # 対象レコードを消す
+    reduced_log
+
+    else
+      false
+    end
   end
 
   private
