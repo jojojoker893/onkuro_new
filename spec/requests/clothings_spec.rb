@@ -55,6 +55,21 @@ RSpec.describe "Clothings", type: :request do
         expect(response).to redirect_to clothings_path
       end
     end
+
+    context "不正なパラメータを送信した時" do
+      it "登録が失敗すること" do
+        expect {
+          post "/clothings", params: {
+            clothing: {
+              name: "failure_clothing",
+              category_id: nil,
+              brand_id: nil,
+              color_id: nil
+            }
+          }
+        }.not_to change(Clothing, :count)
+      end
+    end
   end
 
   describe "GET /clothings/:id" do
@@ -64,9 +79,11 @@ RSpec.describe "Clothings", type: :request do
         expect(response).to have_http_status(:ok)
       end
     end
+  end
 
-    context "服の登録情報の更新をした時" do
-      it "正しいパラメーターで更新されること" do
+  describe "PATCH /clothings/:id" do
+    context "正しいパラメーターを送信した時" do
+      it "登録情報が正しく更新されること" do
         patch clothing_path(clothing), params: {
           clothing: {
             name: "update_clothing",
@@ -76,6 +93,22 @@ RSpec.describe "Clothings", type: :request do
           }
         }
         expect(clothing.reload.name).to eq "update_clothing"
+      end
+    end
+
+    context "不正なパラメーターを送信した時" do
+      it "更新が失敗すること" do
+        expect {
+          patch clothing_path(clothing), params: {
+            clothing: {
+              name: "not_update_clothing",
+              category_id: nil,
+              brand_id: nil,
+              color_id: nil
+            }
+          }
+        }.not_to change { clothing.reload.name }
+        expect(response.body).to include ("更新に失敗しました")
       end
     end
   end

@@ -9,7 +9,7 @@ class User < ApplicationRecord
     if authenticate(current_password)
       update(new_params)
     else
-      errors.add(:currnet_password, "が正しくありません")
+      errors.add(:current_password, "が正しくありません")
       false
     end
   end
