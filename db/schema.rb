@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_02_114741) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_14_053157) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -82,6 +82,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_114741) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "usage_log_clearings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "clothing_id", null: false
+    t.bigint "user_id", null: false
+    t.timestamp "reduced_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clothing_id"], name: "index_usage_log_clearings_on_clothing_id"
+    t.index ["user_id"], name: "index_usage_log_clearings_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -99,4 +109,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_114741) do
   add_foreign_key "clothings", "categories"
   add_foreign_key "clothings", "colors"
   add_foreign_key "clothings", "users"
+  add_foreign_key "usage_log_clearings", "clothings"
+  add_foreign_key "usage_log_clearings", "users"
 end

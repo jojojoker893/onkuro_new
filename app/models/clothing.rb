@@ -6,6 +6,7 @@ class Clothing < ApplicationRecord
 
   has_one_attached :image
   has_many :clothing_usage_logs, dependent: :destroy
+  has_many :usage_log_clearing, dependent: :destroy
 
   # @@登録順
   scope :order_by_created_at, -> { order(created_at: :desc) }
@@ -20,4 +21,8 @@ class Clothing < ApplicationRecord
 
   # @@検索機能
   scope :search_keyword, ->(keyword) { where("name LIKE ?", "%" + keyword + "%") }
+
+  def usage_total_count
+    [ clothing_usage_logs.count - usage_log_clearing.count, 0 ].max
+  end
 end
