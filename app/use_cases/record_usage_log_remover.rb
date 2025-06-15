@@ -20,7 +20,6 @@ class RecordUsageLogRemover
         )
 
     reduced_log
-
     else
       false
     end

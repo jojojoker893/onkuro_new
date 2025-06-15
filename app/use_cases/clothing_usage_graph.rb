@@ -7,7 +7,9 @@ class ClothingUsageGraph
 
   def call
     usage_data = usage_data_range_or_all
-    usage_data.map { |name, count| { name: name, y: count } }
+    usage_data
+    .select { |name, count| count.positive? }
+    .map { |name, count| { name: name, y: count } }
   end
 
   private
@@ -15,15 +17,19 @@ class ClothingUsageGraph
   attr_reader :user, :start_date, :end_date
 
   def usage_data_range_or_all
-    if start_date.present? && end_date.present?
-      # 両方の日付が指定されている場合は、その期間に絞って使用回数を取得
-      ClothingUsageLog.usage_period(user.id, start_date, end_date)
-    else
-      # 日付が未指定なら、全ての服のログ使用ログを集計(服のIDごとにグループ化)
-      user.clothings
-      .joins(:clothing_usage_logs)
-      .group("clothings.id")
-      .pluck("clothings.name, COUNT(clothing_usage_logs.id)")
+    user.clothings.map do |clothing|
+      all_usage_logs = clothing.clothing_usage_logs
+      all_reduced_logs = clothing.usage_log_clearing
+
+      if start_date.present? && end_date.present?
+        usage_logs = all_usage_logs.where(used_at: start_date.beginning_of_day..end_date.end_of_day)
+        reduced_logs = all_reduced_logs.where(reduced_at: start_date.beginning_of_day..end_date.end_of_day)
+        count = [ usage_logs.count - reduced_logs.count, 0 ].max
+      else
+        count = clothing.usage_total_count
+      end
+
+      [ clothing.name, count ]
     end
   end
 end
