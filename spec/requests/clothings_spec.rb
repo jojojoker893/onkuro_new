@@ -151,7 +151,7 @@ RSpec.describe "Clothings", type: :request do
         .with(user: user, clothing_id: clothing.id.to_s)
         .and_return(usage_log_remover_mock)
 
-        delete remove_usage_log_clothing_path(clothing.id)
+        delete remove_usage_log_clothing_path(clothing.id) # deleteではない
 
         expect(response).to redirect_to clothings_path
         follow_redirect!
