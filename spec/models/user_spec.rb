@@ -34,12 +34,31 @@ RSpec.describe User do
       expect(user.errors.full_messages).to include("Passwordは6文字以上で入力してください")
     end
 
-    let!(:test_user) { create(:user, email: "hoge@example.com") }
+    context "emailのバリデーションチェック" do
+      let!(:test_user) { create(:user, email: "hoge@example.com") }
 
-    it "重複したemailなら無効" do
-      user = build(:user, email: test_user.email)
-      user.valid?
-      expect(user.errors.full_messages).to include("Emailはすでに存在します")
+      it "重複したemailなら無効" do
+        user = build(:user, email: test_user.email)
+        user.valid?
+        expect(user.errors.full_messages).to include("Emailはすでに存在します")
+      end
+    end
+  end
+
+  describe "# update_password" do
+    let!(:user) { create(:user, password: "sample_password") }
+    context "現在のパスワードが正しい場合" do
+      it "更新されること" do
+        result = user.update_password("sample_password", password: "update_password", password_confirmation: "update_password")
+        expect(result).to eq true
+      end
+    end
+
+    context "パスワードが間違っている場合" do
+      it "更新が失敗すること" do
+        result = user.update_password("miss_password", password: "update_password", password_confirmation: "update_password")
+        expect(result).to eq false
+      end
     end
   end
 end
