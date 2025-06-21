@@ -142,7 +142,7 @@ RSpec.describe "Clothings", type: :request do
     end
   end
 
-  describe "DELETE /clothing/:id/remove_usage_log" do
+  describe "POST /clothing/:id/remove_usage_log" do
     context "服の記録を減らした場合" do
       let!(:usage_log) { create(:clothing_usage_log, user: user, clothing: clothing) }
       it "正常に使用回数が減ること" do
@@ -151,7 +151,7 @@ RSpec.describe "Clothings", type: :request do
         .with(user: user, clothing_id: clothing.id.to_s)
         .and_return(usage_log_remover_mock)
 
-        delete remove_usage_log_clothing_path(clothing.id) # deleteではない
+        post remove_usage_log_clothing_path(clothing.id) # 使用取り消しログの発行
 
         expect(response).to redirect_to clothings_path
         follow_redirect!
