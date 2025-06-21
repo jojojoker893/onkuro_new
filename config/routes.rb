@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
+  # ルートページ
   root to: "home#index"
 
+  # セッション管理
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
+  # メインページ
   get "/graph", to: "graph#index"
   get "/maps", to: "maps#index"
 
+  # ユーザー管理
   resources :users, only: [ :new, :create ] # 新規登録用
 
   resource :user, only: [ :edit, :update, :destroy ] do # マイページ用
@@ -17,11 +21,12 @@ Rails.application.routes.draw do
     delete "withdraw", to: "users#destroy"
   end
 
+  # マスターデータ管理
   resources :categories, only: [ :index, :new, :create ]
   resources :brands, only: [ :index, :new, :create ]
   resources :colors, only: [ :index, :new, :create ]
-  resources :maps, only: [ :index ]
 
+  # 服の管理
   resources :clothings do
     member do
       post :usage_log
