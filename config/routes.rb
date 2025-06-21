@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :clothings do
     member do
       post :usage_log
-      delete :remove_usage_log
+      post :remove_usage_log
     end
   end
 end
