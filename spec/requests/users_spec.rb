@@ -92,7 +92,46 @@ RSpec.describe UsersController, type: :request do
 
         expect(response).to have_http_status (:unprocessable_entity)
         expect(response.body).to include ("更新に失敗しました")
+        expect(response.body).to include ("更新")
       end
     end
   end
+
+  describe "PATCH user/password" do
+    let(:user) { create(:user) }
+
+    # ログイン状態の作成
+    before do
+      post "/login", params: {
+        session: {
+          email: user.email,
+          password: "sample_password"
+        }
+      }
+    end
+
+    context "正しいパラメータを送信した時" do
+      it "パスワードが更新されること" do
+        expect {
+          post "/user/password", params: {
+            user: {
+              current_password: "sample_password",
+              password: "new_password",
+              password_confirmation: "new_password"
+            }
+          }
+        }.not_to change(User, :count)
+
+        expect(user.reload.password).to eq("new_password")
+        expect(response).to redirect_to edit_password_user_path
+        follow_redirect!
+        expect(response.body).to include("パスワードを変更しました")
+
+
+      end
+      
+    end
+    
+  end
+  
 end
