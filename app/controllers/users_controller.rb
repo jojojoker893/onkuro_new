@@ -28,9 +28,9 @@ class UsersController < ApplicationController
   end
 
   def password_update
-    @user = current_user
+    updated_password = PasswordUpdater.new(current_user, params[:user][:current_password], password_params)
 
-    if @user.update_password(params[:user][:current_password], password_params)
+    if updated_password.call
       flash[:notice] = "パスワードを変更しました"
       redirect_to edit_password_user_path
     else

@@ -112,26 +112,19 @@ RSpec.describe UsersController, type: :request do
 
     context "正しいパラメータを送信した時" do
       it "パスワードが更新されること" do
-        expect {
-          post "/user/password", params: {
-            user: {
-              current_password: "sample_password",
-              password: "new_password",
-              password_confirmation: "new_password"
-            }
+        patch "/user/password", params: {
+          user: {
+            current_password: "sample_password",
+            password: "new_password",
+            password_confirmation: "new_password"
           }
-        }.not_to change(User, :count)
+        }
 
-        expect(user.reload.password).to eq("new_password")
         expect(response).to redirect_to edit_password_user_path
         follow_redirect!
         expect(response.body).to include("パスワードを変更しました")
-
-
+        expect(user.reload.authenticate("new_password")).to be_truthy
       end
-      
     end
-    
   end
-  
 end
