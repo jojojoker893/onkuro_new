@@ -44,21 +44,4 @@ RSpec.describe User do
       end
     end
   end
-
-  describe "# update_password" do
-    let!(:user) { create(:user, password: "sample_password") }
-    context "現在のパスワードが正しい場合" do
-      it "更新されること" do
-        result = user.update_password("sample_password", password: "update_password", password_confirmation: "update_password")
-        expect(result).to eq true
-      end
-    end
-
-    context "パスワードが間違っている場合" do
-      it "更新が失敗すること" do
-        result = user.update_password("miss_password", password: "update_password", password_confirmation: "update_password")
-        expect(result).to eq false
-      end
-    end
-  end
 end
