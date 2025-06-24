@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   end
 
   def password_update
+    @user = current_user
     updated_password = PasswordUpdater.new(current_user, params[:user][:current_password], password_params)
 
     if updated_password.call

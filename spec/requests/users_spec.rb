@@ -130,5 +130,20 @@ RSpec.describe UsersController, type: :request do
         expect(response.body).to include("パスワードを変更しました")
       end
     end
+
+    context "不正なパラメータを送信した時" do
+      it "パスワードが変更されないこと" do
+        patch "/user/password", params: {
+          user: {
+            current_password: "sample_password",
+            password: nil,
+            password_confirmation: "miss_password"
+          }
+        }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.body).to include("変更に失敗しました")
+      end
+    end
   end
 end
