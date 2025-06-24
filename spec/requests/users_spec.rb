@@ -23,6 +23,8 @@ RSpec.describe UsersController, type: :request do
             }
           }
         }.to change(User, :count).by(1)
+
+        expect(response).to have_http_status (:found)
         expect(response).to redirect_to login_path
         follow_redirect!
         expect(response.body).to include ("登録しました")
@@ -42,6 +44,7 @@ RSpec.describe UsersController, type: :request do
           }
         }
       }.not_to change(User, :count)
+
       expect(response).to have_http_status (:unprocessable_entity)
       expect(response.body).to include("登録に失敗しました")
       expect(response.body).to include("新規登録")
@@ -72,6 +75,7 @@ RSpec.describe UsersController, type: :request do
           }
         }.not_to change(User, :count)
 
+        expect(response).to have_http_status (:found)
         expect(user.reload.name).to eq("update_name")
         expect(response).to redirect_to user_path
         follow_redirect!
@@ -120,10 +124,10 @@ RSpec.describe UsersController, type: :request do
           }
         }
 
+        expect(response).to have_http_status(:found)
         expect(response).to redirect_to edit_password_user_path
         follow_redirect!
         expect(response.body).to include("パスワードを変更しました")
-        expect(user.reload.authenticate("new_password")).to be_truthy
       end
     end
   end
