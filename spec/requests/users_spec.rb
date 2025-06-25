@@ -146,4 +146,28 @@ RSpec.describe UsersController, type: :request do
       end
     end
   end
+
+  describe "DELETE user/withdraw" do
+    let(:user) { create(:user) }
+
+    # ログイン状態の作成
+    before do
+      post "/login", params: {
+        session: {
+          email: user.email,
+          password: "sample_password"
+        }
+      }
+    end
+    context "アカウント削除を実行した時" do
+      it "正常に削除されること" do
+        expect {
+          delete withdraw_user_path
+      }.to change(User, :count).by(-1)
+
+        expect(response.body).to include("アカウントを削除しました")
+        expect(response).to have_http_status(:found)
+      end
+    end
+  end
 end
