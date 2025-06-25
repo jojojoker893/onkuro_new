@@ -165,8 +165,11 @@ RSpec.describe UsersController, type: :request do
           delete withdraw_user_path
       }.to change(User, :count).by(-1)
 
+        expect(session[:user_id]).to be_nil
+        expect(response).to redirect_to root_path
+        follow_redirect!
         expect(response.body).to include("アカウントを削除しました")
-        expect(response).to have_http_status(:found)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
