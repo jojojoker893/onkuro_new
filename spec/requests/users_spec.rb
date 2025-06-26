@@ -130,5 +130,47 @@ RSpec.describe UsersController, type: :request do
         expect(response.body).to include("パスワードを変更しました")
       end
     end
+
+    context "不正なパラメータを送信した時" do
+      it "パスワードが変更されないこと" do
+        patch "/user/password", params: {
+          user: {
+            current_password: "sample_password",
+            password: nil,
+            password_confirmation: "miss_password"
+          }
+        }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.body).to include("変更に失敗しました")
+      end
+    end
+  end
+
+  describe "DELETE user/withdraw" do
+    let(:user) { create(:user) }
+
+    # ログイン状態の作成
+    before do
+      post "/login", params: {
+        session: {
+          email: user.email,
+          password: "sample_password"
+        }
+      }
+    end
+    context "アカウント削除を実行した時" do
+      it "正常に削除されること" do
+        expect {
+          delete withdraw_user_path
+      }.to change(User, :count).by(-1)
+
+        expect(session[:user_id]).to be_nil
+        expect(response).to redirect_to root_path
+        follow_redirect!
+        expect(response.body).to include("アカウントを削除しました")
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 end
