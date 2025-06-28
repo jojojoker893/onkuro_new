@@ -1,4 +1,5 @@
 class GraphController < ApplicationController
+  before_action :login_user?
   def index
     start_date = parse_time(params[:start_date])
     end_date = parse_time(params[:end_date])
@@ -17,5 +18,11 @@ class GraphController < ApplicationController
     Time.zone.parse(date)
   rescue ArgumentError
     nil
+  end
+
+  def login_user?
+    unless current_user
+      redirect_to login_path, alert: "ログインしてください"
+    end
   end
 end
