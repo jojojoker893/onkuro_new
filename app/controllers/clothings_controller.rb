@@ -55,8 +55,20 @@ class ClothingsController < ApplicationController
     end
   end
 
-  def remove_usage_log # 使用回数を減らす
-    if RecordUsageLogRemover.new(user: current_user, clothing_id: params[:id]).call
+  def remove_usage_log
+    clothing = current_user.clothings.find(params[:id])
+
+    usage_log_count = clothing.clothing_usage_logs.count
+    reduced_log_count = clothing.usage_log_clearing.count
+
+    if usage_log_count > reduced_log_count
+        reduced_log = UsageLogClearing.new(
+                      user: current_user,
+                      clothing: clothing,
+                      reduced_at: Time.current
+                      )
+
+      reduced_log.save
       redirect_to clothings_path, notice: "使用記録を減らしました"
     else
       redirect_to clothings_path, alert: "使用記録がありません"

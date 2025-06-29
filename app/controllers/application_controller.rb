@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   helper_method :current_user
   # TODO: ActiveRecord::RecordNotFoundをrescue_fromして、404ページに遷移させる
+  rescue_from ActiveRecord::RecordNotFound, render 
 
   private
 
