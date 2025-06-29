@@ -11,9 +11,9 @@ class PasswordUpdater # current_userのパスワードを更新するクラス
     current_password_update
   end
 
-private
+  private
 
-attr_reader :user, :current_password, :new_params
+  attr_reader :user, :current_password, :new_params
 
   def valid_password?
     user.authenticate(current_password)
