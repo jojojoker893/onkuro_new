@@ -156,11 +156,6 @@ RSpec.describe "Clothings", type: :request do
     context "服の記録を減らした場合" do
       let!(:usage_log) { create(:clothing_usage_log, user: user, clothing: clothing) }
       it "正常に使用回数が減ること" do
-        usage_log_remover_mock = double("RecordUsageLogRemover", call: true)
-        allow(RecordUsageLogRemover).to receive(:new)
-        .with(user: user, clothing_id: clothing.id.to_s)
-        .and_return(usage_log_remover_mock)
-
         post remove_usage_log_clothing_path(clothing.id) # 使用取り消しログの発行
 
         expect(response).to redirect_to clothings_path
@@ -170,12 +165,11 @@ RSpec.describe "Clothings", type: :request do
     end
 
     context "使用の取り消しが失敗した場合" do
+      before do
+        usage_log_remover_mock = double("UsageLogClearing", save: false)
+        allow(UsageLogClearing).to receive(:new).and_return(usage_log_remover_mock)
+      end
       it "使用記録が減らないこと" do
-        usage_log_remover_mock = double("RecordUsageLogRemover", call: false)
-        allow(RecordUsageLogRemover).to receive(:new)
-        .with(user: user, clothing_id: clothing.id.to_s)
-        .and_return(usage_log_remover_mock)
-
         post remove_usage_log_clothing_path(clothing.id)
 
         expect(response).to redirect_to clothings_path
