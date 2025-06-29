@@ -128,11 +128,6 @@ RSpec.describe "Clothings", type: :request do
   describe "POST /clothings/:id/usage_log" do
     context "服の記録を追加した場合" do
       it "正常に使用回数が増えること" do
-        usage_log_adder_mock = double("RecordUsageLogAdder", call: true)
-        allow(RecordUsageLogAdder).to receive(:new)
-        .with(user: user, clothing_id: clothing.id.to_s)
-        .and_return(usage_log_adder_mock)
-
         post usage_log_clothing_path(clothing.id)
 
         expect(response).to redirect_to clothings_path
@@ -142,12 +137,12 @@ RSpec.describe "Clothings", type: :request do
     end
 
     context "使用の記録が失敗した場合" do
-      it "使用記録が追加されないこと" do
-        usage_log_adder_mock = double("RecordUsageLogAdder", call: false)
-        allow(RecordUsageLogAdder).to receive(:new)
-        .with(user: user, clothing_id: clothing.id.to_s)
-        .and_return(usage_log_adder_mock)
+      before do
+        usage_log_mock = double("ClothingUsageLog", save: false)
+        allow(ClothingUsageLog).to receive(:new).and_return(usage_log_mock)
+      end
 
+      it "使用記録が追加されないこと" do
         post usage_log_clothing_path(clothing.id)
 
         expect(response).to redirect_to clothings_path

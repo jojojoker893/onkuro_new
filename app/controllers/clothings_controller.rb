@@ -41,8 +41,14 @@ class ClothingsController < ApplicationController
     redirect_to clothings_path, notice: "削除しました"
   end
 
-  def usage_log # 使用回数の記録
-    if RecordUsageLogAdder.new(user: current_user, clothing_id: params[:id]).call
+  def usage_log
+    clothing = current_user.clothings.find(params[:id])
+    usage_log = ClothingUsageLog.new(
+      user: current_user,
+      clothing: clothing,
+      used_at: Time.current
+    )
+    if usage_log.save
       redirect_to clothings_path, notice: "使用記録を追加しました"
     else
       redirect_to clothings_path, alert: "使用記録を追加できませんでした"
