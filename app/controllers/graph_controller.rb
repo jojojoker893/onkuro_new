@@ -19,4 +19,14 @@ class GraphController < ApplicationController
   rescue ArgumentError
     nil
   end
+
+  def remove_usage_log
+    form = UsageLogClearing::CreateForm.new(clothing: user.clothings.find(params[:id]))
+    result = form.save
+    if result.success?
+      redirect_to clothings_path, notice: "使用記録を減らしました"
+    else
+      redirect_to clothings_path, alert: result.error_message
+    end
+  end
 end
