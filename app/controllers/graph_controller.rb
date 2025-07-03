@@ -19,10 +19,4 @@ class GraphController < ApplicationController
   rescue ArgumentError
     nil
   end
-
-  def login_user?
-    unless current_user
-      redirect_to login_path, alert: "ログインしてください"
-    end
-  end
 end

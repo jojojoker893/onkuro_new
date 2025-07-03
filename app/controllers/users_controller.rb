@@ -69,10 +69,4 @@ class UsersController < ApplicationController
   def password_params
     params.require(:user).permit(:password, :password_confirmation)
   end
-
-  def login_user?
-    unless current_user
-      redirect_to login_path, alert: "ログインしてください"
-    end
-  end
 end

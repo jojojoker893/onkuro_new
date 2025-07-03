@@ -63,10 +63,4 @@ class ClothingsController < ApplicationController
   def clothing_params
     params.require(:clothing).permit(:name, :category_id, :brand_id, :color_id, :explanation, :image, :order, :keyword)
   end
-
-  def login_user?
-    unless current_user
-      redirect_to login_path, alert: "ログインしてください"
-    end
-  end
 end
