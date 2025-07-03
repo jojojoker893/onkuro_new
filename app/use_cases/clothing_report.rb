@@ -2,43 +2,45 @@ class ClothingReport
   ORDER_DIRECTIONS = {
     "usage_asc" => "ASC",
     "usage_desc" => "DESC"
-}.freeze
+  }.freeze
 
+  # @param [Integer] user_id
+  # @param [ActionController::Parameters] params
   def initialize(user_id:, params:)
     @user_id = user_id
     @params = params
   end
 
+  # @return [Clothing::ActiveRecord_Relation]
   def call
     clothings = Clothing.where(user_id: user_id)
-    clothings = clothings.search_keyword(params[:keyword]) if params[:keyword].present?  # 検索
-    clothings = clothings.filter_by_category(params[:category_id]) if params[:category_id].present? # カテゴリフィルター
-    clothings = clothings.filter_by_brand(params[:brand_id]) if params[:brand_id].present? # ブランドフィルター
-    clothings = clothings.filter_by_color(params[:color_id]) if params[:color_id].present? # カラーフィルター
-
+    clothings = clothings.search_keyword(params[:keyword]) if params[:keyword].present?
+    clothings = clothings.filter_by_category(params[:category_id]) if params[:category_id].present?
+    clothings = clothings.filter_by_brand(params[:brand_id]) if params[:brand_id].present?
+    clothings = clothings.filter_by_color(params[:color_id]) if params[:color_id].present?
 
     apply_ordering(clothings)
+      .page(params[:page])
+      .per(8)
   end
 
   private
 
   attr_reader :user_id, :params
 
-  def apply_ordering(clothings) # 並び替え
+  # @note 使用回数順の並びと登録順の並びのどちらかを適用する
+  # @param [Clothing::ActiveRecord_Relation] clothings
+  # @return [Clothing::ActiveRecord_Relation]
+  def apply_ordering(clothings)
     if order_direction.present?
-      # @@使用回数を取得
-      result = clothings.joins(:clothing_usage_logs)
-      .group("clothings.id")
-      .order("COUNT(clothing_usage_logs.id) #{order_direction}")
-      .to_a
-
-      Kaminari.paginate_array(result)
-      .page(params[:page])
-      .per(8)
+      clothings.joins(:clothing_usage_logs)
+               .group("clothings.id")
+               .order("COUNT(clothing_usage_logs.id) #{order_direction}")
     else
-      clothings.order_by_created_at.page(params[:page]).per(8)
+      clothings.order_by_created_at
     end
   end
 
+  # @return [String]
   def order_direction = ORDER_DIRECTIONS[@params[:order]]
 end

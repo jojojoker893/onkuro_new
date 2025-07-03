@@ -128,12 +128,9 @@ RSpec.describe "Clothings", type: :request do
   describe "POST /clothings/:id/usage_log" do
     context "服の記録を追加した場合" do
       it "正常に使用回数が増えること" do
-        usage_log_adder_mock = double("RecordUsageLogAdder", call: true)
-        allow(RecordUsageLogAdder).to receive(:new)
-        .with(user: user, clothing_id: clothing.id.to_s)
-        .and_return(usage_log_adder_mock)
-
-        post usage_log_clothing_path(clothing.id)
+        expect {
+          post usage_log_clothing_path(clothing.id)
+      }.to change(ClothingUsageLog, :count).by(1)
 
         expect(response).to redirect_to clothings_path
         follow_redirect!
@@ -142,14 +139,12 @@ RSpec.describe "Clothings", type: :request do
     end
 
     context "使用の記録が失敗した場合" do
+      before do
+        usage_log_mock = double(ClothingUsageLog, save: false)
+        allow(ClothingUsageLog).to receive(:new).and_return(usage_log_mock)
+      end
       it "使用記録が追加されないこと" do
-        usage_log_adder_mock = double("RecordUsageLogAdder", call: false)
-        allow(RecordUsageLogAdder).to receive(:new)
-        .with(user: user, clothing_id: clothing.id.to_s)
-        .and_return(usage_log_adder_mock)
-
         post usage_log_clothing_path(clothing.id)
-
         expect(response).to redirect_to clothings_path
         follow_redirect!
         expect(response.body).to include("使用記録を追加できませんでした")
@@ -160,13 +155,10 @@ RSpec.describe "Clothings", type: :request do
   describe "POST /clothing/:id/remove_usage_log" do
     context "服の記録を減らした場合" do
       let!(:usage_log) { create(:clothing_usage_log, user: user, clothing: clothing) }
-      it "正常に使用回数が減ること" do
-        usage_log_remover_mock = double("RecordUsageLogRemover", call: true)
-        allow(RecordUsageLogRemover).to receive(:new)
-        .with(user: user, clothing_id: clothing.id.to_s)
-        .and_return(usage_log_remover_mock)
 
-        post remove_usage_log_clothing_path(clothing.id) # 使用取り消しログの発行
+      it "正常に使用回数が減ること" do
+        expect { post remove_usage_log_clothing_path(clothing.id)
+          }.to change(UsageLogClearing, :count).by(1)
 
         expect(response).to redirect_to clothings_path
         follow_redirect!
@@ -176,16 +168,12 @@ RSpec.describe "Clothings", type: :request do
 
     context "使用の取り消しが失敗した場合" do
       it "使用記録が減らないこと" do
-        usage_log_remover_mock = double("RecordUsageLogRemover", call: false)
-        allow(RecordUsageLogRemover).to receive(:new)
-        .with(user: user, clothing_id: clothing.id.to_s)
-        .and_return(usage_log_remover_mock)
-
-        post remove_usage_log_clothing_path(clothing.id)
+        expect { post remove_usage_log_clothing_path(clothing.id)
+          }.to change(UsageLogClearing, :count).by(0)
 
         expect(response).to redirect_to clothings_path
         follow_redirect!
-        expect(response.body).to include("使用記録がありません")
+        expect(response.body).to include("使用回数をこれ以上減らせません")
       end
     end
   end

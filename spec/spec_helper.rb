@@ -19,10 +19,12 @@ SimpleCov.start "rails" do
   add_group "Mailers", "app/mailers"
 
   # 最小カバレッジ率の設定（オプション）
-  minimum_coverage 0
+  minimum_coverage 60
 
   # カバレッジレポートの出力形式
   formatter SimpleCov::Formatter::HTMLFormatter
+
+  enable_coverage :branch
 end
 
 # テスト実行後にカバレッジレポートを自動で開く（開発環境のみ）

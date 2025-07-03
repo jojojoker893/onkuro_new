@@ -14,6 +14,7 @@ class GraphController < ApplicationController
 
   def parse_time(date)
     return nil if date.blank?
+
     Time.zone.parse(date)
   rescue ArgumentError
     nil
