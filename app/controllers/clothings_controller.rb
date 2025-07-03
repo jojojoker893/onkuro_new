@@ -56,22 +56,12 @@ class ClothingsController < ApplicationController
   end
 
   def remove_usage_log
-    clothing = current_user.clothings.find(params[:id])
-
-    usage_log_count = clothing.clothing_usage_logs.count
-    reduced_log_count = clothing.usage_log_clearing.count
-
-    if usage_log_count > reduced_log_count
-        reduced_log = UsageLogClearing.new(
-                      user: current_user,
-                      clothing: clothing,
-                      reduced_at: Time.current
-                      )
-
-      reduced_log.save
+    form = UsageLogClearing::CreateForm.new(clothing: current_user.clothings.find(params[:id]), user: current_user)
+    result = form.save
+    if result.success?
       redirect_to clothings_path, notice: "使用記録を減らしました"
     else
-      redirect_to clothings_path, alert: "使用記録がありません"
+      redirect_to clothings_path, alert: result.error_message
     end
   end
 
