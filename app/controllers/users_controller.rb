@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :login_user?, expect: [ :new, :create ]
+  before_action :login_user?, except: [ :new, :create ]
   def new
     @user = User.new
   end
