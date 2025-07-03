@@ -128,7 +128,9 @@ RSpec.describe "Clothings", type: :request do
   describe "POST /clothings/:id/usage_log" do
     context "服の記録を追加した場合" do
       it "正常に使用回数が増えること" do
-        post usage_log_clothing_path(clothing.id)
+        expect {
+          post usage_log_clothing_path(clothing.id)
+      }.to change(ClothingUsageLog, :count).by(1)
 
         expect(response).to redirect_to clothings_path
         follow_redirect!
@@ -138,13 +140,11 @@ RSpec.describe "Clothings", type: :request do
 
     context "使用の記録が失敗した場合" do
       before do
-        usage_log_mock = double("ClothingUsageLog", save: false)
+        usage_log_mock = double(ClothingUsageLog, save: false)
         allow(ClothingUsageLog).to receive(:new).and_return(usage_log_mock)
       end
-
       it "使用記録が追加されないこと" do
         post usage_log_clothing_path(clothing.id)
-
         expect(response).to redirect_to clothings_path
         follow_redirect!
         expect(response.body).to include("使用記録を追加できませんでした")
@@ -155,8 +155,10 @@ RSpec.describe "Clothings", type: :request do
   describe "POST /clothing/:id/remove_usage_log" do
     context "服の記録を減らした場合" do
       let!(:usage_log) { create(:clothing_usage_log, user: user, clothing: clothing) }
+
       it "正常に使用回数が減ること" do
-        post remove_usage_log_clothing_path(clothing.id) # 使用取り消しログの発行
+        expect { post remove_usage_log_clothing_path(clothing.id)
+          }.to change(UsageLogClearing, :count).by(1)
 
         expect(response).to redirect_to clothings_path
         follow_redirect!
@@ -165,16 +167,13 @@ RSpec.describe "Clothings", type: :request do
     end
 
     context "使用の取り消しが失敗した場合" do
-      before do
-        usage_log_remover_mock = double("UsageLogClearing", save: false)
-        allow(UsageLogClearing).to receive(:new).and_return(usage_log_remover_mock)
-      end
       it "使用記録が減らないこと" do
-        post remove_usage_log_clothing_path(clothing.id)
+        expect { post remove_usage_log_clothing_path(clothing.id)
+          }.to change(UsageLogClearing, :count).by(0)
 
         expect(response).to redirect_to clothings_path
         follow_redirect!
-        expect(response.body).to include("使用記録がありません")
+        expect(response.body).to include("使用回数をこれ以上減らせません")
       end
     end
   end
