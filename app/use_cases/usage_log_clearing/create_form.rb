@@ -26,7 +26,7 @@ class UsageLogClearing::CreateForm
     clothing.clothing_usage_logs.count <= clothing.usage_log_clearing.count
   end
 
-  # @return [UsgaeLogClearing]
+  # @return [UsageLogClearing]
   def clearing_log
     @clearing_log ||= UsageLogClearing.new(
       user: user,
