@@ -1,4 +1,5 @@
 class ClothingsController < ApplicationController
+  before_action :login_user?
   def index
     @categories = Category.all
     @brands = Brand.all
@@ -22,11 +23,11 @@ class ClothingsController < ApplicationController
   end
 
   def edit
-    @clothing = Clothing.find(params[:id])
+    @clothing = current_user.clothings.find(params[:id])
   end
 
   def update
-    @clothing = Clothing.find(params[:id])
+    @clothing = current_user.clothings.find(params[:id])
     if @clothing.update(clothing_params)
       redirect_to clothings_path, notice: "更新しました"
     else
@@ -36,7 +37,7 @@ class ClothingsController < ApplicationController
   end
 
   def destroy
-    @clothing = Clothing.find(params[:id])
+    @clothing = current_user.clothings.find(params[:id])
     @clothing.destroy
     redirect_to clothings_path, notice: "削除しました"
   end

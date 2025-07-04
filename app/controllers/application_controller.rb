@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
+  def login_user?
+    unless current_user
+      redirect_to login_path, alert: "ログインしてください"
+    end
+  end
+
   def record_not_found
     render plain: "404 Not Found", status: 404
   end
