@@ -7,7 +7,7 @@ class UsageLogClearing::CreateForm
 
   # @return [UsageLogClearing::Create::Result]
   def save
-    return Result.new(success?: false, error_message: "使用回数をこれ以上減らせません") if can_reducan_reduce_usage?
+    return Result.new(success?: false, error_message: "使用回数をこれ以上減らせません") if can_reduce_usage?
 
     if clearing_log.save
       Result.new(success?: true, error_message: nil)
@@ -18,12 +18,12 @@ class UsageLogClearing::CreateForm
 
   private
   # note 使用回数を減らせるかチェックする
-  # return [Boolen]
-  def can_reducan_reduce_usage?
+  # return [Boolean]
+  def can_reduce_usage?
     clothing.clothing_usage_logs.count <= clothing.usage_log_clearing.count
   end
 
-  # @return [UsgaeLogClearing]
+  # @return [UsageLogClearing]
   def clearing_log
     @clearing_log ||= UsageLogClearing.new(
       user: user,
