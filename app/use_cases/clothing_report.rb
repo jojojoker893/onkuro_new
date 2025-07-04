@@ -19,6 +19,8 @@ class ClothingReport
     clothings = clothings.filter_by_brand(params[:brand_id]) if params[:brand_id].present?
     clothings = clothings.filter_by_color(params[:color_id]) if params[:color_id].present?
 
+    clothings = clothings.preload(:category, :brand, :color, :clothing_usage_logs, :usage_log_clearing)
+
     apply_ordering(clothings)
       .page(params[:page])
       .per(8)
