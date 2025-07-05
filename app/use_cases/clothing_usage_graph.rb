@@ -17,7 +17,7 @@ class ClothingUsageGraph
   attr_reader :user, :start_date, :end_date
 
   def usage_data_range_or_all
-    user.clothings.map do |clothing|
+    user.clothings.preload(:clothing_usage_logs, :usage_log_clearing).map do |clothing|
       all_usage_logs = clothing.clothing_usage_logs
       all_reduced_logs = clothing.usage_log_clearing
 
