@@ -18,7 +18,7 @@ RSpec.describe "Sessions", type: :request do
       end
     end
 
-    context "不正なパラメータを送信した時" do
+    context "不正なパスワードを送信した時" do
       it "ログインできないこと" do
         post "/login", params: {
           session: {
@@ -28,6 +28,20 @@ RSpec.describe "Sessions", type: :request do
         }
 
         expect(response).to have_http_status (:unprocessable_entity)
+        expect(response.body).to include("メールアドレスまたはパスワードが正しくありません")
+      end
+    end
+
+    context "存在しないメールアドレスを送信した時" do
+      it "ログインできないこと" do
+        post "/login", params: {
+          session: {
+            email: "nonexistent@example.com",
+            password: "sample_password"
+          }
+        }
+
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to include("メールアドレスまたはパスワードが正しくありません")
       end
     end
