@@ -4,7 +4,6 @@ class MapsController < ApplicationController
     @google_maps_api_key = get_google_maps_api_key
   end
 
-
   private
 
   def get_google_maps_api_key
