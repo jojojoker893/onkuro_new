@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User do
-  before(:each) do
-    User.delete_all
-  end
-
   describe "ユーザモデルテスト" do
     it "有効なuserの場合保存されるか" do
       expect(build(:user)).to be_valid
