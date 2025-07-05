@@ -1,23 +1,13 @@
 class GraphController < ApplicationController
   before_action :login_user?
   def index
-    start_date = parse_time(params[:start_date])
-    end_date = parse_time(params[:end_date])
+    start_date = GraphDataParseTime.new(params[:start_date]).call
+    end_date = GraphDataParseTime.new(params[:end_date]).call
 
     @graph_data = ClothingUsageGraph.new(
       user: current_user,
       start_date: start_date,
       end_date: end_date
     ).call
-  end
-
-  private
-
-  def parse_time(date)
-    return nil if date.blank?
-
-    Time.zone.parse(date)
-  rescue ArgumentError
-    nil
   end
 end
