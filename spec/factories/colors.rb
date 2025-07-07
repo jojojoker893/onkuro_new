@@ -1,5 +1,13 @@
 FactoryBot.define do
   factory :color do
-    name { "黒" }
+    sequence(:name) { |n| "カラー#{n}" }
+
+    trait :black do
+      name { "黒" }
+    end
+
+    trait :white do
+      name { "白" }
+    end
   end
 end

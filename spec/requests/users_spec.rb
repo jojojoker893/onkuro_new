@@ -145,6 +145,21 @@ RSpec.describe UsersController, type: :request do
         expect(response.body).to include("変更に失敗しました")
       end
     end
+
+    context "現在のパスワードが間違っている時" do
+      it "パスワードが変更されないこと" do
+        patch "/user/password", params: {
+          user: {
+            current_password: "miss_password",
+            password: "new_password",
+            password_confirmation: "new_password"
+          }
+        }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.body).to include("変更に失敗しました")
+      end
+    end
   end
 
   describe "DELETE user/withdraw" do
