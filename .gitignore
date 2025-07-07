@@ -35,3 +35,6 @@
 /.env
 node_modules/
 /coverage/
+
+.DS_Store
+.ruby-lsp/
