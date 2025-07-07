@@ -36,8 +36,10 @@ class ClothingReport
   def apply_ordering(clothings)
     if order_direction.present?
       clothings.joins(:clothing_usage_logs)
+               .left_joins(:usage_log_clearing)
                .group("clothings.id")
-               .order("COUNT(clothing_usage_logs.id) #{order_direction}")
+               .select("clothings.*, (COUNT(clothing_usage_logs.id) - COUNT(usage_log_clearings.id)) as usage_count")
+               .order("usage_count #{order_direction}")
     else
       clothings.order_by_created_at
     end
