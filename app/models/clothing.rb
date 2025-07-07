@@ -10,8 +10,6 @@ class Clothing < ApplicationRecord
 
   scope :order_by_created_at, -> { order(created_at: :desc) }
 
-  scope :order_by_usage, ->(sort_order = "DESC") { order(Arel.sql("usage_count #{sort_order}")) }
-
   scope :filter_by_category, ->(category_id) { where(category_id: category_id)  if category_id.present? }
   scope :filter_by_brand, ->(brand_id) { where(brand_id: brand_id)  if brand_id.present? }
   scope :filter_by_color, ->(color_id) { where(color_id: color_id)  if color_id.present? }
